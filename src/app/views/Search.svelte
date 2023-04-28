@@ -73,8 +73,8 @@
       <BorderLeft on:click={() => openTopic(result.topic.name)}>
         #{result.topic.name}
       </BorderLeft>
-    {:else if result.type === "person"}
-      <PersonInfo person={result.person} />
+    <!-- {:else if result.type === "person"}
+      <PersonInfo person={result.person} /> -->
     {/if}
   {/each}
 </Content>

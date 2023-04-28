@@ -15,9 +15,24 @@
   import {feedsTab} from "src/app/state"
 
   const {lists, canPublish} = user
-  const defaultTabs = ["Follows", "Network"]
+  const defaultTabs = ["Follows", "Network", "Topics"]
 
   let relays, filter
+
+  // const daLists = user.getLists();
+  // let topicsListExists = false;
+  // daLists.forEach(list => {
+  //   if (list.tags[0][1] === "followed_topics") {
+  //     topicsListExists = true;
+  //   }
+  // });
+  // if (!topicsListExists) {
+    let list
+    const authors = shuffle(getUserNetwork()).slice(0, 256)
+    relays = sampleRelays(getAllPubkeyWriteRelays(authors))
+    user.putList(list?.id, "followed_topics", [["t", "books"], ["t", "foodstr"]], relays)
+  // }
+  // console.log('Da lists: ', daLists);
 
   $: listsByName = indexBy(l => Tags.from(l).getMeta("d"), $lists)
   $: allTabs = defaultTabs.concat(Object.keys(listsByName))
@@ -35,8 +50,8 @@
 
       filter = {authors}
       relays = sampleRelays(getAllPubkeyWriteRelays(authors))
-    } else {
-      const list = listsByName[$feedsTab]
+    } else if ($feedsTab === "Topics"){
+      const list = listsByName["followed_topics"]
       const tags = Tags.from(list)
       const authors = tags.type("p").values().all()
       const topics = tags.type("t").values().all()

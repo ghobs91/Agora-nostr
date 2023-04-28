@@ -22,15 +22,12 @@
   }
 
   const search = q => {
-    if (q.startsWith("#")) {
+    // if (q.startsWith("#")) {
       return $searchTopics(q)
         .slice(0, 5)
         .map(({name}) => ["t", name])
-    }
+    // }
 
-    return $searchPeople(q)
-      .slice(0, 5)
-      .map(({pubkey}) => ["p", pubkey])
   }
 
   const _searchRelays = q => pluck("url", $searchRelays(q)).map(url => ["r", url])
@@ -66,7 +63,7 @@
         </p>
       </div>
       <div class="flex flex-col gap-1">
-        <strong>Topics and People</strong>
+        <strong>Followed Topics</strong>
         <MultiSelect {search} bind:value={values.params}>
           <div slot="item" let:item>
             {#if item[0] === "p"}
@@ -78,9 +75,9 @@
             {/if}
           </div>
         </MultiSelect>
-        <p class="text-sm text-gray-4">Type "@" to look for people, and "#" to look for topics.</p>
+        <p class="text-sm text-gray-4">Look for topics to follow!</p>
       </div>
-      <div class="flex flex-col gap-1">
+      <!-- <div class="flex flex-col gap-1">
         <strong>Relays</strong>
         <MultiSelect search={_searchRelays} bind:value={values.relays}>
           <div slot="item" let:item>
@@ -91,7 +88,7 @@
           Select which relays to limit this list to. If you leave this blank, your default relays
           will be used.
         </p>
-      </div>
+      </div> -->
       <Button type="submit" class="text-center">Save</Button>
     </div>
   </Content>

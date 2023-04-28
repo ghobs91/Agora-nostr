@@ -28,8 +28,8 @@
       type="unstyled"
       href="https://info.coracle.social"
       class="flex items-center gap-2">
-      <img alt="Coracle Logo" src={logoUrl} class="w-8" />
-      <h1 class="staatliches text-3xl">{appName}</h1>
+      <img alt="Coracle Logo" src="/images/logo.png" class="w-8" />
+      <h1 class="staatliches text-3xl">Agora</h1>
     </Anchor>
     <i class="fa fa-lightbulb -m-4 cursor-pointer p-4 text-lg" on:click={toggleTheme} />
   </div>

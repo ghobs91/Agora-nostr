@@ -206,6 +206,7 @@ export default {
   lists,
   getLists: () => profileCopy.lists,
   async putList(id, name, params, relays) {
+    console.log('the relays of the list created:', relays);
     const tags = [["d", name]].concat(params).concat(relays)
 
     if (id) {
