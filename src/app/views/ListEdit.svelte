@@ -72,7 +72,7 @@
         </p>
       </div>
       <div class="flex flex-col gap-1">
-        <strong>Search for a Topic</strong>
+        <strong>Your Topics</strong>
         <MultiSelect {search} bind:value={values.params}>
           <div slot="item" let:item>
             {#if item[0] === "p"}

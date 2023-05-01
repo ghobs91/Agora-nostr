@@ -58,12 +58,12 @@
       <i class="fa fa-search mr-2" /> Search
     </a>
   </li>
-  <li class="cursor-pointer">
+  <!-- <li class="cursor-pointer">
     <a class="block px-4 py-2 transition-all hover:bg-accent hover:text-white" href="/scan">
       <i class="fa fa-qrcode mr-2" /> Scan
     </a>
-  </li>
-  <li
+  </li> -->
+  <!-- <li
     class={cx("relative", {
       "cursor-pointer": $canPublish,
       "pointer-events-none opacity-75": !$canPublish,
@@ -74,8 +74,8 @@
         <div class="absolute top-2 left-7 h-2 w-2 rounded bg-accent" />
       {/if}
     </a>
-  </li>
-  <li
+  </li> -->
+  <!-- <li
     class={cx("relative", {
       "cursor-pointer": $canPublish,
       "pointer-events-none opacity-75": !$canPublish,
@@ -86,7 +86,7 @@
         <div class="absolute top-2 left-7 h-2 w-2 rounded bg-accent" />
       {/if}
     </a>
-  </li>
+  </li> -->
   <li class="mx-3 my-4 h-px bg-gray-6" />
   {#if pool.forceUrls.length === 0}
     <li class="relative cursor-pointer">
@@ -101,7 +101,7 @@
   {#if $profile.pubkey}
     <li class="cursor-pointer">
       <a class="block px-4 py-2 transition-all hover:bg-accent hover:text-white" href="/keys">
-        <i class="fa fa-key mr-2" /> Keys
+        <i class="fa fa-key mr-2" /> My Account
       </a>
     </li>
     <li class="cursor-pointer">

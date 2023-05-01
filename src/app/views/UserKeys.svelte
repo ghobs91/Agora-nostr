@@ -38,7 +38,7 @@
 <div in:fly={{y: 20}}>
   <Content>
     <div class="flex flex-col items-center justify-center">
-      <Heading>Your Keys</Heading>
+      <Heading>My Account</Heading>
       <p>
         Your account is identified across the network using a public/private <Anchor
           href={keypairUrl}

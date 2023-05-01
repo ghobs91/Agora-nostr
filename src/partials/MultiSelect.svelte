@@ -3,12 +3,11 @@
   import Chip from "src/partials/Chip.svelte"
   import Suggestions from "src/partials/Suggestions.svelte"
 
-  export let value
-  console.log('value: ', value);
-  export let placeholder = ""
-  export let delimiters = []
-  export let search = null
-  export let termToItem = null
+  export let value;
+  export let placeholder = "Search for a new Topic";
+  export let delimiters = [];
+  export let search = null;
+  export let termToItem = null;
 
   let term = ""
   let input
