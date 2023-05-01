@@ -11,9 +11,12 @@
   import {searchTopics, searchPeople, searchRelays, getPersonWithFallback} from "src/agent/db"
   import user from "src/agent/user"
 
-  export let list
+  export let list;
+  list = find(e => e.id !== list?.id && Tags.from(e).getMeta("d") === "agora_followed_topics", user.getLists());
 
   const tags = Tags.wrap(list?.tags || [])
+  console.log('tags: ', tags);
+  console.log('list: ', list);
 
   let values = {
     name: tags.getMeta("d") || "",
@@ -21,12 +24,14 @@
     relays: tags.type("r").all(),
   }
 
+  console.log('values.params: ', values.params)
+
   const search = q => {
-    // if (q.startsWith("#")) {
+    if (q.startsWith("#")) {
       return $searchTopics(q)
         .slice(0, 5)
         .map(({name}) => ["t", name])
-    // }
+    }
 
   }
 
@@ -37,10 +42,14 @@
       return toast.show("error", "A name is required for your list")
     }
 
-    if (
-      find(e => e.id !== list?.id && Tags.from(e).getMeta("d") === values.name, user.getLists())
-    ) {
-      return toast.show("error", "That name is already in use")
+    // if (
+    //   find(e => e.id !== list?.id && Tags.from(e).getMeta("d") === values.name, user.getLists())
+    // ) {
+    //   return toast.show("error", "That name is already in use")
+    // }
+
+    if (values.params.length < 1) {
+      return toast.show("error", "Add at least 1 topic to follow!")
     }
 
     const {name, params, relays} = values
@@ -53,17 +62,17 @@
 
 <form on:submit|preventDefault={submit}>
   <Content>
-    <Heading class="text-center">{values.id ? "Edit" : "Add"} list</Heading>
+    <Heading class="text-center">Follow Your Favorite Topics</Heading>
     <div class="flex w-full flex-col gap-8">
-      <div class="flex flex-col gap-1">
+      <div class="flex flex-col gap-1 list-name-field">
         <strong>Name</strong>
-        <Input bind:value={values.name} placeholder="My list" />
+        <Input bind:value={values.name} placeholder="" />
         <p class="text-sm text-gray-4">
           Lists are identified by their name, so this has to be unique.
         </p>
       </div>
       <div class="flex flex-col gap-1">
-        <strong>Followed Topics</strong>
+        <strong>Search for a Topic</strong>
         <MultiSelect {search} bind:value={values.params}>
           <div slot="item" let:item>
             {#if item[0] === "p"}
@@ -75,7 +84,6 @@
             {/if}
           </div>
         </MultiSelect>
-        <p class="text-sm text-gray-4">Look for topics to follow!</p>
       </div>
       <!-- <div class="flex flex-col gap-1">
         <strong>Relays</strong>

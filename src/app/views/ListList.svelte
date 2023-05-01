@@ -21,6 +21,7 @@
   }
 
   const editList = list => {
+    console.log('followedTopicsList: ', list);
     modal.push({type: "list/edit", list})
   }
 </script>

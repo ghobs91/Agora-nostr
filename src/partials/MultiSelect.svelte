@@ -4,6 +4,7 @@
   import Suggestions from "src/partials/Suggestions.svelte"
 
   export let value
+  console.log('value: ', value);
   export let placeholder = ""
   export let delimiters = []
   export let search = null

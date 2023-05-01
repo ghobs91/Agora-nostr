@@ -13,31 +13,36 @@
   import {sampleRelays, getAllPubkeyWriteRelays, getUserReadRelays} from "src/agent/relays"
   import user from "src/agent/user"
   import {feedsTab} from "src/app/state"
+  import {pluck, find} from "ramda"
+
 
   const {lists, canPublish} = user
-  const defaultTabs = ["Follows", "Network", "Topics"]
+  let topicsListCreated = false;
+  let list;
+  topicsListCreated = find(e => e.id !== list?.id && Tags.from(e).getMeta("d") === "agora_followed_topics", user.getLists())
+  console.log('value of topicsListCreated: ', topicsListCreated);
+  const defaultTabs = topicsListCreated ? ["Followed Topics", "Global"] : ["Global", "Followed Topics"]
 
   let relays, filter
+  const tags = Tags.wrap(list?.tags || [])
 
-  // const daLists = user.getLists();
-  // let topicsListExists = false;
-  // daLists.forEach(list => {
-  //   if (list.tags[0][1] === "followed_topics") {
-  //     topicsListExists = true;
-  //   }
-  // });
-  // if (!topicsListExists) {
-    let list
-    const authors = shuffle(getUserNetwork()).slice(0, 256)
-    relays = sampleRelays(getAllPubkeyWriteRelays(authors))
-    user.putList(list?.id, "followed_topics", [["t", "books"], ["t", "foodstr"]], relays)
-  // }
-  // console.log('Da lists: ', daLists);
+  let values = {
+    name: tags.getMeta("d") || "",
+    params: tags.type(["t", "p"]).all(),
+    relays: tags.type("r").all(),
+  }
+  const {name, params} = values
+  if (!find(e => e.id !== list?.id && Tags.from(e).getMeta("d") === "agora_followed_topics", user.getLists())){
+    console.log('nah we dont got dat list');
+    modal.push({type: "list/edit"})
+  }
 
   $: listsByName = indexBy(l => Tags.from(l).getMeta("d"), $lists)
   $: allTabs = defaultTabs.concat(Object.keys(listsByName))
   $: $feedsTab = allTabs.includes($feedsTab) ? $feedsTab : defaultTabs[0]
   $: visibleTabs = defaultTabs.includes($feedsTab) ? defaultTabs : [defaultTabs[0], $feedsTab]
+  $: followedTopicsList = find(e => e.id !== list?.id && Tags.from(e).getMeta("d") === "agora_followed_topics", user.getLists())
+
 
   $: {
     if ($feedsTab === "Follows") {
@@ -45,20 +50,25 @@
 
       filter = {authors}
       relays = sampleRelays(getAllPubkeyWriteRelays(authors))
-    } else if ($feedsTab === "Network") {
+    } else if ($feedsTab === "Global") {
       const authors = shuffle(getUserNetwork()).slice(0, 256)
 
       filter = {authors}
       relays = sampleRelays(getAllPubkeyWriteRelays(authors))
-    } else if ($feedsTab === "Topics"){
-      const list = listsByName["followed_topics"]
-      const tags = Tags.from(list)
-      const authors = tags.type("p").values().all()
-      const topics = tags.type("t").values().all()
-      const urls = tags.type("r").values().all()
+    } else if ($feedsTab === "Followed Topics"){
+      if (!find(e => e.id !== list?.id && Tags.from(e).getMeta("d") === "agora_followed_topics", user.getLists())){
+        console.log('nah we dont got dat list');
+        modal.push({type: "list/edit"})
+      } else {
+        const list = listsByName["agora_followed_topics"]
+        const tags = Tags.from(list)
+        const authors = tags.type("p").values().all()
+        const topics = tags.type("t").values().all()
+        const urls = tags.type("r").values().all()
 
-      filter = _filter(prop("length"), {authors, "#t": topics})
-      relays = urls.length > 0 ? urls.map(objOf("url")) : sampleRelays(getUserReadRelays())
+        filter = _filter(prop("length"), {authors, "#t": topics})
+        relays = urls.length > 0 ? urls.map(objOf("url")) : sampleRelays(getUserReadRelays())
+      }
     }
 
     filter = [{...filter, kinds: [1]}]
@@ -70,6 +80,12 @@
 
   const showLists = () => {
     modal.push({type: "list/list"})
+  }
+
+  const addMoreTopicsModal = followedTopicsList => {
+    // const followedTopicsList = find(e => e.id !== list?.id && Tags.from(e).getMeta("d") === "agora_followed_topics", user.getLists())
+    console.log('followedTopicsList: ', followedTopicsList);
+    modal.push({type: "list/edit", followedTopicsList})
   }
 
   document.title = $feedsTab
@@ -87,6 +103,11 @@
   <div>
     <Tabs tabs={visibleTabs} activeTab={$feedsTab} {setActiveTab}>
       {#if $canPublish}
+      <div class="flex items-center justify-between">
+        <Anchor type="button-accent" on:click={() => addMoreTopicsModal(followedTopicsList)}>
+          <i class="fa fa-plus" /> Add Topics
+        </Anchor>
+      </div>
         {#if $lists.length > 0}
           <Popover placement="bottom" opts={{hideOnClick: true}} theme="transparent">
             <i slot="trigger" class="fa fa-ellipsis-v cursor-pointer p-2" />

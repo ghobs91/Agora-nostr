@@ -112,3 +112,7 @@ body,
 .tippy-box[data-theme~="transparent"] > .tippy-svg-arrow {
   fill: transparent;
 }
+
+.list-name-field {
+  display: none;
+}

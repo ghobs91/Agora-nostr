@@ -13,6 +13,7 @@
 
   const {lists} = user
   const label = item.type === "p" ? "person" : "topic"
+  console.log('item info: ', item);
 
   const modifyList = updateIn("tags", tags => (tags || []).concat([[item.type, item.value]]))
 

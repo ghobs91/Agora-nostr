@@ -14,8 +14,11 @@
 <Content>
   <div class="flex justify-between gap-2">
     <Heading>#{topic}</Heading>
-    <div class="pt-5">
-      <TopicActions {topic} />
+    <div>
+      <div class="pt-5">Follow Topic</div>
+      <div class="pt-5">
+        <TopicActions {topic} />
+      </div>
     </div>
   </div>
   <Feed {relays} {filter} />
