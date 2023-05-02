@@ -31,7 +31,7 @@
       <img alt="Coracle Logo" src="/images/logo.png" class="w-8" />
       <h1 class="staatliches text-3xl">Agora</h1>
     </Anchor>
-    <i class="fa fa-lightbulb -m-4 cursor-pointer p-4 text-lg" on:click={toggleTheme} />
+    <!-- <i class="fa fa-lightbulb -m-4 cursor-pointer p-4 text-lg" on:click={toggleTheme} /> -->
   </div>
   {#if $newNotifications}
     <div class="absolute top-4 left-12 h-2 w-2 rounded bg-accent lg:hidden" />
