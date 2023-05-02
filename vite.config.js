@@ -27,7 +27,7 @@ export default defineConfig({
       registerType: "autoUpdate",
       injectRegister: "auto",
       manifest: {
-        name: process.env.VITE_APP_NAME,
+        name: "Agora",
         short_name: process.env.VITE_APP_NAME,
         description: "A place for all to share interests and knowledge.",
         theme_color: "#4512a3",
