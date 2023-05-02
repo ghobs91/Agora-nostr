@@ -5,7 +5,7 @@
   viewBox="0 0 189 189"
   fill="none"
   xmlns="http://www.w3.org/2000/svg">
-  <g id="paths" clip-path="url(#clip0_753_289)" style="stroke: var(--logo-color, #EB5E28)">
+  <g id="paths" clip-path="url(#clip0_753_289)" style="stroke: var(--logo-color, #4512a3)">
     <path
       d="M43.7937 12.5298C0.57938 44.8609 0.342815 92.8076 16.3236 126.458C33.6361 162.913 75.9226 184.525 117.769 173.613C156.42 163.534 183.82 122.549 182.358 95.8221"
       stroke-width="12"

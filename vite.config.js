@@ -30,7 +30,7 @@ export default defineConfig({
         name: process.env.VITE_APP_NAME,
         short_name: process.env.VITE_APP_NAME,
         description: "Nostr, your way.",
-        theme_color: "#EB5E28",
+        theme_color: "#4512a3",
         icons: [
           {type: "image/png", sizes: "192x192", src: "/images/favicon/android-icon-192x192.png"},
           {type: "image/png", sizes: "512x512", src: "/images/favicon/android-icon-512x512.png"},
