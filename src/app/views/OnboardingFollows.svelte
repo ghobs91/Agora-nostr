@@ -45,7 +45,7 @@
   </Content>
   <div class="flex items-center gap-2">
     <i class="fa fa-user-astronaut fa-lg" />
-    <h2 class="staatliches text-2xl">Your follows</h2>
+    <h2 class="roboto text-2xl">Your follows</h2>
   </div>
   {#if $petnamePubkeys.length === 0}
     <div class="mt-8 flex items-center justify-center gap-2 text-center">
@@ -59,7 +59,7 @@
   {/if}
   <div class="flex items-center gap-2">
     <i class="fa fa-earth-asia fa-lg" />
-    <h2 class="staatliches text-2xl">Other people</h2>
+    <h2 class="roboto text-2xl">Other people</h2>
   </div>
   <Input bind:value={q} type="text" wrapperClass="flex-grow" placeholder="Type to search">
     <i slot="before" class="fa-solid fa-search" />

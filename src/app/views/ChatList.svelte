@@ -46,7 +46,7 @@
   <div class="flex justify-between">
     <div class="flex items-center gap-2">
       <i class="fa fa-server fa-lg" />
-      <h2 class="staatliches text-2xl">Your rooms</h2>
+      <h2 class="roboto text-2xl">Your rooms</h2>
     </div>
     <Anchor type="button-accent" on:click={() => modal.push({type: "room/edit"})}>
       <i class="fa-solid fa-plus" /> Create Room
@@ -60,7 +60,7 @@
   <div class="mb-2 border-b border-solid border-gray-6 pt-2" />
   <div class="flex items-center gap-2">
     <i class="fa fa-earth-asia fa-lg" />
-    <h2 class="staatliches text-2xl">Other rooms</h2>
+    <h2 class="roboto text-2xl">Other rooms</h2>
   </div>
   <div class="flex-grow">
     <Input bind:value={q} type="text" placeholder="Search rooms">

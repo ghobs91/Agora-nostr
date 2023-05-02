@@ -18,7 +18,7 @@
     <div class="flex justify-between">
       <div class="flex items-center gap-2">
         <i class="fa fa-server fa-lg" />
-        <h2 class="staatliches text-2xl">Your relays</h2>
+        <h2 class="roboto text-2xl">Your relays</h2>
       </div>
       <Anchor type="button-accent" on:click={() => modal.push({type: "relay/add"})}>
         <i class="fa-solid fa-plus" /> Add Relay
@@ -43,7 +43,7 @@
       <div class="mb-2 border-b border-solid border-gray-6 pt-2" />
       <div class="flex items-center gap-2">
         <i class="fa fa-earth-asia fa-lg" />
-        <h2 class="staatliches text-2xl">Other relays</h2>
+        <h2 class="roboto text-2xl">Other relays</h2>
       </div>
       <p>
         {appName} automatically discovers relays as you browse the network. Adding more

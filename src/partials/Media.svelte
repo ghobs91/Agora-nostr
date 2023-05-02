@@ -48,7 +48,7 @@
       {/if}
       <div class="h-px bg-gray-6" />
       {#if title}
-        <div class="flex flex-col bg-white px-4 py-2 text-black">
+        <div class="flex flex-col bg-white px-4 py-2 text-black link-preview-text">
           <strong class="overflow-hidden text-ellipsis whitespace-nowrap">{title}</strong>
           <small>{ellipsize(description, 140)}</small>
         </div>
@@ -58,13 +58,5 @@
         Unable to load a preview for {link.url}
       </p>
     {/await}
-  {/if}
-  {#if onClose}
-    <div
-      on:click|preventDefault={onClose}
-      class="absolute top-0 right-0 m-1 flex h-6 w-6 cursor-pointer items-center justify-center
-       rounded-full border border-solid border-gray-6 bg-white text-black opacity-50 shadow">
-      <i class="fa fa-times" />
-    </div>
   {/if}
 </Anchor>

@@ -56,7 +56,7 @@
 <form on:submit={submit} class="flex justify-center py-12" in:fly={{y: 20}}>
   <Content>
     <div class="mb-4 flex flex-col items-center justify-center">
-      <h1 class="staatliches text-6xl">Name your room</h1>
+      <h1 class="roboto text-6xl">Name your room</h1>
     </div>
     <div class="flex w-full flex-col gap-8">
       <div class="flex flex-col gap-1">

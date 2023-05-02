@@ -186,7 +186,7 @@
     }}>
     <Content>
       {#if zaps.length > 0}
-        <h1 class="staatliches text-2xl">Zapped By</h1>
+        <h1 class="roboto text-2xl">Zapped By</h1>
         <div class="grid grid-cols-2 gap-2">
           {#each zaps as zap}
             <div class="flex flex-col gap-1">
@@ -198,21 +198,21 @@
         </div>
       {/if}
       {#if likes.length > 0}
-        <h1 class="staatliches text-2xl">Liked By</h1>
+        <h1 class="roboto text-2xl">Liked By</h1>
         <div class="grid grid-cols-2 gap-2">
           {#each likes as like}
             <PersonBadge person={getPersonWithFallback(like.pubkey)} />
           {/each}
         </div>
       {/if}
-      <h1 class="staatliches text-2xl">Relays</h1>
+      <h1 class="roboto text-2xl">Relays</h1>
       <p>This note was found on {quantify(note.seen_on.length, "relay")} below.</p>
       <div class="flex flex-col gap-2">
         {#each note.seen_on as url}
           <RelayCard relay={{url}} />
         {/each}
       </div>
-      <h1 class="staatliches text-2xl">Details</h1>
+      <h1 class="roboto text-2xl">Details</h1>
       <CopyValue label="Identifier" value={nevent} />
       <CopyValue label="Event ID (note)" value={bech32Note} />
       <CopyValue label="Event ID (hex)" value={note.id} />

@@ -80,7 +80,7 @@
 {#if quote}
   <Modal onEscape={decline}>
     <Content>
-      <h1 class="staatliches text-2xl">Confirm File Upload</h1>
+      <h1 class="roboto text-2xl">Confirm File Upload</h1>
       <p>Please accept the following terms:</p>
       <p>{quote.terms}</p>
       <div class="flex gap-2">
@@ -92,7 +92,7 @@
 {:else if isOpen}
   <Modal onEscape={decline}>
     <Content>
-      <h1 class="staatliches text-2xl">Upload a File</h1>
+      <h1 class="roboto text-2xl">Upload a File</h1>
       <p>Click below to select a file to upload.</p>
       <input type="file" bind:this={input} />
     </Content>

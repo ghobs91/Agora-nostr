@@ -42,14 +42,14 @@
 
 <div in:fly={{y: 20}}>
   <Content>
-    <h1 class="staatliches text-2xl">Profile Details</h1>
+    <h1 class="roboto text-2xl">Profile Details</h1>
     <CopyValue label="Public Key (Hex)" value={person.pubkey} />
     <CopyValue label="Public Key (npub)" value={npub} />
     {#if nprofile}
       <CopyValue label="Profile Link" value={nprofile} />
     {/if}
 
-    <h1 class="staatliches mt-4 text-2xl">NIP05</h1>
+    <h1 class="roboto mt-4 text-2xl">NIP05</h1>
 
     {#if loaded && person.verified_as}
       <CopyValue label="NIP 05 Identifier" value={person.verified_as} />

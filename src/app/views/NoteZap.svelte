@@ -89,7 +89,7 @@
 
 <Content size="lg">
   <div class="text-center">
-    <h1 class="staatliches text-2xl">Send a zap</h1>
+    <h1 class="roboto text-2xl">Send a zap</h1>
     <p>to {displayPerson(author)}</p>
   </div>
   {#if zap.confirmed}

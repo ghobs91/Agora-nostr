@@ -41,7 +41,7 @@
   </Anchor>
   <div class="flex items-center gap-2">
     <i class="fa fa-server fa-lg" />
-    <h2 class="staatliches text-2xl">Your relays</h2>
+    <h2 class="roboto text-2xl">Your relays</h2>
   </div>
   {#if $relays.length === 0}
     <div class="mt-8 flex items-center justify-center gap-2 text-center">
@@ -57,7 +57,7 @@
   {/if}
   <div class="flex items-center gap-2">
     <i class="fa fa-earth-asia fa-lg" />
-    <h2 class="staatliches text-2xl">Other relays</h2>
+    <h2 class="roboto text-2xl">Other relays</h2>
   </div>
   <Input bind:value={q} type="text" wrapperClass="flex-grow" placeholder="Type to search">
     <i slot="before" class="fa-solid fa-search" />
