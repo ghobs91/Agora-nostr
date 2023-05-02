@@ -93,12 +93,11 @@
 
 <form on:submit|preventDefault={onSubmit} in:fly={{y: 20}}>
   <Content size="lg">
-    <Heading class="text-center">Create a note</Heading>
+    <Heading class="text-center">Create a post</Heading>
     <div class="flex w-full flex-col gap-4">
       <div class="flex flex-col gap-2">
-        <strong>What do you want to say?</strong>
         <div class="border-l-2 border-solid border-gray-6 pl-4">
-          <Compose bind:this={compose} {onSubmit} />
+          <Compose bind:this={compose} {onSubmit}/>
           <div class="flex justify-end">
             <small class="text-gray-5">
               Posting as @{displayPerson(getPersonWithFallback(user.getPubkey()))}
