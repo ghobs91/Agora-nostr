@@ -173,7 +173,7 @@ class PublishableEvent {
     const createdAt = Math.round(new Date().valueOf() / 1000)
 
     if (tagClient) {
-      tags = tags.filter(t => t[0] !== "client").concat([["client", "coracle"]])
+      tags = tags.filter(t => t[0] !== "client").concat([["client", "agora"]])
     }
 
     this.event = {kind, content, tags, pubkey, created_at: createdAt}

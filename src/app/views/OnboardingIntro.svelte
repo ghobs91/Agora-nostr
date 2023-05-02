@@ -12,7 +12,7 @@
   <Heading>Create an Account</Heading>
   <p>
     New to Nostr? Click <Anchor external href={tutorialUrl}>here</Anchor> or watch the video below for
-    a crash course on what it is, and how to use it.
+    an awesome crash course from the maker of Coracle!
   </p>
   <video controls src={videoUrl} class="object-contain object-center" />
   <p>

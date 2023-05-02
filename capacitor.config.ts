@@ -2,7 +2,7 @@ import {CapacitorConfig} from "@capacitor/cli"
 
 const config: CapacitorConfig = {
   appId: "social.coracle.app",
-  appName: "Coracle",
+  appName: "Agora",
   webDir: "dist",
   bundledWebRuntime: false,
 }
