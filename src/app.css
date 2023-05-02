@@ -116,3 +116,13 @@ body,
 .list-name-field {
   display: none;
 }
+
+.bg-gray-7 {
+  background-color: #111 !important;
+}
+.border-gray-6 {
+  border-color: #1a1a1a !important;
+}
+#app {
+  background-color: #1b1b1b;
+}

@@ -21,7 +21,7 @@
   let list;
   topicsListCreated = find(e => e.id !== list?.id && Tags.from(e).getMeta("d") === "agora_followed_topics", user.getLists())
   console.log('value of topicsListCreated: ', topicsListCreated);
-  const defaultTabs = topicsListCreated ? ["Followed Topics", "Global"] : ["Global", "Followed Topics"]
+  const defaultTabs = topicsListCreated ? ["Followed Topics"] : ["Global", "Followed Topics"]
 
   let relays, filter
   const tags = Tags.wrap(list?.tags || [])
@@ -108,7 +108,7 @@
           <i class="fa fa-plus" /> Add Topics
         </Anchor>
       </div>
-        {#if $lists.length > 0}
+        <!-- {#if $lists.length > 0}
           <Popover placement="bottom" opts={{hideOnClick: true}} theme="transparent">
             <i slot="trigger" class="fa fa-ellipsis-v cursor-pointer p-2" />
             <div
@@ -140,7 +140,7 @@
           </Popover>
         {:else}
           <i class="fa fa-ellipsis-v cursor-pointer p-1" on:click={showLists} />
-        {/if}
+        {/if} -->
       {/if}
     </Tabs>
     {#key $feedsTab}
