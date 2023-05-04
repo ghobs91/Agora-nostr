@@ -32,7 +32,7 @@
     </Input>
     <Anchor
       type="button-accent"
-      on:click={() => modal.replace({type: "onboarding", stage: "note"})}>
+      on:click={() => modal.replace({type: "onboarding", stage: nextStage})}>
       Got it
     </Anchor>
   </div>
