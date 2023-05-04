@@ -55,7 +55,7 @@
 
     const {name, params, relays} = values
 
-    user.putList(list.id, name, params, relays)
+    user.putList(list?.id, name, params, relays)
     toast.show("info", "Your list has been saved!")
     modal.pop()
   }
