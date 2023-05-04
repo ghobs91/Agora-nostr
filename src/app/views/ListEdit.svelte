@@ -41,12 +41,13 @@
     if (!values.name) {
       values.name = "agora_followed_topics";
     }
-
-    // if (
-    //   find(e => e.id !== list?.id && Tags.from(e).getMeta("d") === values.name, user.getLists())
-    // ) {
-    //   return toast.show("error", "That name is already in use")
-    // }
+    const existingList = find(e => e.id !== list?.id && Tags.from(e).getMeta("d") === values.name, user.getLists());
+    if (
+      find(e => e.id !== list?.id && Tags.from(e).getMeta("d") === values.name, user.getLists())
+    ) {
+      list.id = existingList.id;
+      // return toast.show("error", "That name is already in use")
+    }
 
     if (values.params.length < 1) {
       return toast.show("error", "Add at least 1 topic to follow!")
@@ -54,7 +55,7 @@
 
     const {name, params, relays} = values
 
-    user.putList(list?.id, name, params, relays)
+    user.putList(list.id, name, params, relays)
     toast.show("info", "Your list has been saved!")
     modal.pop()
   }

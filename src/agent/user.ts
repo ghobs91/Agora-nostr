@@ -64,6 +64,7 @@ let profileCopy = null
 
 profile.subscribe($profile => {
   profileCopy = $profile
+  console.log('lists from user.ts: ', profileCopy.lists);
   pool.Config.multiplextrUrl = $profile.settings.multiplextrUrl
 })
 

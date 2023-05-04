@@ -32,13 +32,9 @@
   <p>
     Select a list to modify. The selected {label} will be added to it as an additional filter.
   </p>
-  {#each $lists as e (e.id)}
-    {@const meta = Tags.from(e).asMeta()}
-    <BorderLeft on:click={() => selectlist(e)}>
+    {@const meta = Tags.from($lists[0]).asMeta()}
+    <BorderLeft on:click={() => selectlist($lists[0])}>
       <strong>{meta.d}</strong>
-      <ListSummary list={e} />
+      <ListSummary list={$lists[0]} />
     </BorderLeft>
-  {:else}
-    <p class="text-center py-12">You don't have any custom lists yet.</p>
-  {/each}
 </Content>
