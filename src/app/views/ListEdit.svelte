@@ -27,11 +27,11 @@
   console.log('values.params: ', values.params)
 
   const search = q => {
-    if (q.startsWith("#")) {
+    // if (q.startsWith("#")) {
       return $searchTopics(q)
         .slice(0, 5)
         .map(({name}) => ["t", name])
-    }
+    // }
 
   }
 
