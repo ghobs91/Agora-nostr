@@ -123,6 +123,18 @@
         })} />
       {$likesCount}
     </button>
+    <button
+      class={cx("w-16 text-left", {
+        "pointer-events-none opacity-50": disableActions || $author.pubkey === user.getPubkey(),
+        "text-accent": like,
+      })}
+      on:click={() => (quote)}>
+      <i
+        class={cx("fa quote-left cursor-pointer", {
+          "fa-beat fa-beat-custom": like,
+        })} />
+      {$likesCount}
+    </button>
     {#if enableZaps}
       <button
         class={cx("note-buttons text-left", {
