@@ -1,8 +1,8 @@
-# What is this?
+# What is Agora?
 
 Follow your favorite topics in the Nostr-verse!
 
-It’s also a Progressive Web App, so you can install it on mobile by tapping the share button and “add to home screen”.
+Agora is a Progressive Web App, so you can install it on mobile by tapping the share button and “add to home screen”.
 
 # Features
 
