@@ -12,10 +12,6 @@
 
 <Content size="lg">
   <Heading class="text-center">Introduce Yourself</Heading>
-  <p class="text-center">
-    Give other people something to go on. Remember that "privacy is the power to selectively reveal
-    oneself to the world".
-  </p>
   <div class="flex flex-col gap-2">
     <div class="flex flex-col gap-1">
       <strong>Your Name</strong>

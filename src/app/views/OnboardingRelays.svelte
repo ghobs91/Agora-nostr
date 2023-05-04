@@ -29,7 +29,7 @@
     <Heading>Get Connected</Heading>
     <p>
       Nostr is a protocol, not a platform. This means that <i>you</i> choose where to store your data.
-      Select your preferred storage relays below, or click "continue" to use some reasonable defaults.
+      Select your preferred storage relays below, or click "continue" to use some pre-selected defaults.
       You can change your selection any time.
     </p>
   </div>

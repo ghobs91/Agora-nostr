@@ -21,7 +21,7 @@
 </script>
 
 <Content size="lg">
-  <Heading class="text-center">Welcome to Nostr</Heading>
+  <Heading class="text-center">Welcome to Agora</Heading>
   <p class="text-center">
     Your're all set! If have any questions, just ask! People around these parts are always ready to
     lend a hand.
