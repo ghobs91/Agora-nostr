@@ -27,7 +27,7 @@
 </script>
 
 <ul
-  class="fixed top-0 bottom-0 left-0 z-20 mt-16 w-56 overflow-hidden border-r border-gray-6 bg-gray-7 pt-4
+  class="fixed top-0 bottom-0 left-0 z-20 mt-16 w-56 overflow-hidden border-r border-gray-6 navbar-bg pt-4
          pb-20 text-gray-2 shadow-xl transition-all lg:mt-0 lg:ml-0"
   class:-ml-56={!$menuIsOpen}>
   {#if $profile.pubkey}
@@ -87,7 +87,7 @@
       {/if}
     </a>
   </li> -->
-  <li class="mx-3 my-4 h-px bg-gray-6" />
+  <li class="mx-3 my-4 h-px navbar-bg" />
   {#if pool.forceUrls.length === 0}
     <li class="relative cursor-pointer">
       <a class="block px-4 py-2 transition-all hover:bg-accent hover:text-white" href="/relays">

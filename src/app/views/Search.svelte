@@ -24,7 +24,7 @@
     // This allows us to populate results even if search isn't supported by forced urls
     if (q.length > 2) {
       network.load({
-        relays: sampleRelays([{url: "wss://relay.nostr.band"}]),
+        relays: sampleRelays([{url: "wss://relay.nostr.band"}, {url: "wss://search.nos.today"}]),
         filter: [{kinds: [0], search, limit: 10}],
       })
     } else {
@@ -73,8 +73,8 @@
       <BorderLeft on:click={() => openTopic(result.topic.name)}>
         #{result.topic.name}
       </BorderLeft>
-    <!-- {:else if result.type === "person"}
-      <PersonInfo person={result.person} /> -->
+    {:else if result.type === "person"}
+      <PersonInfo person={result.person} />
     {/if}
   {/each}
 </Content>
