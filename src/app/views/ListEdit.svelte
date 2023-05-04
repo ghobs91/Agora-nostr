@@ -39,7 +39,7 @@
 
   const submit = () => {
     if (!values.name) {
-      return toast.show("error", "A name is required for your list")
+      values.name = "agora_followed_topics";
     }
 
     // if (
