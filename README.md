@@ -1,10 +1,8 @@
 # What is this?
 
-Coracle is a web client for the Nostr protocol. While Nostr is useful for many things, Coracle focuses on providing a high-quality social media experience. Check it out at [coracle.social](https://coracle.social).
+Follow your favorite topics in the Nostr-verse!
 
-[Dufflepud](https://github.com/coracle-social/dufflepud) is a companion server which you can self-host. It helps Coracle with things like link previews and image uploads.
-
-If you like Coracle and want to support its development, you can donate sats via [Geyser](https://geyser.fund/project/coracle).
+It’s also a Progressive Web App, so you can install it on mobile by tapping the share button and “add to home screen”.
 
 # Features
 
@@ -33,12 +31,10 @@ If you like Coracle and want to support its development, you can donate sats via
 - [ ] Reporting and basic distributed moderation
 - [ ] Content and person recommendations
 
-You can find a more complete changelog [here](./ROADMAP.md).
+# Run  Agora locally:
 
-# Run  Coracle locally:
-
-- Clone the project repository: `git clone https://github.com/coracle-social/coracle.git`
-- Navitage to the project directory: `cd coracle`
+- Clone the project repository
+- Navitage to the project directory: `cd agorasocial`
 - Install dependencies: `npm install`
 - Add an env file from the template: `cp env.template env.local`
 - Start the development server: `npm run dev`
