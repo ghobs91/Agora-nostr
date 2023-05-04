@@ -105,7 +105,10 @@ const defaultUrls =
         "wss://purplepag.es",
         "wss://relay.damus.io",
         "wss://relay.nostr.band",
-        "wss://nostr-pub.wellorder.net",
+        "wss://search.nos.today",
+        "wss://nos.lol",
+        "wss://relay.snort.social",
+        "wss://rsslay.nostr.moe"
       ]
 
 const getUrls = relays => {

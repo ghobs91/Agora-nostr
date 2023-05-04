@@ -63,6 +63,7 @@
         const list = listsByName["agora_followed_topics"]
         const tags = Tags.from(list)
         const authors = tags.type("p").values().all()
+        console.log("authors: ", authors);
         const topics = tags.type("t").values().all()
         const urls = tags.type("r").values().all()
 
