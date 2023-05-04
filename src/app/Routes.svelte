@@ -20,8 +20,10 @@
   import RelayList from "src/app/views/RelayList.svelte"
   import UserProfile from "src/app/views/UserProfile.svelte"
   import UserSettings from "src/app/views/UserSettings.svelte"
+  import { inject } from '@vercel/analytics'
 
   let ready = false
+  inject({ mode: 'production' });
 
   onReady(() => {
     ready = true

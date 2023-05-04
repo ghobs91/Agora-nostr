@@ -40,6 +40,7 @@
     "@noble/secp256k1": "^1.7.0",
     "@scure/base": "^1.1.1",
     "@tsconfig/svelte": "^3.0.0",
+    "@vercel/analytics": "^1.0.1",
     "classnames": "^2.3.2",
     "compressorjs": "^1.1.1",
     "fuse.js": "^6.6.2",
