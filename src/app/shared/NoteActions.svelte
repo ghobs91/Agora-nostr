@@ -88,9 +88,9 @@
     actions.push({label: "Quote", icon: "quote-left", onClick: quote})
 
     if (muted) {
-      actions.push({label: "Unmute", icon: "microphone", onClick: unmute})
+      actions.push({label: "Unblock", icon: "microphone", onClick: unmute})
     } else {
-      actions.push({label: "Mute", icon: "microphone-slash", onClick: mute})
+      actions.push({label: "Block", icon: "microphone-slash", onClick: mute})
     }
 
     if (pool.forceUrls.length === 0) {
