@@ -12,6 +12,10 @@
   import {modal} from "src/partials/state"
   import user from "src/agent/user"
 
+  export let signup
+
+  const skip = () => signup()
+
   const {petnamePubkeys} = user
 
   if ($petnamePubkeys.length === 0) {
@@ -39,7 +43,7 @@
     </p>
     <Anchor
       type="button-accent"
-      on:click={() => modal.replace({type: "onboarding", stage: "note"})}>
+      on:click={skip}>
       Continue
     </Anchor>
   </Content>

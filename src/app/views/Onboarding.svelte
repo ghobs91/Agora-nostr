@@ -86,7 +86,7 @@
     {:else if stage === "relays"}
       <OnboardingRelays />
     {:else if stage === "follows"}
-      <OnboardingFollows />
+      <OnboardingFollows {signup}/>
     {:else if stage === "note"}
       <OnboardingNote {signup} />
     {/if}

@@ -22,7 +22,7 @@
   }
 
   const signUp = () => {
-    modal.push({type: "onboarding", stage: "intro"})
+    modal.push({type: "onboarding", stage: "key"})
   }
 
   const pubkeyLogIn = () => {
@@ -41,13 +41,12 @@
     <div class="flex max-w-2xl flex-col gap-8">
       <div class="mb-4 flex flex-col items-center justify-center">
         <Heading>Welcome!</Heading>
-        <i>To the Nostr Network</i>
       </div>
       <p class="text-center">
-        Click below to log in or create an account.
+        Click below to log in or generate a new account.
         {#if !Capacitor.isNativePlatform()}
           If you have a <Anchor href={nip07} external>compatible browser extension</Anchor> installed,
-          we will use that.
+          we will automatically use that.
         {/if}
       </p>
       <div class="flex flex-col items-center gap-4">
@@ -55,9 +54,9 @@
           <Anchor class="w-32 text-center" type="button-accent" on:click={autoLogIn}>Log In</Anchor>
           <Anchor class="w-32 text-center" type="button" on:click={signUp}>Sign Up</Anchor>
         </div>
-        <Anchor type="unstyled" on:click={pubkeyLogIn}>
+        <!-- <Anchor type="unstyled" on:click={pubkeyLogIn}>
           <i class="fa fa-cogs" /> Advanced Login
-        </Anchor>
+        </Anchor> -->
       </div>
     </div>
   </Content>
