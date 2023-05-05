@@ -112,7 +112,8 @@ const defaultUrls =
         "wss://relay.current.fyi",
         "wss://offchain.pub",
         "wss://nostr.mom",
-        "wss://nostr.mutinywallet.com"
+        "wss://nostr.mutinywallet.com",
+        "wss://relay.mostr.pub"
       ]
 
 const getUrls = relays => {
