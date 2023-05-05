@@ -108,7 +108,11 @@ const defaultUrls =
         "wss://search.nos.today",
         "wss://nos.lol",
         "wss://relay.snort.social",
-        "wss://rsslay.nostr.moe"
+        "wss://rsslay.nostr.moe",
+        "wss://relay.current.fyi",
+        "wss://offchain.pub",
+        "wss://nostr.mom",
+        "wss://nostr.mutinywallet.com"
       ]
 
 const getUrls = relays => {
