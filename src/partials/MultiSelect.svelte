@@ -12,8 +12,8 @@
   let term = ""
   let input
   let suggestions
-
-  $: suggestions?.setData(term ? search(term).slice(0, 10) : [])
+  
+  $: suggestions?.setData(term ? search(term).unshift(["t", term]) : [])
 
   const remove = item => {
     value = reject(equals(item), value)

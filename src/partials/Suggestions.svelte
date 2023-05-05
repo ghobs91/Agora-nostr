@@ -8,7 +8,7 @@
 
   export const setData = d => {
     data = d
-
+    console.log('data in suggestions.svelte: ', d)
     if (!data[index]) {
       index = 0
     }

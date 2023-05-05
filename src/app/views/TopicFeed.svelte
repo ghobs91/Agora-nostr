@@ -11,15 +11,13 @@
   import user from "src/agent/user"
 
   export let topic
-  let list;
 
   const relays = sampleRelays(getUserReadRelays())
-  const filter = [{kinds: [1], "#t": [topic]}]
+  const filter = [{kinds: [1], "#t": ["microsoft"]}]
 
-  const followedTopicsList = find(e => e.id !== list?.id && Tags.from(e).getMeta("d") === "agora_followed_topics", user.getLists())
   const addMoreTopicsModal = () => {
-    console.log('followedTopicsList: ', followedTopicsList);
-    modal.push({type: "list/edit", followedTopicsList})
+    console.log('followedTopicsList: ', topic);
+    modal.push({type: "list/edit", topic})
   }
 
 </script>

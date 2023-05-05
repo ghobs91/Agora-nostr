@@ -11,7 +11,10 @@
   import {searchTopics, searchPeople, searchRelays, getPersonWithFallback} from "src/agent/db"
   import user from "src/agent/user"
 
-  export let list;
+  export let placeholder = "Add a new Topic";
+  export let topic;
+  console.log('the topic is: ', topic);
+  let list;
   list = find(e => e.id !== list?.id && Tags.from(e).getMeta("d") === "agora_followed_topics", user.getLists());
 
   const tags = Tags.wrap(list?.tags || [])
@@ -24,7 +27,7 @@
     relays: tags.type("r").all(),
   }
 
-  console.log('values.params: ', values.params)
+  console.log('values: ', values)
 
   const search = q => {
     // if (q.startsWith("#")) {

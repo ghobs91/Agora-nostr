@@ -61,7 +61,7 @@
 {:else if m.type === "list/select"}
   <ListSelect item={m.item} />
 {:else if m.type === "list/edit"}
-  <ListEdit list={m.list} />
+  <ListEdit topic={m.topic} />
 {:else if m.type === "message"}
   <Content size="lg">
     <div class="text-center">{m.message}</div>
