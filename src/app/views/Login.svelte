@@ -2,12 +2,13 @@
   import {Capacitor} from "@capacitor/core"
   import {fly} from "svelte/transition"
   import {navigate} from "svelte-routing"
-  import {modal} from "src/partials/state"
+  import {modal, toast} from "src/partials/state"
   import Anchor from "src/partials/Anchor.svelte"
   import Content from "src/partials/Content.svelte"
   import Heading from "src/partials/Heading.svelte"
   import user from "src/agent/user"
   import {login} from "src/app/state"
+  import {isMobile} from "src/util/html"
 
   const nip07 = "https://github.com/nostr-protocol/nips/blob/master/07.md"
 
@@ -19,6 +20,10 @@
     } else {
       modal.push({type: "login/privkey"})
     }
+  }
+
+  if (isMobile) {
+    toast.show("info", 'Install Agora as an app by tapping the browser share button below and then “add to home screen"');
   }
 
   const signUp = () => {

@@ -22,7 +22,7 @@
 <Content size="lg" class="text-center">
   <Heading>Generate a Key</Heading>
   <p>
-    Your private key is your password, and gives you total control over your Nostr account. We've
+    Your private key is your password, and gives you total control over your account. We've
     generated a fresh one for you below – store it somewhere safe!
   </p>
   <div class="flex gap-2">
