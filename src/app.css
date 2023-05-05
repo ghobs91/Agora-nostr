@@ -128,3 +128,12 @@ body,
 #app {
   background-color: #1b1b1b;
 }
+.text-gray-2 {
+  color: white !important;
+}
+.bg-gray-8 {
+  background-color: #232120;
+}
+.text-gray-1 {
+  color: white !important;
+}
