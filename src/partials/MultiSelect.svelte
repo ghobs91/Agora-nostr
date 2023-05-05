@@ -13,7 +13,7 @@
   let input
   let suggestions
   
-  $: suggestions?.setData(term ? search(term).unshift(["t", term]) : [])
+  $: suggestions?.setData(term ? [["t", term]] : [])
 
   const remove = item => {
     value = reject(equals(item), value)

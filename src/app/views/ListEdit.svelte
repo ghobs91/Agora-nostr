@@ -11,7 +11,6 @@
   import {searchTopics, searchPeople, searchRelays, getPersonWithFallback} from "src/agent/db"
   import user from "src/agent/user"
 
-  export let placeholder = "Add a new Topic";
   export let topic;
   console.log('the topic is: ', topic);
   let list;
@@ -70,7 +69,7 @@
     <div class="flex w-full flex-col gap-8">
       <div class="flex flex-col gap-1 list-name-field">
         <strong>Name</strong>
-        <Input bind:value={values.name} placeholder="" />
+        <Input bind:value={values.name} />
         <p class="text-sm text-gray-4">
           Lists are identified by their name, so this has to be unique.
         </p>
