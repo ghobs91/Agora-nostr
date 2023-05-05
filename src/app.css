@@ -117,7 +117,7 @@ body,
 }
 
 .bg-gray-7 {
-  background-color: #111 !important;
+  background-color: #1d1e20 !important
 }
 .navbar-bg {
   background-color: #4512a3 !important;
@@ -126,13 +126,13 @@ body,
   border-color: #1a1a1a !important;
 }
 #app {
-  background-color: #1b1b1b;
+  background-color: #111;
 }
 .text-gray-2 {
   color: white !important;
 }
 .bg-gray-8 {
-  background-color: #232120;
+  background-color: #111;
 }
 .text-gray-1 {
   color: white !important;
