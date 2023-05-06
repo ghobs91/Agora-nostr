@@ -207,7 +207,7 @@
   }
 </script>
 
-<div class="flex">
+<div class="flex content-editable-container">
   <ContentEditable bind:this={contenteditable} on:keydown={onKeyDown} on:keyup={onKeyUp}/>
   <slot name="addon" />
 </div>
