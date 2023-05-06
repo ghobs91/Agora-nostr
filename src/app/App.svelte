@@ -36,7 +36,7 @@
 
   document.head.append(style)
 
-  $: style.textContent = `:root { ${getThemeVariables($theme)}; background: var(--gray-8); }`
+  $: style.textContent = `:root { ${getThemeVariables($theme)}; background: #111; }`
 
   const seenChallenges = new Set()
 
