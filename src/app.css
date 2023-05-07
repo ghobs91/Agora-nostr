@@ -149,3 +149,6 @@ body,
   background-color: #1a1a1a;
   color: #e8e8e8;
 }
+.bg-accent {
+  background-color: #7239dd !important;
+}
