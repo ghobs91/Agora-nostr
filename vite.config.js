@@ -30,7 +30,7 @@ export default defineConfig({
         name: "Agora",
         short_name: "Agora",
         description: "A place for all to share interests and knowledge.",
-        theme_color: "#7239dd",
+        theme_color: "#1e1e1e",
         icons: [
           {type: "image/png", sizes: "192x192", src: "/images/favicon/192.png"},
           {type: "image/png", sizes: "512x512", src: "/images/favicon/512.png"},
