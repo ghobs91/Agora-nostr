@@ -10,6 +10,7 @@
   import MultiSelect from "src/partials/MultiSelect.svelte"
   import {searchTopics, searchPeople, searchRelays, getPersonWithFallback} from "src/agent/db"
   import user from "src/agent/user"
+  import {warn} from "src/util/logger"
 
   export let topic;
   console.log('the topic is: ', topic);
@@ -39,7 +40,7 @@
 
   const _searchRelays = q => pluck("url", $searchRelays(q)).map(url => ["r", url])
 
-  const submit = () => {
+  const submit = async () => {
     if (!values.name) {
       values.name = "agora_followed_topics";
     }
@@ -58,6 +59,18 @@
     const {name, params, relays} = values
 
     user.putList(list?.id, name, params, relays)
+
+    params.forEach(async (topic) => {
+      const twitterHashtag = topic[1];
+      try {
+        await fetch(`https://rsslay.nostr.moe/create?url=https://nitter.moomoo.me/search/rss?f=tweets&q=%23${twitterHashtag}&e-nativeretweets=on&e-replies=on&e-quote=on`, {method: "get"})
+      } catch (e) {
+        if (!e.toString().includes("Failed to fetch")) {
+          warn(e)
+        }
+      }
+    });
+    
     toast.show("info", "Your list has been saved!")
     modal.pop()
   }
