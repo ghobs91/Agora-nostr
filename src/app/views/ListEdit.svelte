@@ -40,6 +40,19 @@
 
   const _searchRelays = q => pluck("url", $searchRelays(q)).map(url => ["r", url])
 
+  const generateMastodonHashtag = async (params) => {
+    params.forEach(async (topic) => {
+      const topicHashtag = topic[1];
+      try {
+        await fetch(`https://rsslay.nostr.moe/api/feed?url=https://mastodon.social/tags/${topicHashtag}.rss`, {method: "get"})
+      } catch (e) {
+        if (!e.toString().includes("Failed to fetch")) {
+          warn(e)
+        }
+      }
+    });
+  }
+
   const submit = async () => {
     if (!values.name) {
       values.name = "agora_followed_topics";
@@ -59,18 +72,7 @@
     const {name, params, relays} = values
 
     user.putList(list?.id, name, params, relays)
-
-    params.forEach(async (topic) => {
-      const twitterHashtag = topic[1];
-      try {
-        await fetch(`https://rsslay.nostr.moe/create?url=https://nitter.moomoo.me/search/rss?f=tweets&q=%23${twitterHashtag}&e-nativeretweets=on&e-replies=on&e-quote=on`, {method: "get"})
-      } catch (e) {
-        if (!e.toString().includes("Failed to fetch")) {
-          warn(e)
-        }
-      }
-    });
-    
+    generateMastodonHashtag(params);
     toast.show("info", "Your list has been saved!")
     modal.pop()
   }
