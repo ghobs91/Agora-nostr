@@ -40,11 +40,37 @@
 
   const _searchRelays = q => pluck("url", $searchRelays(q)).map(url => ["r", url])
 
-  const generateMastodonHashtag = async (params) => {
+  const generateMastodonHashtagBridge = async (params) => {
     params.forEach(async (topic) => {
       const topicHashtag = topic[1];
       try {
         await fetch(`https://rsslay.nostr.moe/api/feed?url=https://mastodon.social/tags/${topicHashtag}.rss`, {method: "get"})
+      } catch (e) {
+        if (!e.toString().includes("Failed to fetch")) {
+          warn(e)
+        }
+      }
+    });
+  }
+
+  const generateTwitterHashtag = async (params) => {
+    params.forEach(async (topic) => {
+      const topicHashtag = topic[1];
+      try {
+        await fetch(`https://rsslay.nostr.moe/api/feed?url=https://nitter.moomoo.me/search/rss?f=tweets&q=%23${topicHashtag}&e-nativeretweets=on&e-replies=on&e-quote=on&since=&until=&near=united+states`, {method: "get"})
+      } catch (e) {
+        if (!e.toString().includes("Failed to fetch")) {
+          warn(e)
+        }
+      }
+    });
+  }
+
+  const generateSubredditTopicBridge = async (params) => {
+    params.forEach(async (topic) => {
+      const topicHashtag = topic[1];
+      try {
+        await fetch(`https://rsslay.nostr.moe/api/feed?url=https://www.reddit.com/r/${topicHashtag}/best/.rss?sort=new`, {method: "get"})
       } catch (e) {
         if (!e.toString().includes("Failed to fetch")) {
           warn(e)
@@ -72,7 +98,8 @@
     const {name, params, relays} = values
 
     user.putList(list?.id, name, params, relays)
-    generateMastodonHashtag(params);
+    generateMastodonHashtagBridge(params);
+    generateSubredditTopicBridge(params);
     toast.show("info", "Your list has been saved!")
     modal.pop()
   }
