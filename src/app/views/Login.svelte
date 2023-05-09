@@ -48,12 +48,14 @@
         <Heading>Welcome!</Heading>
       </div>
       <p class="text-center">
-        Click below to log in or generate a new account.
-        {#if !Capacitor.isNativePlatform()}
-          If you have a <Anchor href={nip07} external>compatible browser extension</Anchor> installed,
-          we will automatically use that.
-        {/if}
+        Click below to log in, or generate a new account <b>(no need to provide an email or phone number!)</b>
       </p>
+      {#if !Capacitor.isNativePlatform()}
+      <p>
+        If you have a <Anchor href={nip07} external>compatible browser extension</Anchor> installed,
+        we can automatically use that.
+      </p>
+      {/if}
       <div class="flex flex-col items-center gap-4">
         <div class="flex gap-4">
           <Anchor class="w-32 text-center" type="button-accent" on:click={autoLogIn}>Log In</Anchor>
