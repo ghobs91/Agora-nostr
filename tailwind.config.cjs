@@ -8,7 +8,7 @@ module.exports = {
       transparent: "var(--transparent)",
       black: "var(--black)",
       white: "var(--white)",
-      accent: "var(--accent)",
+      accent: "#7239dd",
       "accent-light": "var(--accent-light)",
       input: "var(--input)",
       "input-hover": "var(--input-hover)",
