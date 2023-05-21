@@ -8,7 +8,7 @@
   import {identity, isNil, last} from "ramda"
   import {first} from "hurdak/lib/hurdak"
   import {warn} from "src/util/logger"
-  import {timedelta, hexToBech32, bech32ToHex, shuffle, now} from "src/util/misc"
+  import {timedelta, hexToBech32, bech32ToHex, shuffle, now, tryFunc} from "src/util/misc"
   import cmd from "src/agent/cmd"
   import {onReady, relays} from "src/agent/db"
   import keys from "src/agent/keys"
@@ -39,6 +39,8 @@
   document.head.append(style)
 
   $: style.textContent = `:root { ${getThemeVariables($theme)}; background: #111; }`
+
+  tryFunc(() => navigator.registerProtocolHandler("web+nostr", `${location.origin}/%s`))
 
   const seenChallenges = new Set()
 
