@@ -52,6 +52,8 @@
     )
   )
 
+  tryFunc(() => navigator.registerProtocolHandler("web+nostr", `${location.origin}/%s`))
+
   const seenChallenges = new Set()
 
   // When we get an AUTH challenge from our pool, attempt to authenticate

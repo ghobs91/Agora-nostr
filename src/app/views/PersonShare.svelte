@@ -14,6 +14,6 @@
 </script>
 
 <Content size="lg">
-  <QRCode code={toNostrURI(nprofile)} />
+  <QRCode code={`nostr:${nprofile}`} />
   <div class="text-center text-gray-1">Copy or scan from a nostr app to share this profile.</div>
 </Content>
