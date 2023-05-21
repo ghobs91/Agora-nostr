@@ -4,12 +4,7 @@
   import {onMount} from "svelte"
   import {fly} from "svelte/transition"
   import {navigate} from "svelte-routing"
-  import {
-    now,
-    formatTimestampAsDate,
-    formatTimestampAsLocalISODate,
-    createScroller,
-  } from "src/util/misc"
+  import {now, timedelta, formatTimestampAsDate, createScroller} from "src/util/misc"
   import {findReplyId} from "src/util/nostr"
   import Spinner from "src/partials/Spinner.svelte"
   import Tabs from "src/partials/Tabs.svelte"
