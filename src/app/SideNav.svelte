@@ -63,11 +63,7 @@
       <i class="fa fa-search mr-2" /> Search
     </a>
   </li>
-  <!-- <li class="cursor-pointer">
-    <a class="block px-4 py-2 transition-all hover:bg-accent hover:text-white" href="/scan">
-      <i class="fa fa-qrcode mr-2" /> Scan
-    </a>
-  </li> -->
+  
   <!-- <li
     class={cx("relative", {
       "cursor-pointer": $canPublish,
@@ -79,7 +75,7 @@
         <div class="absolute top-2 left-7 h-2 w-2 rounded bg-accent" />
       {/if}
     </a>
-  </li> -->
+  </li>  -->
   <!-- <li
     class={cx("relative", {
       "cursor-pointer": $canPublish,
