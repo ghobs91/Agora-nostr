@@ -1,19 +1,24 @@
 # Current
 
+- [ ] Relay reviews
+  - New kind, d as url? Combine with labeling?
+  - Show reviews in relay detail rather than events. Warn about events tab
+  - Add curated relay list, and an easy way to view content on the relays
 - [ ] Add preview proxy thing
-- [ ] Open embedded pubkeys and stuff in modals
-- [ ] Handle embedded naddrs http://localhost:5173/nevent1qqs0sp3dvtvd9t8glg8l4t4lhamvk4092mnqqtcklylwn50l0fxh75qpzemhxue69uhhyetvv9ujumn0wd68ytnzv9hxgcv4y0g
-- [ ] Add curated relay list, and an easy way to view content on the relays
-- [ ] Pagination is slow. Maybe load with no window first, then add since?
-- [ ] Add coupon code registration for relay
-- [ ] Repurpose chat as groups
-- [ ] Avoid leaking events from private relays
+- [ ] White-labeled
+  - [ ] Add invite code registration for relay
+    - [ ] Add endpoint to nostream that updates whitelist
+    - [ ] Show invite code somewhere so users can share it.
+    - [ ] Use a signed string so it's based on pubkey?
+    - [ ] Nostream is public-read, apply registration to reads as well
+  - [ ] Avoid leaking events from private relays
 - [ ] Image classification
   - https://github.com/bhky/opennsfw2
 
 # Core
 
 - [ ] Make mutes private
+- [ ] Support nip 94
 - [ ] Show trending on search page http://localhost:5173/nevent1qqs8m3f52uelvpan4nn9hmc99a4qde0gjq9mlxc2khu057nryk3879gpr4mhxue69uhkummnw3ez6ur4vgh8wetvd3hhyer9wghxuet5qyv8wumn8ghj7un9d3shjtnndehhyapwwdhkx6tpdstjvu0y
 - [ ] Add welcome.nostr.wine relay to onboarding
   - http://localhost:5173/nevent1qqsp9vf7agqyl7swhwepjw0r9s8ny55vsxkljh62pn0uh6f2g9z7a2qpr3mhxue69uhkummnw3ezuarjw43kketwvf6kx6mn9e3k7mgpyfmhxue69uhkummnw3ez6an9wf5kv6t9vsh8wetvd3hhyer9wghxuet5nds9yj

@@ -5,6 +5,7 @@
   import {warn} from "src/util/logger"
   import Content from "src/partials/Content.svelte"
   import NoteDetail from "src/app/views/NoteDetail.svelte"
+  import NaddrDetail from "src/app/views/NaddrDetail.svelte"
   import PersonDetail from "src/app/views/PersonDetail.svelte"
   import {sampleRelays} from "src/agent/relays"
 
@@ -31,6 +32,10 @@
 {:else if type === "note"}
   <Content>
     <NoteDetail note={{id: data}} />
+  </Content>
+{:else if type === "naddr"}
+  <Content>
+    <NaddrDetail {...data} />
   </Content>
 {:else if type === "nprofile"}
   <PersonDetail npub={nip19.npubEncode(data.pubkey)} {relays} activeTab="notes" />
