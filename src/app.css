@@ -119,14 +119,21 @@ body,
 .bg-gray-7 {
   background-color: #1d1e20 !important
 }
+.sidenav {
+  background-color: black !important;
+}
+.note {
+  border-color: #2d2d2d !important;
+  border-radius: 12px;
+}
 .navbar-bg {
-  background-color: #1e1e1e !important;
+  background-color: black !important;
 }
 .border-gray-6 {
   border-color: #1a1a1a !important;
 }
 #app {
-  background-color: #111;
+  background-color: black;
 }
 .text-gray-2 {
   color: white !important;

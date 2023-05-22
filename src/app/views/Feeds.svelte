@@ -21,7 +21,7 @@
   let list;
   topicsListCreated = find(e => e.id !== list?.id && Tags.from(e).getMeta("d") === "agora_followed_topics", user.getLists())
   console.log('value of topicsListCreated: ', topicsListCreated);
-  const defaultTabs = topicsListCreated ? ["Followed Topics"] : ["Global", "Followed Topics"]
+  const defaultTabs = topicsListCreated ? ["Followed Topics", "Friends"] : ["Global", "Followed Topics"]
 
   let relays, filter
   const tags = Tags.wrap(list?.tags || [])
@@ -45,7 +45,7 @@
 
 
   $: {
-    if ($feedsTab === "Follows") {
+    if ($feedsTab === "Friends") {
       const authors = shuffle(getUserFollows()).slice(0, 256)
 
       filter = {authors}
