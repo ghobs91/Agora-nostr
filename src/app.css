@@ -122,9 +122,10 @@ body,
 .sidenav {
   background-color: black !important;
 }
-.note {
+.note .card{
   border-color: #2d2d2d !important;
   border-radius: 12px;
+  background-color: #151515 !important;
 }
 .navbar-bg {
   background-color: black !important;
