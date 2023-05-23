@@ -1,7 +1,11 @@
 # Current
 
-- [ ] Combine search and scan
-- [ ] Fix white screen on cold scan
+- [ ] Add threads - replies by self get shown at the top of replies?
+- [ ] Fix rich text -> plain text using library
+- [ ] Highlights
+  - Allow highlighting text in notes
+  - When something is highlighted, show fixed-position elements for adding highlights
+  - When a note is "selected" (what does that mean, on hover?), show annotations
 - [ ] Relay reviews
   - New kind, d as url? Combine with labeling?
   - Show reviews in relay detail rather than events. Warn about events tab
