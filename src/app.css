@@ -125,7 +125,7 @@ body,
 .note .card{
   border-color: #2d2d2d !important;
   border-radius: 12px;
-  background-color: #151515 !important;
+  background-color: #1d1e20 !important;
 }
 .navbar-bg {
   background-color: black !important;
@@ -138,6 +138,7 @@ body,
 }
 .text-gray-2 {
   color: white !important;
+  border-color: #373737;
 }
 .bg-gray-8 {
   background-color: #111;

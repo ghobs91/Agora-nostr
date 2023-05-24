@@ -143,7 +143,7 @@
   <div class="flex items-center">
     {#if pool.forceUrls.length === 0}
       <!-- Mobile version -->
-      <div
+      <!-- <div
         style="transform: scale(-1, 1)"
         class="absolute top-0 right-0 m-3 grid grid-cols-3 gap-2 sm:hidden">
         {#each sortBy(identity, note.seen_on) as url, i}
@@ -154,7 +154,7 @@
               on:click={() => setFeedRelay?.({url})} />
           </div>
         {/each}
-      </div>
+      </div> -->
       <!-- Desktop version -->
       <div
         class={cx("hidden transition-opacity sm:flex", {
