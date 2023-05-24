@@ -161,3 +161,6 @@ body,
 .bg-accent {
   background-color: #7239dd !important;
 }
+.w-8 {
+  width: 3.5rem;
+}
