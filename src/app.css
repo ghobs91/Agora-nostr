@@ -177,6 +177,7 @@ body,
 .bottom-bar {
   list-style: none;
   border-top: 1px solid #373737;
+  height: 70px;
 }
 .post-button {
   bottom: 45px;
