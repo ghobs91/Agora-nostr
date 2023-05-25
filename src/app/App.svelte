@@ -27,6 +27,7 @@
   import TopNav from "src/app/TopNav.svelte"
   import Modal from "src/app/Modal.svelte"
   import ForegroundButtons from "src/app/ForegroundButtons.svelte"
+  import {isMobile} from "src/util/html"
 
   Object.assign(window, {cmd, user, keys, network, pool, sync, db, bech32ToHex, hexToBech32})
 
@@ -161,6 +162,34 @@
     <ForegroundButtons />
     <SideNav />
     <TopNav />
+    {#if isMobile}
+      <div class="bottom-bar fixed bottom-0 z-10 flex h-16 w-full items-center justify-between border-b border-gray-6 navbar-bg p-4 text-gray-2">
+        <li class="relative cursor-pointer">
+          <a class="block px-4 py-2 transition-all hover:bg-accent hover:text-white" href="/notes">
+            <i class="fa fa-home mr-2" />
+          </a>
+        </li>
+        <li class="relative cursor-pointer">
+          <a
+            class="block px-4 py-2 transition-all hover:bg-accent hover:text-white"
+            href="/discover">
+            <i class="fa fa-fire mr-2" />
+          </a>
+        </li>
+        <li class="cursor-pointer">
+          <a class="block px-4 py-2 transition-all hover:bg-accent hover:text-white" href="/search">
+            <i class="fa fa-search mr-2" />
+          </a>
+        </li>
+        <li class="relative cursor-pointer">
+          <a
+            class="block px-4 py-2 transition-all hover:bg-accent hover:text-white"
+            href="/notifications">
+            <i class="fa fa-bell mr-2" />
+          </a>
+        </li>
+      </div>
+    {/if}
     <Modal />
     <Toast />
   </div>
