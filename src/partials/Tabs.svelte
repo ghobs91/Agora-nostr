@@ -1,6 +1,7 @@
 <script>
   import {fly} from "svelte/transition"
   import {toTitle} from "hurdak/lib/hurdak"
+  import Anchor from "src/partials/Anchor.svelte"
 
   export let tabs
   export let activeTab
@@ -15,7 +16,7 @@
     {#each tabs as tab}
       {@const {title, badge} = getDisplay(tab)}
       <button
-        class="flex cursor-pointer gap-2 border-solid border-gray-6 px-8 py-4 hover:border-b"
+        class="flex cursor-pointer gap-2 border-solid active-tab px-8 py-4 hover:border-b"
         class:border-b={activeTab === tab}
         on:click={() => setActiveTab(tab)}>
         <div>{title}</div>
@@ -24,6 +25,17 @@
         {/if}
       </button>
     {/each}
+    <button
+      class="flex cursor-pointer gap-2 border-solid border-gray-6 px-8 py-4 hover:border-b">
+      <Anchor type="unstyled" href="/discover">
+        <i class="fa" /> Discover
+      </Anchor>
+    </button>
+    <!-- <div class="flex items-center justify-between">
+      <Anchor type="unstyled" href="/suggested">
+        <i class="fa" /> Suggested
+      </Anchor>
+    </div> -->
   </div>
   <slot />
 </div>

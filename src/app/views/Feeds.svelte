@@ -21,7 +21,7 @@
   let list;
   topicsListCreated = find(e => e.id !== list?.id && Tags.from(e).getMeta("d") === "agora_followed_topics", user.getLists())
   console.log('value of topicsListCreated: ', topicsListCreated);
-  const defaultTabs = topicsListCreated ? ["Followed Topics", "Friends"] : ["Global", "Followed Topics"]
+  const defaultTabs = topicsListCreated ? ["Topics", "Friends"] : ["Global", "Topics"]
 
   let relays, filter
   const tags = Tags.wrap(list?.tags || [])
@@ -55,7 +55,7 @@
 
       filter = {authors}
       relays = sampleRelays(getAllPubkeyWriteRelays(authors))
-    } else if ($feedsTab === "Followed Topics"){
+    } else if ($feedsTab === "Topics"){
       if (!find(e => e.id !== list?.id && Tags.from(e).getMeta("d") === "agora_followed_topics", user.getLists())){
         console.log('nah we dont got dat list');
         modal.push({type: "list/edit"})
@@ -104,6 +104,7 @@
   <div>
     <Tabs tabs={visibleTabs} activeTab={$feedsTab} {setActiveTab}>
       {#if $canPublish}
+
       <div class="flex items-center justify-between">
         <Anchor type="button-accent" on:click={() => addMoreTopicsModal(followedTopicsList)}>
           <i class="fa fa-plus" /> Add Topics

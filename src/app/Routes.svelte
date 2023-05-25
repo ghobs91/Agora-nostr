@@ -22,8 +22,10 @@
   import UserProfile from "src/app/views/UserProfile.svelte"
   import UserSettings from "src/app/views/UserSettings.svelte"
   import { inject } from '@vercel/analytics'
+  import Discover from "./views/Discover.svelte"
 
   let ready = false
+  let signup
   inject({ mode: 'production' });
 
   onReady(() => {
@@ -35,6 +37,9 @@
   <div class="pt-16 text-gray-2 lg:ml-56">
     <Route path="/notifications" component={Notifications} />
     <Route path="/notifications/:activeTab" component={Notifications} />
+    <Route path="/discover">
+      <Discover/>
+    </Route>
     <Route path="/search">
       <EnsureData enforcePeople={false}>
         <Search />

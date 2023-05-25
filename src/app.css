@@ -79,7 +79,7 @@ body,
 }
 
 .tippy-box[data-theme~="dark"][data-placement^="bottom"] > .tippy-arrow:before {
-  border-bottom-color: #403d39;
+  border-bottom-color: purple;
 }
 
 .tippy-box[data-theme~="dark"][data-placement^="left"] > .tippy-arrow:before {
@@ -131,7 +131,10 @@ body,
   background-color: black !important;
 }
 .border-gray-6 {
-  border-color: #1a1a1a !important;
+  border-color: #26272d !important;
+}
+.active-tab {
+  border-color: #7239dd;
 }
 #app {
   background-color: black;
@@ -165,6 +168,6 @@ body,
   width: 3.5rem;
 }
 .px-8 {
-  padding-left: 1.5rem;
-  padding-right: 1.5rem;
+  padding-left: .5rem;
+  padding-right: .5rem;
 }

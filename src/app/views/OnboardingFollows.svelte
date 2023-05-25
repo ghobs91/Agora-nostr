@@ -41,11 +41,11 @@
       To get you started, we’ve added some interesting people to your follow list. You can update
       your follows list at any time.
     </p>
-    <Anchor
+    <!-- <Anchor
       type="button-accent"
       on:click={skip}>
       Continue
-    </Anchor>
+    </Anchor> -->
   </Content>
   <div class="flex items-center gap-2">
     <i class="fa fa-user-astronaut fa-lg" />
