@@ -29,7 +29,7 @@ export default defineConfig({
       manifest: {
         name: "Agora",
         short_name: "Agora",
-        description: "A place for all to share interests and knowledge.",
+        description: "A place to share interests and learn new things!",
         theme_color: "#1e1e1e",
         icons: [
           {type: "image/png", sizes: "192x192", src: "/images/favicon/192.png"},

@@ -167,6 +167,9 @@ body,
 .w-8 {
   width: 3.5rem;
 }
+.w-16 {
+  width: 3.5rem !important;
+}
 .px-8 {
   padding-left: .5rem;
   padding-right: .5rem;

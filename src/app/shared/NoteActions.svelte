@@ -129,7 +129,7 @@
     </button>
     {#if enableZaps}
       <button
-        class={cx("w-20 text-left", {
+        class={cx("w-16 text-left", {
           "pointer-events-none opacity-50":
             disableActions || $author.pubkey === user.getPubkey() || !$author.zapper,
           "text-accent": zap,
@@ -139,6 +139,13 @@
         {formatSats($zapsTotal)}
       </button>
     {/if}
+    <button
+      class={cx("w-20 text-left")}
+      on:click={quote}>
+      <i
+      class={cx("fa fa-quote-left cursor-pointer")} />
+      Repost
+    </button>
   </div>
   <div class="flex items-center">
     {#if pool.forceUrls.length === 0}
