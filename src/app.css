@@ -177,3 +177,6 @@ body,
 .bottom-bar {
   list-style: none;
 }
+.post-button {
+  bottom: 45px;
+}

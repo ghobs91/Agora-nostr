@@ -25,7 +25,7 @@
 
 <svelte:window bind:scrollY />
 
-<div class="fixed bottom-0 right-0 z-10 m-8 flex flex-col items-center gap-3">
+<div class="post-button fixed bottom-0 right-0 z-10 m-8 flex flex-col items-center gap-3">
   {#if scrollY > 1000}
     <button
       transition:fade|local={{delay: 200, duration: 200}}
