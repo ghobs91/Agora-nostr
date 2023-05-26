@@ -19,6 +19,45 @@
     modal.push({type: "topic/feed", topic})
   }
 
+  async function createBridgedBluesky(handle) {
+    try {
+        const sanitizedHandle = handle.replace('@', '');
+        const res = await fetch(`https://rsslay.nostr.moe/api/feed?url=https://ghobs91-bluestream.deno.dev/${sanitizedHandle}`, {method: "get"});
+        const rsslayResponse = await res.json();
+        const pubKey = rsslayResponse.PubKey;
+        console.log('PubKey: ', pubKey);
+        window.location.href = `/people/${pubKey}/notes`
+      } catch (e) {
+        console.log('rsslay call failed!');
+      }
+  }
+
+  async function createBridgedTwitter(handle) {
+    try {
+        const sanitizedHandle = handle.replace('@twitter', '');
+        const res = await fetch(`https://rsslay.nostr.moe/api/feed?url=https://nitter.moomoo.me/${sanitizedHandle}/rss`, {method: "get"});
+        const rsslayResponse = await res.json();
+        const pubKey = rsslayResponse.PubKey;
+        console.log('PubKey: ', pubKey);
+        window.location.href = `/people/${pubKey}/notes`
+      } catch (e) {
+        console.log('rsslay call failed!');
+      }
+  }
+
+  async function createBridgedMastodon(handle) {
+    try {
+        const sanitizedHandle = handle.replace('@mastodon.social', '');
+        const res = await fetch(`https://rsslay.nostr.moe/api/feed?url=https://mastodon.social/${sanitizedHandle}.rss`, {method: "get"});
+        const rsslayResponse = await res.json();
+        const pubKey = rsslayResponse.PubKey;
+        console.log('PubKey: ', pubKey);
+        window.location.href = `/people/${pubKey}/notes`
+      } catch (e) {
+        console.log('rsslay call failed!');
+      }
+  }
+
   const loadPeople = debounce(500, search => {
     // If we have a query, search using nostr.band. If not, ask for random profiles.
     // This allows us to populate results even if search isn't supported by forced urls
@@ -32,6 +71,18 @@
         relays: getUserReadRelays(),
         filter: [{kinds: [0], limit: 50}],
       })
+    }
+    if (q.indexOf('bsky.social') > -1) {
+      console.log('we searchin for Bluesky?');
+      createBridgedBluesky(q);
+    }
+    if (q.indexOf('@twitter') > -1) {
+      console.log('we searchin for Twitter?');
+      createBridgedTwitter(q);
+    }
+    if (q.indexOf('@mastodon.social') > -1) {
+      console.log('we searchin for Mastodon?');
+      createBridgedMastodon(q);
     }
   })
 
@@ -61,8 +112,16 @@
   <div class="flex flex-col items-center justify-center">
     <Heading>Search</Heading>
     <p>
-      Search for people and topics on Nostr. For now, only results that have already been loaded
-      will appear in search results.
+      Search for people and topics on Agora.
+    </p>
+    <p>
+      To find a <b>Bluesky</b> profile, search their handle in this format: <b>jack.bsky.social</b>
+    </p>
+    <p>
+      To find a <b>Twitter</b> profile, search their handle in this format: <b>elonmusk@twitter</b>
+    </p>
+    <p>
+      To find a <b>Mastodon</b> profile, search their handle in this format: <b>@Gargron@mastodon.social</b>
     </p>
   </div>
   <Input bind:value={q} placeholder="Search for people or topics">
