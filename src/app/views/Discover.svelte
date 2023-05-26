@@ -32,7 +32,7 @@
   
     onMount(async () => {
       const relays = sampleRelays(user.getRelays())
-      const follows = user.getPetnamePubkeys().concat(defaultFollows)
+      const follows = user.getPetnamePubkeys().unshift(defaultFollows)
       await network.loadPeople(defaultFollows, {relays})
       const others = shuffle(uniq(follows.flatMap(getFollows))).slice(0, 256)
       await network.loadPeople(others, {relays})
