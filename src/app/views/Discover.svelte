@@ -38,8 +38,9 @@
       await network.loadPeople(others, {relays})
     })
 
-    $: results = reject(p => $petnamePubkeys.includes(p.pubkey), $searchPeople(q))
+    $: results = reject(p => $petnamePubkeys.includes(p.pubkey), $searchPeople(q)).concat(defaultFollows)
     $: results.concat(defaultFollows)
+    $: newResults = reject(p => !results.includes(p.pubkey), $searchPeople(q))
 
   </script>
   
@@ -69,7 +70,7 @@
     <Input bind:value={q} type="text" wrapperClass="flex-grow" placeholder="Type to search">
       <i slot="before" class="fa-solid fa-search" />
     </Input>
-    {#each results.slice(0, 50) as person (person.pubkey)}
+    {#each newResults.slice(0, 50) as person (person.pubkey)}
       <PersonInfo {person} />
     {/each}
     <!-- <div class="flex items-center gap-2">
