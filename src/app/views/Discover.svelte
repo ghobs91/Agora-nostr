@@ -62,10 +62,10 @@
       {/each}
     {/if} -->
 
-    <div class="flex items-center gap-2">
+    <!-- <div class="flex items-center gap-2">
       <i class="fa fa-earth-asia fa-lg" />
       <h2 class="roboto text-2xl">Trending</h2>
-    </div>
+    </div> -->
     <Input bind:value={q} type="text" wrapperClass="flex-grow" placeholder="Type to search">
       <i slot="before" class="fa-solid fa-search" />
     </Input>
