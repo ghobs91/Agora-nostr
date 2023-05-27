@@ -23,6 +23,7 @@
   import UserSettings from "src/app/views/UserSettings.svelte"
   import { inject } from '@vercel/analytics'
   import Discover from "./views/Discover.svelte"
+    import PopularFeed from "./shared/PopularFeed.svelte"
 
   let ready = false
   let signup
@@ -37,8 +38,8 @@
   <div class="pt-16 text-gray-2 lg:ml-56">
     <Route path="/notifications" component={Notifications} />
     <Route path="/notifications/:activeTab" component={Notifications} />
-    <Route path="/discover">
-      <Discover/>
+    <Route path="/discover" let:params>
+      <PopularFeed/>
     </Route>
     <Route path="/search">
       <EnsureData enforcePeople={false}>
