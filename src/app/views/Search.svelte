@@ -72,6 +72,9 @@
         filter: [{kinds: [0], limit: 50}],
       })
     }
+    if (q.indexOf('npub') > -1) {
+      window.location.href = `/people/${q}/notes`
+    }
     if (q.indexOf('bsky.social') > -1) {
       console.log('we searchin for Bluesky?');
       createBridgedBluesky(q);
