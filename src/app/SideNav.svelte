@@ -42,6 +42,11 @@
         <i class="fa fa-home mr-2" /> Home
       </a>
     </li>
+    <li class="cursor-pointer">
+      <a class="block px-4 py-2 transition-all hover:bg-accent hover:text-white" href="/discover">
+        <i class="fa fa-fire mr-2" /> Discover
+      </a>
+    </li>
     <li class="relative cursor-pointer">
       <a
         class="block px-4 py-2 transition-all hover:bg-accent hover:text-white"
