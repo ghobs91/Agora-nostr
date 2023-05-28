@@ -83,15 +83,15 @@
     }
     if (q.indexOf('bsky.social') > -1) {
       console.log('we searchin for Bluesky?');
-      createBridgedBluesky(q);
+      createBridgedBluesky(search);
     }
     if (q.indexOf('@twitter') > -1) {
       console.log('we searchin for Twitter?');
-      createBridgedTwitter(q);
+      createBridgedTwitter(search);
     }
     if (q.indexOf('@mastodon.social') > -1) {
       console.log('we searchin for Mastodon?');
-      createBridgedMastodon(q);
+      createBridgedMastodon(search);
     }
   })
 
