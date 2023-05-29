@@ -181,7 +181,24 @@ body,
   list-style: none;
   border-top: 1px solid #373737;
   height: 70px;
+  padding: 0 !important;
 }
 .post-button {
   bottom: 45px;
+}
+.botton-bar-button-container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.bottom-bar-button {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.mr-2 {
+  margin-right: 0.5rem;
+  margin-left: 0.5rem;
 }
