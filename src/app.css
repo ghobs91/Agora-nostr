@@ -117,7 +117,7 @@ body,
 }
 
 .bg-gray-7 {
-  background-color: #1d1e20 !important
+  background-color: #151515 !important
 }
 .sidenav {
   background-color: black !important;
@@ -125,13 +125,13 @@ body,
 .note .card{
   border-color: #2d2d2d !important;
   border-radius: 12px;
-  background-color: #1d1e20 !important;
+  background-color: #151515 !important;
 }
 .navbar-bg {
   background-color: black !important;
 }
 .navbar-bg {
-  background-color: #1e1e1e !important;
+  background-color: #151515 !important;
 }
 .border-gray-6 {
   border-color: #26272d !important;
