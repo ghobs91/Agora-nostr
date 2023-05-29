@@ -25,12 +25,12 @@
         {/if}
       </button>
     {/each}
-    <button
+    <!-- <button
       class="flex cursor-pointer gap-2 border-solid border-gray-6 px-8 py-4 hover:border-b">
       <Anchor type="unstyled" href="/discover">
         <i class="fa" /> Discover
       </Anchor>
-    </button>
+    </button> -->
     <!-- <div class="flex items-center justify-between">
       <Anchor type="unstyled" href="/suggested">
         <i class="fa" /> Suggested
