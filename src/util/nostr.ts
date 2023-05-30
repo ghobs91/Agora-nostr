@@ -104,11 +104,11 @@ export const findRootId = e => findRoot(e)?.[1]
 
 export const displayPerson = p => {
   if (p.kind0?.display_name) {
-    return ellipsize(p.kind0?.display_name, 60)
+    return ellipsize(p.kind0?.display_name, 60).replace('(RSS Feed)', '');
   }
 
   if (p.kind0?.name) {
-    return ellipsize(p.kind0?.name, 60)
+    return ellipsize(p.kind0?.name, 60).replace('(RSS Feed)', '');
   }
 
   try {
