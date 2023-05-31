@@ -159,7 +159,7 @@
         {/each}
       </div> -->
       <!-- Desktop version -->
-      <div
+      <!-- <div
         class={cx("hidden transition-opacity sm:flex", {
           "opacity-0 group-hover:opacity-100": !showEntire,
         })}>
@@ -174,7 +174,7 @@
             <div slot="tooltip">{displayRelay({url})}</div>
           </Popover>
         {/each}
-      </div>
+      </div> -->
     {/if}
     <div class="ml-2">
       <OverflowMenu {actions} />
