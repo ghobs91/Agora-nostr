@@ -25,7 +25,7 @@
   <div class="flex items-center gap-4">
     <Anchor
       type="unstyled"
-      href="https://agorasocial.app"
+      href="/"
       class="flex items-center gap-2">
       <img alt="Agora Logo" src="/images/logo.png" class="w-8" />
       <h1 class="roboto text-3xl">Agora</h1>
