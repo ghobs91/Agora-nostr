@@ -205,3 +205,6 @@ body,
 .notification-card {
   background-color: #151515 !important;
 }
+.routes-container {
+  background-color: black;
+}
