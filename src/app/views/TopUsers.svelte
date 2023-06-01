@@ -31,7 +31,7 @@
   
     let q = ""
   
-    $: results = reject(p => $petnamePubkeys.includes(p.pubkey), $searchPeople(q))
+    $: results = reject(p => $petnamePubkeys.includes(p.pubkey), defaultFollows)
   </script>
   
   <Content>
@@ -47,20 +47,6 @@
         Continue
       </Anchor>
     </Content>
-    <div class="flex items-center gap-2">
-      <i class="fa fa-user-astronaut fa-lg" />
-      <h2 class="roboto text-2xl">Your follows</h2>
-    </div>
-    {#if $petnamePubkeys.length === 0}
-      <div class="mt-8 flex items-center justify-center gap-2 text-center">
-        <i class="fa fa-triangle-exclamation" />
-        <span>No follows selected</span>
-      </div>
-    {:else}
-      {#each $petnamePubkeys as pubkey}
-        <PersonInfo person={getPersonWithFallback(pubkey)} />
-      {/each}
-    {/if}
     <div class="flex items-center gap-2">
       <i class="fa fa-earth-asia fa-lg" />
       <h2 class="roboto text-2xl">Trending</h2>
