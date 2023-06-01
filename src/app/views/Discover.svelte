@@ -48,40 +48,11 @@
     <Content class="text-center">
       <Heading>Find Interesting People!</Heading>
     </Content>
-    <!-- <div class="flex items-center gap-2">
-      <i class="fa fa-user-astronaut fa-lg" />
-      <h2 class="roboto text-2xl">Your follows</h2>
-    </div>
-    {#if $petnamePubkeys.length === 0}
-      <div class="mt-8 flex items-center justify-center gap-2 text-center">
-        <i class="fa fa-triangle-exclamation" />
-        <span>No follows selected</span>
-      </div>
-    {:else}
-      {#each $petnamePubkeys as pubkey}
-        <PersonInfo person={getPersonWithFallback(pubkey)} />
-      {/each}
-    {/if} -->
-
-    <!-- <div class="flex items-center gap-2">
-      <i class="fa fa-earth-asia fa-lg" />
-      <h2 class="roboto text-2xl">Trending</h2>
-    </div> -->
     <Input bind:value={q} type="text" wrapperClass="flex-grow" placeholder="Type to search">
       <i slot="before" class="fa-solid fa-search" />
     </Input>
     {#each newResults.slice(0, 50) as person (person.pubkey)}
       <PersonInfo {person} />
     {/each}
-    <!-- <div class="flex items-center gap-2">
-      <i class="fa fa-earth-asia fa-lg" />
-      <h2 class="roboto text-2xl">Other people</h2>
-    </div>
-    <Input bind:value={q} type="text" wrapperClass="flex-grow" placeholder="Type to search">
-      <i slot="before" class="fa-solid fa-search" />
-    </Input>
-    {#each results.slice(0, 50) as person (person.pubkey)}
-      <PersonInfo {person} />
-    {/each} -->
   </Content>
   

@@ -16,10 +16,12 @@
   import network from "src/agent/network"
   import {watch, people} from "src/agent/db"
   import user from "src/agent/user"
+  import TopUsers from "./TopUsers.svelte"
 
   let q = ""
   let options = []
   let scanner
+  let signup
 
   const openTopic = topic => {
     modal.push({type: "topic/feed", topic})
@@ -186,15 +188,20 @@
       on:click={() => scanner.start()} />
   </Input>
 
-  {#each search(q).slice(0, 50) as result (result.type + result.id)}
-    {#if result.type === "topic"}
-      <BorderLeft on:click={() => openTopic(result.topic.name)}>
-        #{result.topic.name}
-      </BorderLeft>
-    {:else if result.type === "person"}
-      <PersonInfo person={result.person} />
-    {/if}
-  {/each}
+  {#if q.length > 0}
+    {#each search(q).slice(0, 20) as result (result.type + result.id)}
+      {#if result.type === "topic"}
+        <BorderLeft on:click={() => openTopic(result.topic.name)}>
+          #{result.topic.name}
+        </BorderLeft>
+      {:else if result.type === "person"}
+        <PersonInfo person={result.person} />
+      {/if}
+    {/each}
+  {/if}
+  <br/>
+  <br/>
+  <TopUsers {signup}></TopUsers>
 </Content>
 
 <Scan bind:this={scanner} onScan={tryParseEntity} />

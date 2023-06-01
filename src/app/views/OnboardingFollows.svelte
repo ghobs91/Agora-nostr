@@ -38,8 +38,7 @@
   <Content class="text-center">
     <Heading>Find Your People</Heading>
     <p>
-      To get you started, we’ve added some interesting people to your follow list. You can update
-      your follows list at any time.
+      To get you started, we’ve pulled up some popular accounts for you to checkout!
     </p>
     <Anchor
       type="button-accent"
@@ -63,7 +62,7 @@
   {/if}
   <div class="flex items-center gap-2">
     <i class="fa fa-earth-asia fa-lg" />
-    <h2 class="roboto text-2xl">Trending</h2>
+    <h2 class="roboto text-2xl">Popular</h2>
   </div>
   <Input bind:value={q} type="text" wrapperClass="flex-grow" placeholder="Type to search">
     <i slot="before" class="fa-solid fa-search" />

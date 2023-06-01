@@ -26,7 +26,7 @@
     generated a fresh one for you below – store it somewhere safe!
   </p>
   <div class="flex gap-2">
-    <Input disabled placeholder={"•".repeat(53)} wrapperClass="flex-grow">
+    <Input type="password" autocomplete="new-password" disabled placeholder={"•".repeat(53)} wrapperClass="flex-grow">
       <i slot="before" class="fa fa-lock" />
       <button slot="after" class="fa fa-copy cursor-pointer" on:click={copyKey} />
     </Input>
