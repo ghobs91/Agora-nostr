@@ -68,7 +68,7 @@
   <Input bind:value={q} type="text" wrapperClass="flex-grow" placeholder="Type to search">
     <i slot="before" class="fa-solid fa-search" />
   </Input>
-  {#each results.slice(0, 50) as person (person.pubkey)}
+  {#each results as person (person.pubkey)}
     <PersonInfo {person} />
   {/each}
 </Content>
