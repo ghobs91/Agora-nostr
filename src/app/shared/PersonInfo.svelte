@@ -35,7 +35,7 @@
            transition-all hover:border-accent hover:bg-gray-8">
     <PersonCircle {person} size={12} />
     <div class="flex min-w-0 flex-grow flex-col gap-4">
-      <div class="flex items-start justify-between gap-2">
+      <div class="person-info-card flex items-start justify-between gap-2">
         <div class="flex flex-col gap-2">
           <h1 class="text-xl">{displayPerson(person)}</h1>
           {#if person.verified_as}

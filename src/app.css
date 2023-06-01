@@ -208,3 +208,13 @@ body,
 .routes-container {
   background-color: black;
 }
+.top-users-container {
+  padding: 0 !important;
+}
+.person-info-card {
+  height: 5rem;
+  justify-content: space-between;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 30px;
+}

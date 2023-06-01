@@ -23,7 +23,7 @@
     $: curatedResults = reject(p => !defaultFollows.includes(p.pubkey), results);
   </script>
   
-  <Content>
+  <Content class="top-users-container">
     <div class="flex items-center gap-2">
       <i class="fa fa-earth-asia fa-lg" />
       <h2 class="roboto text-2xl">Popular</h2>
