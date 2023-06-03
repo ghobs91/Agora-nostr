@@ -30,12 +30,9 @@
   console.log('values: ', values)
 
   const search = q => {
-    // if (q.startsWith("#")) {
       return $searchTopics(q)
         .slice(0, 5)
         .map(({name}) => ["t", name])
-    // }
-
   }
 
   const _searchRelays = q => pluck("url", $searchRelays(q)).map(url => ["r", url])
@@ -88,7 +85,6 @@
       find(e => e.id !== list?.id && Tags.from(e).getMeta("d") === values.name, user.getLists())
     ) {
       list.id = existingList.id;
-      // return toast.show("error", "That name is already in use")
     }
 
     if (values.params.length < 1) {

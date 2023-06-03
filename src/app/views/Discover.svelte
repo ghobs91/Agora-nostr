@@ -17,16 +17,6 @@
     import {getFollows, defaultFollows} from "src/agent/social"
   
     const {petnamePubkeys} = user
-    // if ($petnamePubkeys.length === 0) {
-    //   user.updatePetnames(() =>
-    //     defaultFollows.map(pubkey => {
-    //       const [{url}] = sampleRelays(getPubkeyWriteRelays(pubkey))
-    //       const name = displayPerson(getPersonWithFallback(pubkey))
-  
-    //       return ["p", pubkey, url, name]
-    //     })
-    //   )
-    // }
 
     let q = ""
   

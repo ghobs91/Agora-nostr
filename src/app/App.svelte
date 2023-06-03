@@ -28,11 +28,15 @@
   import Modal from "src/app/Modal.svelte"
   import ForegroundButtons from "src/app/ForegroundButtons.svelte"
   import {isMobile} from "src/util/html"
+  import {newNotifications, newDirectMessages, newChatMessages} from "src/app/state"
+  import cx from "classnames"
 
   Object.assign(window, {cmd, user, keys, network, pool, sync, db, bech32ToHex, hexToBech32})
 
   export let pathname = location.pathname
   export let hash = location.hash
+
+  const {profile, canPublish} = user
 
   const style = document.createElement("style")
 
@@ -183,6 +187,18 @@
             <i class="fa fa-fire mr-2" />
           </a>
         </li>
+        <li
+        class={cx("relative", "botton-bar-button-container", {
+          "cursor-pointer": $canPublish,
+          "pointer-events-none opacity-75": !$canPublish,
+        })}>
+        <a class="bottom-bar-button block px-4 py-2 transition-all hover:bg-accent hover:text-white" href="/messages">
+          <i class="fa fa-envelope mr-2" />
+          {#if $newDirectMessages}
+            <div class="absolute top-2 left-7 h-2 w-2 rounded bg-accent" />
+          {/if}
+        </a>
+      </li> 
         <li class="botton-bar-button-container relative cursor-pointer">
           <a class="bottom-bar-button block px-4 py-2 transition-all hover:bg-accent hover:text-white" href="/search">
             <i class="fa fa-search mr-2" />
@@ -192,6 +208,9 @@
           <a class="bottom-bar-button block px-4 py-2 transition-all hover:bg-accent hover:text-white"
             href="/notifications">
             <i class="fa fa-bell mr-2" />
+            {#if $newNotifications}
+              <div class="absolute top-3 right-5 h-2 w-2 rounded bg-accent" />
+            {/if}
           </a>
         </li>
       </div>

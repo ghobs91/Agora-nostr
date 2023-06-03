@@ -22,9 +22,9 @@
     }
   }
 
-  // if (isMobile) {
+  if (isMobile) {
     toast.show("info", 'Install Agora as an app by tapping the browser share button below and then “add to home screen"');
-  // }
+  }
 
   const signUp = () => {
     modal.push({type: "onboarding", stage: "key"})

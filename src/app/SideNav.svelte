@@ -64,7 +64,7 @@
     </a>
   </li>
   
-  <!-- <li
+  <li
     class={cx("relative", {
       "cursor-pointer": $canPublish,
       "pointer-events-none opacity-75": !$canPublish,
@@ -75,8 +75,8 @@
         <div class="absolute top-2 left-7 h-2 w-2 rounded bg-accent" />
       {/if}
     </a>
-  </li>  -->
-  <!-- <li
+  </li> 
+<!-- <li
     class={cx("relative", {
       "cursor-pointer": $canPublish,
       "pointer-events-none opacity-75": !$canPublish,
@@ -93,9 +93,9 @@
     <li class="relative cursor-pointer">
       <a class="block px-4 py-2 transition-all hover:bg-accent hover:text-white" href="/relays">
         <i class="fa fa-server mr-2" /> Relays
-        {#if $slowConnections.length > 0}
+        <!-- {#if $slowConnections.length > 0}
           <div class="absolute top-2 left-8 h-2 w-2 rounded bg-accent" />
-        {/if}
+        {/if} -->
       </a>
     </li>
   {/if}
