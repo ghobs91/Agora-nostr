@@ -9,9 +9,25 @@
   import {Tags} from "src/util/nostr"
   import Anchor from "src/partials/Anchor.svelte"
   import user from "src/agent/user"
-
   export let topic
 
+  let list;
+  list = find(e => e.id !== list?.id && Tags.from(e).getMeta("d") === "agora_followed_topics", user.getLists());
+  const tags = Tags.wrap(list?.tags || [])
+  let values = {
+    name: tags.getMeta("d") || "",
+    params: tags.type(["t", "p"]).all(),
+    relays: tags.type("r").all(),
+  }
+
+  let isFollowingTopic = null;
+  const topicsList = values.params;
+
+  topicsList.forEach((topicObject) => {
+    if (topicObject[1] === topic.toLowerCase()) {
+      isFollowingTopic = true;
+    }
+  });
   const relays = sampleRelays(getUserReadRelays())
   const filter = [{kinds: [1], "#t": [topic]}]
 
@@ -20,16 +36,43 @@
     modal.push({type: "list/edit", topic})
   }
 
+  const addToTopicsList = async () => {
+    if (!values.name) {
+      values.name = "agora_followed_topics";
+    }
+    
+    const existingList = find(e => e.id !== list?.id && Tags.from(e).getMeta("d") === values.name, user.getLists());
+    
+    if (
+      find(e => e.id !== list?.id && Tags.from(e).getMeta("d") === values.name, user.getLists())
+    ) {
+      list.id = existingList.id;
+    }
+    const {name, params, relays} = values
+    params.push(["t", topic]);
+    user.putList(list?.id, name, params, relays)
+    console.log(`new topics list: ${params}`);
+    window.location.href="/"
+  }
+
 </script>
 
 <Content>
   <div class="flex justify-between gap-2">
     <Heading>#{topic}</Heading>
+    {#if !isFollowingTopic}
     <div class="flex items-center justify-between">
-      <Anchor type="button-accent" on:click={() => addMoreTopicsModal()}>
-        <i class="fa fa-plus" /> Follow This Topic
+      <Anchor type="button-accent" on:click={() => addToTopicsList()}>
+        <i class="fa fa-plus" /> Follow Topic
       </Anchor>
     </div>
+    <!-- {:else}
+    <div class="flex items-center justify-between">
+      <Anchor type="button-accent" on:click={() => removeFromTopicsList(topic)}>
+        <i class="fa fa-minus" /> Unfollow Topic
+      </Anchor>
+    </div> -->
+    {/if}
   </div>
   <Feed {relays} {filter} />
 </Content>

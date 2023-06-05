@@ -10,6 +10,8 @@
 
   const relay = relays.get(url) || {url}
 
+  const mastodonFediTrendsAPI = 'https://api.feditrends.com/'
+
   document.title = 'Popular Posts'
 </script>
 

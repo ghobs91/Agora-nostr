@@ -253,7 +253,7 @@ async function publish({relays, event, onProgress, timeout = 3000, verb = "EVENT
 
   Meta.onPublish(urls)
 
-  log(`Publishing to ${urls.length} relays`, event, urls)
+  // log(`Publishing to ${urls.length} relays`, event, urls)
 
   return new Promise(resolve => {
     const timeouts = new Set()
@@ -271,7 +271,7 @@ async function publish({relays, event, onProgress, timeout = 3000, verb = "EVENT
       const progress = getProgress()
 
       if (progress.pending.size === 0) {
-        log(`Finished publishing to ${urls.length} relays`, event, progress)
+        // log(`Finished publishing to ${urls.length} relays`, event, progress)
         resolve(progress)
         sub.unsubscribe()
         executor.target.cleanup()
@@ -325,7 +325,7 @@ async function subscribe({relays, filter, onEvent, onEose}: SubscribeOpts) {
   const seen = new Map()
   const eose = new Set()
 
-  log(`Starting subscription with ${relays.length} relays`, filters, relays)
+  // log(`Starting subscription with ${relays.length} relays`, filters, relays)
 
   if (relays.length !== new Set(pluck("url", relays)).size) {
     error(`Subscribed to non-unique relays`, relays)
@@ -380,7 +380,7 @@ async function subscribe({relays, filter, onEvent, onEose}: SubscribeOpts) {
 
   return {
     unsub: () => {
-      log(`Closing subscription`, filters)
+      // log(`Closing subscription`, filters)
 
       sub.unsubscribe()
       executor.target.cleanup()
