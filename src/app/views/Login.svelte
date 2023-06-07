@@ -48,6 +48,15 @@
         <Heading>Welcome!</Heading>
       </div>
       <p class="text-center">
+        Follow your favorite topics across Nostr, Bluesky, Mastodon, and Twitter.
+      </p>
+      <div class="flex flex-col w-full border-opacity-50">
+        <div class="divider"></div>
+      </div>
+      <div class="flex flex-col w-full border-opacity-50">
+        <div class="divider"></div>
+      </div>
+      <p class="text-center">
         Click below to log in, or generate a new account <b>(no need to provide an email or phone number!)</b>
       </p>
       {#if !Capacitor.isNativePlatform()}
