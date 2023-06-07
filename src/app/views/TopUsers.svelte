@@ -31,7 +31,7 @@
       <i class="fa fa-earth-asia fa-lg" />
       <h2 class="roboto text-2xl">Suggested</h2>
     </div>
-    {#each suggestedFollowList.slice(0, 100) as person (person.pubkey)}
+    {#each suggestedFollowList.slice(0, 50) as person (person.pubkey)}
       <PersonInfo {person} />
     {/each}
   </Content>
