@@ -201,7 +201,7 @@
   {/if}
   <br/>
   <br/>
-  <TopUsers {signup}></TopUsers>
+  <!-- <TopUsers {signup}></TopUsers> -->
 </Content>
 
 <Scan bind:this={scanner} onScan={tryParseEntity} />
