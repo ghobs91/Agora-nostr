@@ -219,3 +219,26 @@ body,
   flex-direction: column;
   margin-bottom: 30px;
 }
+.messages-bubble-sender {
+  background-color: #7239dd;
+  color: #fbfbfb;
+}
+.messages-bubble-recipient {
+  background-color: #222;
+}
+.messages-timestamp {
+  color: #fbfbfb;
+}
+.message-container {
+  display: flex;
+  flex-direction: column;
+}
+.message-container-sender {
+  align-items: end;
+}
+.message-container-recipient {
+  align-items: start;
+}
+.messages-compose {
+  background-color: #262626;
+}

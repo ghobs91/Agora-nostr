@@ -97,27 +97,25 @@
   <div
     slot="message"
     let:message
-    class={cx("flex overflow-hidden text-ellipsis", {
-      "ml-12 justify-end": message.person.pubkey === user.getPubkey(),
-      "mr-12": message.person.pubkey !== user.getPubkey(),
+    class={cx("message-container overflow-hidden text-ellipsis", {
+      "ml-12 message-container-sender": message.person.pubkey === user.getPubkey(),
+      "mr-12 message-container-recipient": message.person.pubkey !== user.getPubkey(),
     })}>
     <div
       class={cx("inline-block max-w-xl rounded-2xl py-2 px-4", {
-        "rounded-br-none bg-gray-1 text-end text-gray-8":
+        "rounded-br-none messages-bubble-sender text-end":
           message.person.pubkey === user.getPubkey(),
-        "rounded-bl-none bg-gray-7": message.person.pubkey !== user.getPubkey(),
+        "rounded-bl-none messages-bubble-recipient": message.person.pubkey !== user.getPubkey(),
       })}>
       <div class="break-words">
         {#if typeof message.content === "string"}
           <NoteContent showEntire note={message} />
         {/if}
       </div>
-      <small
-        class="mt-1"
-        class:text-gray-7={message.person.pubkey === user.getPubkey()}
-        class:text-gray-1={message.person.pubkey !== user.getPubkey()}>
-        {formatTimestamp(message.created_at)}
-      </small>
     </div>
+    <small
+      class="mt-1 messages-timestamp">
+      {formatTimestamp(message.created_at)}
+    </small>
   </div>
 </Channel>

@@ -132,14 +132,14 @@
       <slot name="header" />
     </div>
     <div
-      class="fixed bottom-0 z-10 flex w-full border-t border-solid border-gray-6 border-gray-7 bg-gray-6 lg:-ml-56 lg:pl-56">
+      class="fixed bottom-0 z-10 flex w-full border-t border-solid border-gray-6 border-gray-7 messages-compose lg:-ml-56 lg:pl-56">
       <textarea
         rows="3"
         autofocus
         placeholder="Type something..."
         bind:this={textarea}
         on:keypress={onKeyPress}
-        class="w-full resize-none bg-gray-6 p-2
+        class="w-full resize-none messages-compose p-2
                text-gray-2 outline-0 placeholder:text-gray-1" />
       <button
         on:click={send}
