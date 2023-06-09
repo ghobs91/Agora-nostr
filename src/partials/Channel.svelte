@@ -8,6 +8,8 @@
   import user from "src/agent/user"
   import {getPersonWithFallback} from "src/agent/db"
   import network from "src/agent/network"
+  import { isMobile } from "src/util/html"
+  import cx from "classnames"
 
   export let loadMessages
   export let listenForMessages
@@ -115,7 +117,9 @@
   <div class="relative w-full">
     <div class="py-18 flex h-screen flex-col pb-20">
       <ul
-        class="channel-messages flex flex-grow flex-col-reverse justify-start overflow-auto p-4 pb-6">
+        class={cx("channel-messages flex flex-grow flex-col-reverse justify-start overflow-auto p-4 pb-6", {
+          "channel-messages-mobile": isMobile,
+        })}>
         {#each annotatedMessages as m (m.id)}
           <li in:fly={{y: 20}} class="flex flex-col gap-2 py-1">
             <slot name="message" message={m} />

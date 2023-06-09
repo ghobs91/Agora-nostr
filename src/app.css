@@ -242,3 +242,11 @@ body,
 .messages-compose {
   background-color: #262626;
 }
+.messages-compose-mobile {
+  bottom: 85px;
+  position: sticky;
+  z-index: 9999;
+}
+.channel-messages-mobile {
+  padding-bottom: 120px;
+}
