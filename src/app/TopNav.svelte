@@ -5,7 +5,8 @@
   import {menuIsOpen} from "src/app/state"
   import {newNotifications} from "src/app/state"
 
-  const logoUrl = import.meta.env.VITE_LOGO_URL || "/images/logo.png"
+  // const logoUrl = import.meta.env.VITE_LOGO_URL || "/images/logo.png"
+  const logoUrl = "https://cdn.satellite.earth/f0ef654ec7159b495a78c3f2364f825b7356eb12e9678e25a30dcfe84ed7c340.png"
   const toggleMenu = () => menuIsOpen.update(x => !x)
   const toggleTheme = () => theme.update(t => (t === "dark" ? "light" : "dark"))
 
@@ -27,7 +28,7 @@
       type="unstyled"
       href="/"
       class="flex items-center gap-2">
-      <img alt="Agora Logo" src="/images/logo.png" class="w-8" />
+      <img alt="Agora Logo" src={logoUrl} class="w-8" />
       <h1 class="roboto text-3xl">Agora</h1>
     </Anchor>
     <!-- <i class="fa fa-lightbulb -m-4 cursor-pointer p-4 text-lg" on:click={toggleTheme} /> -->

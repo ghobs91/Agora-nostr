@@ -207,9 +207,10 @@
   }
 </script>
 
-<div class="flex content-editable-container">
+<div class="flex-col content-editable-container">
   <ContentEditable bind:this={contenteditable} on:keydown={onKeyDown} on:keyup={onKeyUp}/>
   <slot name="addon" />
+  <div>sup</div>
 </div>
 
 <Suggestions bind:this={suggestions} select={person => autocomplete({person})}>
