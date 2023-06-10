@@ -107,7 +107,7 @@
 
       <div class="flex items-center justify-between">
         <Anchor type="button-accent" on:click={() => addMoreTopicsModal(followedTopicsList)}>
-          <i class="fa fa-plus" /> Add Topics
+          <i class="fa fa-plus" /> My Topics
         </Anchor>
       </div>
         <!-- {#if $lists.length > 0}
