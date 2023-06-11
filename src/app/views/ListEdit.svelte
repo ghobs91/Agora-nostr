@@ -76,6 +76,19 @@
     });
   }
 
+  const generateSubredditTopicArchive = async (params) => {
+    params.forEach(async (topic) => {
+      const topicHashtag = topic[1];
+      try {
+        await fetch(`https://rsslay.nostr.moe/api/feed?url=https://www.reddit.com/r/${topicHashtag}/top.rss?t=all`, {method: "get"})
+      } catch (e) {
+        if (!e.toString().includes("Failed to fetch")) {
+          warn(e)
+        }
+      }
+    });
+  }
+
   const submit = async () => {
     if (!values.name) {
       values.name = "agora_followed_topics";
@@ -96,6 +109,7 @@
     user.putList(list?.id, name, params, relays)
     generateMastodonHashtagBridge(params);
     generateSubredditTopicBridge(params);
+    generateSubredditTopicArchive(params);
     toast.show("info", "Your list has been saved!")
     modal.pop()
   }
