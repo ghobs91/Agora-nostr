@@ -42,9 +42,9 @@
     <Route path="/discover" let:params>
       <PopularFeed/>
     </Route>
-    <Route path="/topusers" let:params>
+    <!-- <Route path="/topusers" let:params>
       <TopUsers/>
-    </Route>
+    </Route> -->
     <Route path="/search">
       <EnsureData enforcePeople={false}>
         <Search />

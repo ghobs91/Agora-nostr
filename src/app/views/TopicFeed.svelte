@@ -40,9 +40,7 @@
     if (!values.name) {
       values.name = "agora_followed_topics";
     }
-    
     const existingList = find(e => e.id !== list?.id && Tags.from(e).getMeta("d") === values.name, user.getLists());
-    
     if (
       find(e => e.id !== list?.id && Tags.from(e).getMeta("d") === values.name, user.getLists())
     ) {
@@ -54,6 +52,26 @@
     console.log(`new topics list: ${params}`);
     window.location.href="/"
   }
+
+  // const removeFromTopicsList = async () => {
+  //   if (!values.name) {
+  //     values.name = "agora_followed_topics";
+  //   }
+  //   const existingList = find(e => e.id !== list?.id && Tags.from(e).getMeta("d") === values.name, user.getLists());
+  //   if (
+  //     find(e => e.id !== list?.id && Tags.from(e).getMeta("d") === values.name, user.getLists())
+  //   ) {
+  //     list.id = existingList.id;
+  //   }
+  //   const {name, params, relays} = values
+  //   let idx = params.findIndex(p => p[1]==["t", topic.toLowerCase()]);
+  //   console.log(`the index where that topic is found is ${idx}`);
+  //   const newTopicsArray = params.toSpliced(idx, 1);
+  //   console.log(`newTopicsArray without that topic: ${newTopicsArray}`);
+  //   // user.putList(list?.id, name, params, relays)
+  //   // console.log(`new topics list: ${params}`);
+  //   // window.location.href="/"
+  // }
 
 </script>
 
@@ -68,7 +86,7 @@
     </div>
     <!-- {:else}
     <div class="flex items-center justify-between">
-      <Anchor type="button-accent" on:click={() => removeFromTopicsList(topic)}>
+      <Anchor type="button-accent" on:click={() => removeFromTopicsList()}>
         <i class="fa fa-minus" /> Unfollow Topic
       </Anchor>
     </div> -->
