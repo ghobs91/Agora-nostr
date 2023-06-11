@@ -24,6 +24,7 @@
   import Discover from "./views/Discover.svelte"
   import PopularFeed from "./shared/PopularFeed.svelte"
   import TopUsers from "./views/TopUsers.svelte"
+  import TopicFeed from "src/app/views/TopicFeed.svelte"
 
   let ready = false
   let signup
@@ -82,6 +83,9 @@
       {#key params.b64url}
         <RelayDetail url={base64DecodeOrPlainWebSocketURL(params.b64OrUrl)} />
       {/key}
+    </Route>
+    <Route path="/topic/:topic" let:params>
+      <TopicFeed topic={params.topic} />
     </Route>
     <Route path="/profile" component={UserProfile} />
     <Route path="/settings" component={UserSettings} />
