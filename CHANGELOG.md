@@ -231,7 +231,6 @@ Maintenance release - bugfixes, style fixes, and refactoring. High points are AU
 
 - [x] Stop showing replies at top level in feeds to make it more interesting
 - [x] Fix a bug that was preventing people from sending a message
-- [x] Stop sending IP addresses to bugsnag
 - [x] Fix some layout bugs
 
 ## 0.2.7
@@ -262,7 +261,6 @@ Maintenance release - bugfixes, style fixes, and refactoring. High points are AU
 - [x] Added support for bech32 entities
 - [x] Auto-disconnect/reconnect to spare relay resources
 - [x] Added automatic relay discovery
-- [x] Added error tracking with bugsnag
 - [x] Upgraded nostr-tools
 - [x] Added support for NIP-05 verfication
 - [x] Added analytics and error reporting (opt out supported)

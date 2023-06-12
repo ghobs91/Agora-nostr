@@ -1,13 +1,7 @@
 import "src/app.css"
 
-import Bugsnag from "@bugsnag/js"
 import App from "src/app/App.svelte"
 import {installPrompt} from "src/partials/state"
-
-Bugsnag.start({
-  apiKey: "2ea412feabfe14dc9849c6f0b4fa7003",
-  collectUserIp: false,
-})
 
 window.addEventListener("beforeinstallprompt", e => {
   // Prevent Chrome 67 and earlier from automatically showing the prompt
