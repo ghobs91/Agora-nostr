@@ -6,7 +6,7 @@
   import {newNotifications} from "src/app/state"
 
   // const logoUrl = import.meta.env.VITE_LOGO_URL || "/images/logo.png"
-  const logoUrl = "https://cdn.satellite.earth/f0ef654ec7159b495a78c3f2364f825b7356eb12e9678e25a30dcfe84ed7c340.png"
+  const logoUrl = "https://i.imgur.com/mSV5rQ7.png"
   const toggleMenu = () => menuIsOpen.update(x => !x)
   const toggleTheme = () => theme.update(t => (t === "dark" ? "light" : "dark"))
 
