@@ -11,6 +11,8 @@
   import user from "src/agent/user"
   export let topic
 
+  const {profile, canPublish} = user
+
   let list;
   list = find(e => e.id !== list?.id && Tags.from(e).getMeta("d") === "agora_followed_topics", user.getLists());
   const tags = Tags.wrap(list?.tags || [])
@@ -78,7 +80,7 @@
 <Content>
   <div class="flex justify-between gap-2">
     <Heading>#{topic}</Heading>
-    {#if !isFollowingTopic}
+    {#if !isFollowingTopic && $profile.pubkey}
     <div class="flex items-center justify-between">
       <Anchor type="button-accent" on:click={() => addToTopicsList()}>
         <i class="fa fa-plus" /> Follow Topic

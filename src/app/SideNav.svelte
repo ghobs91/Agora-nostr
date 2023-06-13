@@ -42,11 +42,6 @@
         <i class="fa fa-home mr-2" /> Home
       </a>
     </li>
-    <li class="cursor-pointer">
-      <a class="block px-4 py-2 transition-all hover:bg-accent hover:text-white" href="/discover">
-        <i class="fa fa-fire mr-2" /> Discover
-      </a>
-    </li>
     <li class="relative cursor-pointer">
       <a
         class="block px-4 py-2 transition-all hover:bg-accent hover:text-white"
@@ -57,25 +52,29 @@
         {/if}
       </a>
     </li>
+    <li
+      class={cx("relative", {
+        "cursor-pointer": $canPublish,
+        "pointer-events-none opacity-75": !$canPublish,
+      })}>
+      <a class="block px-4 py-2 transition-all hover:bg-accent hover:text-white" href="/messages">
+        <i class="fa fa-envelope mr-2" /> Messages
+        {#if $newDirectMessages}
+          <div class="absolute top-2 left-7 h-2 w-2 rounded bg-accent" />
+        {/if}
+      </a>
+    </li>
   {/if}
+  <li class="cursor-pointer">
+    <a class="block px-4 py-2 transition-all hover:bg-accent hover:text-white" href="/discover">
+      <i class="fa fa-fire mr-2" /> Discover
+    </a>
+  </li>
   <li class="cursor-pointer">
     <a class="block px-4 py-2 transition-all hover:bg-accent hover:text-white" href="/search">
       <i class="fa fa-search mr-2" /> Search
     </a>
   </li>
-  
-  <li
-    class={cx("relative", {
-      "cursor-pointer": $canPublish,
-      "pointer-events-none opacity-75": !$canPublish,
-    })}>
-    <a class="block px-4 py-2 transition-all hover:bg-accent hover:text-white" href="/messages">
-      <i class="fa fa-envelope mr-2" /> Messages
-      {#if $newDirectMessages}
-        <div class="absolute top-2 left-7 h-2 w-2 rounded bg-accent" />
-      {/if}
-    </a>
-  </li> 
 <!-- <li
     class={cx("relative", {
       "cursor-pointer": $canPublish,

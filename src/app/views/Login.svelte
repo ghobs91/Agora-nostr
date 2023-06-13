@@ -12,6 +12,43 @@
 
   const nip07 = "https://github.com/nostr-protocol/nips/blob/master/07.md"
 
+  const bootstrapRelays = [
+    "wss://purplepag.es",
+    "wss://relay.damus.io",
+    "wss://relay.nostr.band",
+    "wss://feeds.nostr.band/popular",
+    "wss://search.nos.today",
+    "wss://nos.lol",
+    "wss://e.nos.lol",
+    "wss://relay.snort.social",
+    "wss://rsslay.nostr.moe",
+    "wss://relay.current.fyi",
+    "wss://offchain.pub",
+    "wss://nostr.mom",
+    "wss://nostr.mutinywallet.com",
+    "wss://relay.mostr.pub"
+  ]
+  bootstrapRelays.forEach((relay) => {
+    user.addRelay(relay)
+  })
+
+  const exploreTopics = [
+    "cooking",
+    "gaming",
+    "worldnews",
+    "books",
+    "architecture",
+    "space",
+    "soccer",
+    "baking",
+    "travel",
+    "cordcutters",
+    "gadgets",
+    "apple",
+    "cars",
+    "diy",
+  ]
+
   const autoLogIn = async () => {
     const {nostr} = window as any
 
@@ -50,19 +87,27 @@
       <p class="text-center">
         Follow your favorite topics across Nostr, Bluesky, Mastodon, and Twitter.
       </p>
-      <div class="flex flex-col w-full border-opacity-50">
+      <!-- <div class="flex flex-col w-full border-opacity-50">
         <div class="divider"></div>
-      </div>
-      <div class="flex flex-col w-full border-opacity-50">
-        <div class="divider"></div>
-      </div>
+      </div> -->
       <p class="text-center">
-        Click below to log in, or generate a new account <b>(no need to provide an email or phone number!)</b>
+        Explore some topics:
+      </p>
+      <div class="flex flex-col items-center topic-pill-container">
+        {#each exploreTopics as topic}
+        <a href='/topic/{topic}' class="topic-pill topic-pill-login">#{topic}</a>
+        {/each}
+      </div>
+      <!-- <div class="flex flex-col w-full border-opacity-50">
+        <div class="divider"></div>
+      </div> -->
+      <p class="text-center">
+        Want to create your own topics list and comment/upvote? Click below to log in, or generate a new account <b>(no email or phone number needed!)</b>
       </p>
       {#if !Capacitor.isNativePlatform()}
       <p>
         If you have a <Anchor href={nip07} external>compatible browser extension</Anchor> installed,
-        we can automatically use that.
+        we can automatically use that to log you in.
       </p>
       {/if}
       <div class="flex flex-col items-center gap-4">
