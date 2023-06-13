@@ -261,4 +261,8 @@ body,
 }
 .topic-pill-container {
   flex-wrap: wrap;
+  height: 300px;
+}
+.explore-topic-wrapper {
+  width: 100%;
 }

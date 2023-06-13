@@ -17,6 +17,7 @@
   import {watch, people} from "src/agent/db"
   import user from "src/agent/user"
   import TopUsers from "./TopUsers.svelte"
+  import ExploreTopics from "./ExploreTopics.svelte"
 
   let q = ""
   let options = []
@@ -201,6 +202,7 @@
   {/if}
   <br/>
   <br/>
+  <ExploreTopics></ExploreTopics>
   <!-- <TopUsers {signup}></TopUsers> -->
 </Content>
 
