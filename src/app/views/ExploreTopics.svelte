@@ -16,6 +16,13 @@
         "apple",
         "cars",
         "diy",
+        "android",
+        "gardening",
+        "nyc",
+        "transit",
+        "nature",
+        "photography",
+        "comicbooks",
     ]
 
   </script>

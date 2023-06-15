@@ -9,6 +9,7 @@
   import user from "src/agent/user"
   import {login} from "src/app/state"
   import {isMobile} from "src/util/html"
+  import ExploreTopics from "./ExploreTopics.svelte"
 
   const nip07 = "https://github.com/nostr-protocol/nips/blob/master/07.md"
 
@@ -90,19 +91,9 @@
       <!-- <div class="flex flex-col w-full border-opacity-50">
         <div class="divider"></div>
       </div> -->
+      <ExploreTopics></ExploreTopics>
       <p class="text-center">
-        Explore some topics:
-      </p>
-      <div class="flex flex-col items-center topic-pill-container">
-        {#each exploreTopics as topic}
-        <a href='/topic/{topic}' class="topic-pill topic-pill-login">#{topic}</a>
-        {/each}
-      </div>
-      <!-- <div class="flex flex-col w-full border-opacity-50">
-        <div class="divider"></div>
-      </div> -->
-      <p class="text-center">
-        Want to create your own topics list and comment/upvote? Click below to log in, or generate a new account <b>(no email or phone number needed!)</b>
+        Want to save your favorite topics and comment/upvote? Click below to log in, or generate a new account <b>(no email or phone number needed!)</b>
       </p>
       {#if !Capacitor.isNativePlatform()}
       <p>
