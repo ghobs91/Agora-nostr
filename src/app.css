@@ -280,3 +280,14 @@ body,
 .notification-card-container {
   margin-bottom: 10px;
 }
+.notification-card {
+  background-color: #151515;
+}
+.note-author-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.person-link-container {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

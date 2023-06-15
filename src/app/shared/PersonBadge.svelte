@@ -18,7 +18,7 @@
 {:else}
   <Link
     to={routes.person(person.pubkey)}
-    class={cx($$props.class, "relative z-10 flex items-center gap-2")}
+    class={cx($$props.class, "relative z-10 flex items-center gap-2 person-link-container")}
     on:click={killEvent}>
     <PersonCircle {person} />
     <span class="text-lg font-bold">{displayPerson(person)}</span>

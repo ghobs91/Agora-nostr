@@ -122,7 +122,7 @@
         </Anchor>
       </div>
       <div class="flex min-w-0 flex-grow flex-col gap-2">
-        <div class="flex flex-col items-start justify-between sm:flex-row sm:items-center">
+        <div class="flex flex-col items-start justify-between sm:flex-row sm:items-center note-author-name">
           <Popover triggerType="mouseenter">
             <div slot="trigger">
               <Anchor

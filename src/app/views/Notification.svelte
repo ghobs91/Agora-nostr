@@ -42,7 +42,7 @@
   <div class="flex flex-col items-end gap-1">
     <Card
       interactive
-      class="flex w-full flex-col gap-2 text-left"
+      class="flex w-full flex-col gap-2 text-left notification-card"
       on:click={() => modal.push({type: "note/detail", note})}>
       <div on:click|stopPropagation>
         {#if !event.ref}
