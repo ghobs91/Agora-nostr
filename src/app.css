@@ -271,4 +271,5 @@ body,
 }
 .discover-card {
   background-color: #151515 !important;
+  cursor: pointer;
 }

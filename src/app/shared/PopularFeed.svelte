@@ -26,6 +26,14 @@
     return json
   }
 
+  const getRsslayMastoProfile = async (mastoLink) => {
+    const res = await fetch(`https://rsslay.nostr.moe/api/feed?url=${mastoLink}.rss`, {method: "get"});
+    const rsslayResponse = await res.json();
+    const pubKey = rsslayResponse.NPubKey;
+    console.log(`pubkey: ${pubKey}`)
+    window.location.href = `/people/${pubKey}/notes`
+  }
+
   export let mastoArray = []
 
   $: popularMastodon().then((daArray) => {
@@ -40,7 +48,7 @@
   <Spinner />
   {:then resultArray }
       {#each resultArray as mastoPost}
-        <Card class="discover-card">
+        <Card class="discover-card" on:click={() => getRsslayMastoProfile(mastoPost.account.url)}>
           <div class="flex justify-between">
             <div class="flex">
               <Anchor class="text-lg font-bold" href={mastoPost.account.url}>
