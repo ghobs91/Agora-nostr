@@ -272,6 +272,8 @@ body,
 .discover-card {
   background-color: #151515 !important;
   cursor: pointer;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 .notification-date-stamp {
   margin-top: 20px;
