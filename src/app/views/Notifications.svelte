@@ -4,7 +4,7 @@
   import {onMount} from "svelte"
   import {fly} from "svelte/transition"
   import {navigate} from "svelte-routing"
-  import {now, timedelta, formatTimestampAsDate, createScroller} from "src/util/misc"
+  import {now, timedelta, formatTimestampAsDate, createScroller, formatTimestampAsLocalISODate} from "src/util/misc"
   import {findReplyId} from "src/util/nostr"
   import Spinner from "src/partials/Spinner.svelte"
   import Tabs from "src/partials/Tabs.svelte"
@@ -99,12 +99,12 @@
     {#each events as event, i (event.key)}
       {@const lineText = getLineText(i)}
       {#if lineText}
-        <div class="flex items-center gap-4">
+        <div class="flex items-center gap-4 notification-date-stamp">
           <small class="whitespace-nowrap text-gray-1">{lineText}</small>
           <div class="h-px w-full bg-gray-6" />
         </div>
       {/if}
-      <div in:fly={{y: 20}}>
+      <div in:fly={{y: 20}} class="notification-card-container">
         <Notification {event} />
       </div>
     {:else}
