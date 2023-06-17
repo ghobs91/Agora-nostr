@@ -41,6 +41,18 @@
       }
   }
 
+  async function createBridgedLemmy(communityRSSUrl) {
+    try {
+        const res = await fetch(`https://rsslay.nostr.moe/api/feed?url=https://lemmy.world/feeds${communityRSSUrl}.xml?sort=Hot`, {method: "get"});
+        const rsslayResponse = await res.json();
+        const pubKey = rsslayResponse.PubKey;
+        console.log('PubKey: ', pubKey);
+        window.location.href = `/people/${pubKey}/notes`
+      } catch (e) {
+        console.log('rsslay call failed!');
+      }
+  }
+
   async function createBridgedTwitter(handle) {
     try {
         const sanitizedHandle = handle.replace('@twitter', '');
@@ -95,6 +107,10 @@
     if (q.indexOf('@mastodon.social') > -1) {
       console.log('we searchin for Mastodon?');
       createBridgedMastodon(search);
+    }
+    if (q.indexOf('/c/') > -1) {
+      console.log('we searchin for Lemmy?');
+      createBridgedLemmy(search);
     }
   })
 

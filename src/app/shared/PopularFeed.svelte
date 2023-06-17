@@ -16,7 +16,7 @@
 
   const relay = relays.get(url) || {url}
 
-  const mastodonFediTrendsAPI = 'https://api.feditrends.com/?order=pop&amp;hours=12'
+  const mastodonFediTrendsAPI = 'https://api.feditrends.com/?order=pop&amp;hours=6'
 
   document.title = 'Popular Posts'
 
@@ -58,7 +58,7 @@
             </div>
             <div>{mastoPost.created_at.replace("T", " ").substring(0, 16)}</div>
           </div>
-        {mastoPost.content.replace( /(<([^>]+)>)/ig, '')}
+        {mastoPost.content.replace( /(<([^>]+)>)/ig, '').replace('&#39;', '')}
         <!-- {#if mastoPost.media_attachments}
           {mastoPost.media_attachments[0].url}
         {/if} -->
