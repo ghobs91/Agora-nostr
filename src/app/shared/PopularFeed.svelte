@@ -27,7 +27,7 @@
   }
 
   const getRsslayMastoProfile = async (mastoLink) => {
-    const res = await fetch(`https://rsslay.nostr.moe/api/feed?url=${mastoLink}.rss`, {method: "get"});
+    const res = await fetch(`https://rsslay-production-bc22.up.railway.app/api/feed?url=${mastoLink}.rss`, {method: "get"});
     const rsslayResponse = await res.json();
     const pubKey = rsslayResponse.NPubKey;
     console.log(`pubkey: ${pubKey}`)
