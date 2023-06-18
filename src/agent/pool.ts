@@ -109,7 +109,7 @@ const defaultUrls =
         "wss://nos.lol",
         "wss://relay.snort.social",
         "wss://rsslay.nostr.moe",
-        "wss://rsslay-production-bc22.up.railway.app",
+        "wss://rsslay.onrender.com",
         "wss://relay.current.fyi",
         "wss://offchain.pub",
         "wss://nostr.mom",
