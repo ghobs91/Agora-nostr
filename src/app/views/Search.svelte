@@ -31,7 +31,7 @@
   async function createBridgedBluesky(handle) {
     try {
         const sanitizedHandle = handle.replace('@', '');
-        const res = await fetch(`https://rsslay-production-bc22.up.railway.app/api/feed?url=https://ghobs91-bluestream.deno.dev/${sanitizedHandle}`, {method: "get"});
+        const res = await fetch(`https://rsslay.onrender.com/api/feed?url=https://ghobs91-bluestream.deno.dev/${sanitizedHandle}`, {method: "get"});
         const rsslayResponse = await res.json();
         const pubKey = rsslayResponse.PubKey;
         console.log('PubKey: ', pubKey);
@@ -43,7 +43,7 @@
 
   async function createBridgedLemmy(communityRSSUrl) {
     try {
-        const res = await fetch(`https://rsslay-production-bc22.up.railway.app/api/feed?url=https://lemmy.world/feeds${communityRSSUrl}.xml?sort=Hot`, {method: "get"});
+        const res = await fetch(`https://rsslay.onrender.com/api/feed?url=https://lemmy.world/feeds${communityRSSUrl}.xml?sort=Hot`, {method: "get"});
         const rsslayResponse = await res.json();
         const pubKey = rsslayResponse.PubKey;
         console.log('PubKey: ', pubKey);
@@ -56,7 +56,7 @@
   async function createBridgedTwitter(handle) {
     try {
         const sanitizedHandle = handle.replace('@twitter', '');
-        const res = await fetch(`https://rsslay-production-bc22.up.railway.app/api/feed?url=https://nitter.moomoo.me/${sanitizedHandle}/rss`, {method: "get"});
+        const res = await fetch(`https://rsslay.onrender.com/api/feed?url=https://nitter.moomoo.me/${sanitizedHandle}/rss`, {method: "get"});
         const rsslayResponse = await res.json();
         const pubKey = rsslayResponse.PubKey;
         console.log('PubKey: ', pubKey);
@@ -69,7 +69,7 @@
   async function createBridgedMastodon(handle) {
     try {
         const sanitizedHandle = handle.replace('@mastodon.social', '');
-        const res = await fetch(`https://rsslay-production-bc22.up.railway.app/api/feed?url=https://mastodon.social/${sanitizedHandle}.rss`, {method: "get"});
+        const res = await fetch(`https://rsslay.onrender.com/api/feed?url=https://mastodon.social/${sanitizedHandle}.rss`, {method: "get"});
         const rsslayResponse = await res.json();
         const pubKey = rsslayResponse.PubKey;
         console.log('PubKey: ', pubKey);

@@ -41,7 +41,7 @@
     params.forEach(async (topic) => {
       const topicHashtag = topic[1];
       try {
-        await fetch(`https://rsslay-production-bc22.up.railway.app/api/feed?url=https://mastodon.social/tags/${topicHashtag}.rss`, {method: "get"})
+        await fetch(`https://rsslay.onrender.com/api/feed?url=https://mastodon.social/tags/${topicHashtag}.rss`, {method: "get"})
       } catch (e) {
         if (!e.toString().includes("Failed to fetch")) {
           warn(e)
@@ -54,7 +54,7 @@
     params.forEach(async (topic) => {
       const topicHashtag = topic[1];
       try {
-        await fetch(`https://rsslay-production-bc22.up.railway.app/api/feed?url=https://nitter.moomoo.me/search/rss?f=tweets&q=%23${topicHashtag}&e-nativeretweets=on&e-replies=on&e-quote=on&since=&until=&near=united+states`, {method: "get"})
+        await fetch(`https://rsslay.onrender.com/api/feed?url=https://nitter.moomoo.me/search/rss?f=tweets&q=%23${topicHashtag}&e-nativeretweets=on&e-replies=on&e-quote=on&since=&until=&near=united+states`, {method: "get"})
       } catch (e) {
         if (!e.toString().includes("Failed to fetch")) {
           warn(e)
@@ -67,7 +67,7 @@
     params.forEach(async (topic) => {
       const topicHashtag = topic[1];
       try {
-        await fetch(`https://rsslay-production-bc22.up.railway.app/api/feed?url=https://www.reddit.com/r/${topicHashtag}/best/.rss?sort=new`, {method: "get"})
+        await fetch(`https://rsslay.onrender.com/api/feed?url=https://www.reddit.com/r/${topicHashtag}/best/.rss?sort=new`, {method: "get"})
       } catch (e) {
         if (!e.toString().includes("Failed to fetch")) {
           warn(e)
@@ -80,7 +80,7 @@
     params.forEach(async (topic) => {
       const topicHashtag = topic[1];
       try {
-        await fetch(`https://rsslay-production-bc22.up.railway.app/api/feed?url=https://www.reddit.com/r/${topicHashtag}/top.rss?t=all`, {method: "get"})
+        await fetch(`https://rsslay.onrender.com/api/feed?url=https://www.reddit.com/r/${topicHashtag}/top.rss?t=all`, {method: "get"})
       } catch (e) {
         if (!e.toString().includes("Failed to fetch")) {
           warn(e)
