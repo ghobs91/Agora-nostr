@@ -252,9 +252,10 @@ body,
 }
 .topic-pill {
   background-color: #7239dd;
-  border-radius: 10px;
+  border-radius: 13px;
   width: fit-content;
   padding: 2px 5px;
+  text-decoration: none;
 }
 .topic-pill-login {
   margin-bottom: 10px;
