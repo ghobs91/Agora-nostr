@@ -76,6 +76,32 @@
     });
   }
 
+  const generateLemmyTopicBridge = async (params) => {
+    params.forEach(async (topic) => {
+      const topicHashtag = topic[1];
+      try {
+        await fetch(`https://rsslay.onrender.com/api/feed?url=https://lemmy.world/feeds/c/${topicHashtag}.xml?sort=Hot`, {method: "get"})
+      } catch (e) {
+        if (!e.toString().includes("Failed to fetch")) {
+          warn(e)
+        }
+      }
+    });
+  }
+
+  const generateKbinTopicBridge = async (params) => {
+    params.forEach(async (topic) => {
+      const topicHashtag = topic[1];
+      try {
+        await fetch(`https://rsslay.onrender.com/api/feed?url=https://kbin.social/rss?magazine=${topicHashtag}`, {method: "get"})
+      } catch (e) {
+        if (!e.toString().includes("Failed to fetch")) {
+          warn(e)
+        }
+      }
+    });
+  }
+
   const generateSubredditTopicArchive = async (params) => {
     params.forEach(async (topic) => {
       const topicHashtag = topic[1];
@@ -108,8 +134,12 @@
 
     user.putList(list?.id, name, params, relays)
     // generateMastodonHashtagBridge(params);
-    generateSubredditTopicBridge(params);
-    generateSubredditTopicArchive(params);
+    // generateSubredditTopicArchive(params);
+    generateSubredditTopicBridge(params).then(() => {
+      generateLemmyTopicBridge(params).then(() => {
+        generateKbinTopicBridge(params);
+      })
+    })
     toast.show("info", "Your list has been saved!")
     modal.pop()
   }
