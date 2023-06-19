@@ -27,11 +27,20 @@
   }
 
   const getRsslayMastoProfile = async (mastoLink) => {
-    const res = await fetch(`https://rsslay.onrender.com/api/feed?url=${mastoLink}.rss`, {method: "get"});
-    const rsslayResponse = await res.json();
-    const pubKey = rsslayResponse.NPubKey;
-    console.log(`pubkey: ${pubKey}`)
-    window.location.href = `/people/${pubKey}/notes`
+    const mastoLinkArray = mastoLink.split("/@")
+    const mostrPubFormattedHandle = mastoLinkArray[1] + '_at_' + mastoLinkArray[0].replace('https://', '');
+    const res = await fetch(`https://mostr.pub/.well-known/nostr.json?name=${mostrPubFormattedHandle}`, {method: "get"});
+    const mostrResponse = await res.json();
+    if (!mostrResponse.error) {
+      const pubKey = mostrResponse.names[`${mostrPubFormattedHandle}`];
+      window.location.href = `/people/${pubKey}/notes`
+    } else {
+      const res = await fetch(`https://rsslay.onrender.com/api/feed?url=${mastoLink}.rss`, {method: "get"});
+      const rsslayResponse = await res.json();
+      const pubKey = rsslayResponse.NPubKey;
+      console.log(`pubkey: ${pubKey}`)
+      window.location.href = `/people/${pubKey}/notes`
+    }
   }
 
   export let mastoArray = []

@@ -67,16 +67,31 @@
   }
 
   async function createBridgedMastodon(handle) {
-    try {
-        const sanitizedHandle = handle.replace('@mastodon.social', '');
-        const res = await fetch(`https://rsslay.onrender.com/api/feed?url=https://mastodon.social/${sanitizedHandle}.rss`, {method: "get"});
-        const rsslayResponse = await res.json();
-        const pubKey = rsslayResponse.PubKey;
-        console.log('PubKey: ', pubKey);
-        window.location.href = `/people/${pubKey}/notes`
-      } catch (e) {
-        console.log('rsslay call failed!');
-      }
+    const handleDomain = handle.split('@')[1];
+    const mostrPubFormattedHandle = handle.replace('@', '_at_');
+    const res = await fetch(`https://mostr.pub/.well-known/nostr.json?name=${mostrPubFormattedHandle}`, {method: "get"});
+    const mostrResponse = await res.json();
+    if (!mostrResponse.error) {
+      const pubKey = mostrResponse.names[`${mostrPubFormattedHandle}`];
+      window.location.href = `/people/${pubKey}/notes`
+    } else {
+      const res = await fetch(`https://rsslay.onrender.com/api/feed?url=@${handle}.rss`, {method: "get"});
+      const rsslayResponse = await res.json();
+      const pubKey = rsslayResponse.NPubKey;
+      console.log(`pubkey: ${pubKey}`)
+      window.location.href = `/people/${pubKey}/notes`
+    }
+
+    // try {
+    //     const sanitizedHandle = handle.replace('@mastodon.social', '');
+    //     const res = await fetch(`https://rsslay.onrender.com/api/feed?url=https://mastodon.social/${sanitizedHandle}.rss`, {method: "get"});
+    //     const rsslayResponse = await res.json();
+    //     const pubKey = rsslayResponse.PubKey;
+    //     console.log('PubKey: ', pubKey);
+    //     window.location.href = `/people/${pubKey}/notes`
+    //   } catch (e) {
+    //     console.log('rsslay call failed!');
+    //   }
   }
 
   const loadPeople = debounce(500, search => {
