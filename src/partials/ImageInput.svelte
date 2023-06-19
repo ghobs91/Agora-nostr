@@ -72,7 +72,7 @@
     }}>
     <slot name="button">
       <div class="flex">
-        <Anchor type="button">
+        <Anchor type="button" class="rounded-full">
           <i class="fa fa-upload" />
         </Anchor>
       </div>

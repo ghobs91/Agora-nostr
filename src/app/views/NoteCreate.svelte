@@ -146,7 +146,7 @@
           }} />
       {/if}
       <div class="flex gap-2">
-        <Button type="submit" class="flex-grow text-center">Send</Button>
+        <Button type="submit" class="flex-grow text-center rounded-full">Send</Button>
         <ImageInput bind:value={image} icon="image" hideInput />
       </div>
       <small
