@@ -14,6 +14,7 @@
   import Modal from "src/partials/Modal.svelte"
   import Heading from "src/partials/Heading.svelte"
   import RelayCard from "src/app/shared/RelayCard.svelte"
+  import NoteContent from "src/app/shared/NoteContent.svelte"
   import RelaySearch from "src/app/shared/RelaySearch.svelte"
   import {getUserWriteRelays, getRelayForPersonHint} from "src/agent/relays"
   import {getPersonWithFallback} from "src/agent/db"
@@ -29,6 +30,7 @@
   let q = ""
   let image = null
   let compose = null
+  let showPreview = false
   let showSettings = false
   let relays = writable(
     (writeTo ? writeTo.map(url => ({url, score: 1})) : getUserWriteRelays()) as Array<{
@@ -94,6 +96,10 @@
     relays.update(reject(propEq("url", relay.url)))
   }
 
+  const togglePreview = () => {
+    showPreview = !showPreview
+  }
+
   onMount(() => {
     if (pubkey && pubkey !== user.getPubkey()) {
       compose.mention(getPersonWithFallback(pubkey))
@@ -109,16 +115,27 @@
 
 <form on:submit|preventDefault={onSubmit} in:fly={{y: 20}}>
   <Content size="lg">
-    <Heading class="text-center">Create a post</Heading>
+    <Heading class="text-center">Create a note</Heading>
     <div class="flex w-full flex-col gap-4">
       <div class="flex flex-col gap-2">
-        <div class="border-l-2 border-solid border-gray-6 pl-4">
-          <Compose bind:this={compose} {onSubmit}/>
-          <div class="flex justify-end">
-            <small class="text-gray-5">
-              Posting as @{displayPerson(getPersonWithFallback(user.getPubkey()))}
-            </small>
+        <strong>What do you want to say?</strong>
+        <div class="ml-2 mt-4 border-l-2 border-solid border-gray-6 pl-3">
+          <div class="compose-container">
+            <Compose bind:this={compose} {onSubmit} />
           </div>
+          <br>
+          {#if showPreview}
+            <NoteContent note={{content: compose.parse(), tags: []}} />
+          {/if}
+        </div>
+        <div class="flex items-center justify-end gap-2 text-gray-5">
+          <small>
+            Posting as @{displayPerson(getPersonWithFallback(user.getPubkey()))}
+          </small>
+          <span>•</span>
+          <small on:click={togglePreview} class="cursor-pointer underline">
+            {showPreview ? "Hide" : "Show"} Preview
+          </small>
         </div>
       </div>
       {#if image}

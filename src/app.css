@@ -294,3 +294,7 @@ body,
   overflow: hidden;
   text-overflow: ellipsis;
 }
+.compose-container {
+  border-bottom: 1px solid #26272d;
+  padding-bottom: 30px;
+}
