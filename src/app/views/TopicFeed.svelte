@@ -13,6 +13,27 @@
 
   const {profile, canPublish} = user
 
+  const bootstrapRelays = [
+    "wss://purplepag.es",
+    "wss://relay.damus.io",
+    "wss://relay.nostr.band",
+    "wss://feeds.nostr.band/popular",
+    "wss://search.nos.today",
+    "wss://nos.lol",
+    "wss://e.nos.lol",
+    "wss://relay.snort.social",
+    "wss://rsslay.nostr.moe",
+    "wss://rsslay.onrender.com",
+    "wss://relay.current.fyi",
+    "wss://offchain.pub",
+    "wss://nostr.mom",
+    "wss://nostr.mutinywallet.com",
+    "wss://relay.mostr.pub"
+  ]
+  bootstrapRelays.forEach((relay) => {
+    user.addRelay(relay)
+  })
+
   let list;
   list = find(e => e.id !== list?.id && Tags.from(e).getMeta("d") === "agora_followed_topics", user.getLists());
   const tags = Tags.wrap(list?.tags || [])
