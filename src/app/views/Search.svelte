@@ -66,7 +66,7 @@
       }
   }
 
-  async function createBridgedMastodon(handle) {
+  async function createBridgedFediverse(handle) {
     const handleDomain = handle.split('@')[1];
     const mostrPubFormattedHandle = handle.replace('@', '_at_');
     const res = await fetch(`https://mostr.pub/.well-known/nostr.json?name=${mostrPubFormattedHandle}`, {method: "get"});
@@ -81,17 +81,6 @@
       console.log(`pubkey: ${pubKey}`)
       window.location.href = `/people/${pubKey}/notes`
     }
-
-    // try {
-    //     const sanitizedHandle = handle.replace('@mastodon.social', '');
-    //     const res = await fetch(`https://rsslay.onrender.com/api/feed?url=https://mastodon.social/${sanitizedHandle}.rss`, {method: "get"});
-    //     const rsslayResponse = await res.json();
-    //     const pubKey = rsslayResponse.PubKey;
-    //     console.log('PubKey: ', pubKey);
-    //     window.location.href = `/people/${pubKey}/notes`
-    //   } catch (e) {
-    //     console.log('rsslay call failed!');
-    //   }
   }
 
   const loadPeople = debounce(500, search => {
@@ -119,9 +108,9 @@
       console.log('we searchin for Twitter?');
       createBridgedTwitter(search);
     }
-    if (q.indexOf('@mastodon.social') > -1) {
+    if ( (q.indexOf('@mastodon.social') > -1) || (q.indexOf('@lemmy.world') > -1) || (q.indexOf('@mastodon.cloud') > -1) || (q.indexOf('@mstdn.social') > -1) || (q.indexOf('@mastodon.online') > -1) || (q.indexOf('@mastodon.world') > -1) ) {
       console.log('we searchin for Mastodon?');
-      createBridgedMastodon(search);
+      createBridgedFediverse(search);
     }
     if (q.indexOf('/c/') > -1) {
       console.log('we searchin for Lemmy?');
@@ -209,7 +198,7 @@
       To find a <b>Twitter</b> profile, search their handle in this format: <b>elonmusk@twitter</b>
     </p>
     <p>
-      To find a <b>Mastodon</b> profile, search their handle in this format: <b>@Gargron@mastodon.social</b>
+      To find a <b>Mastodon</b> profile, search their handle in this format: <b>Gargron@mastodon.social</b>
     </p>
   </div>
   <Input bind:value={q} placeholder="Search for people or topics">

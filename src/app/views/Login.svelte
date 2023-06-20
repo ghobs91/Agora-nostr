@@ -28,7 +28,10 @@
     "wss://offchain.pub",
     "wss://nostr.mom",
     "wss://nostr.mutinywallet.com",
-    "wss://relay.mostr.pub"
+    "wss://relay.mostr.pub",
+    "wss://relay.shitforce.one",
+    "wss://nostr.relayer.se",
+    "wss://relay.minds.com/nostr/v1/ws"
   ]
   bootstrapRelays.forEach((relay) => {
     user.addRelay(relay)
