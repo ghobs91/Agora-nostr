@@ -16,7 +16,7 @@
 
   const relay = relays.get(url) || {url}
 
-  const mastodonFediTrendsAPI = 'https://api.feditrends.com/?order=pop&amp;hours=6'
+  const mastodonFediTrendsAPI = 'https://api.feditrends.com/?order=pop&amp;hours=12'
 
   document.title = 'Popular Posts'
 
