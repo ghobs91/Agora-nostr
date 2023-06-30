@@ -5,7 +5,7 @@
   export let pubkeys
 </script>
 
-<div class="flex flex-col gap-2">
+<div class="flex flex-col gap-2 notification-section">
   <slot />
   <div class="flex flex-col gap-1">
     {#each pubkeys as pubkey}

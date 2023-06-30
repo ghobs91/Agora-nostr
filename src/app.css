@@ -300,3 +300,12 @@ body,
   border-bottom: 1px solid #26272d;
   padding-bottom: 30px;
 }
+.notification-referenced-post {
+  color: rgb(141, 147, 153);
+  border: 1px solid #373737;
+  border-radius: 13px;
+  padding: 15px;
+}
+.notification-section {
+  margin-bottom: 10px;  
+}

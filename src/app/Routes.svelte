@@ -25,6 +25,7 @@
   import PopularFeed from "./shared/PopularFeed.svelte"
   import TopUsers from "./views/TopUsers.svelte"
   import TopicFeed from "src/app/views/TopicFeed.svelte"
+  import FediverseTopicFeed from "./views/FediverseTopicFeed.svelte"
 
   let ready = false
   let signup
@@ -42,6 +43,9 @@
     <Route path="/discover" let:params>
       <PopularFeed/>
     </Route>
+    <!-- <Route path="/fediversetopictest" let:params>
+      <FediverseTopicFeed/>
+    </Route> -->
     <!-- <Route path="/topusers" let:params>
       <TopUsers/>
     </Route> -->

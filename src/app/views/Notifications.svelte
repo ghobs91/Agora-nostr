@@ -48,7 +48,7 @@
         }
 
         if (activeTab === tabs[0]) {
-          return [1].includes(e.kind)
+          return [1, 7, 9735].includes(e.kind) && ref
         } else {
           return [7, 9735].includes(e.kind) && ref
         }
@@ -95,7 +95,7 @@
 
 {#if events}
   <Content>
-    <Tabs {tabs} {activeTab} {setActiveTab} />
+    <!-- <Tabs {tabs} {activeTab} {setActiveTab} /> -->
     {#each events as event, i (event.key)}
       {@const lineText = getLineText(i)}
       {#if lineText}

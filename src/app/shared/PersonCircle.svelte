@@ -5,7 +5,7 @@
   import cx from "classnames"
 
   export let person
-  export let size = 4
+  export let size = 6
 
   const hue = stringToHue(person.pubkey)
   const primary = hsl(hue, {lightness: 80})

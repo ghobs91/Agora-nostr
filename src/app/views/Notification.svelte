@@ -45,7 +45,7 @@
       class="flex w-full flex-col gap-2 text-left notification-card"
       on:click={() => modal.push({type: "note/detail", note})}>
       <div on:click|stopPropagation>
-        {#if !event.ref}
+        <!-- {#if !event.ref}
           <div>
             <PersonBadge class="float-left" person={author} />
             <span class="relative top-px pl-1">mentioned you.</span>
@@ -69,9 +69,19 @@
               {/if}
             </div>
           </Popover>
-        {/if}
+        {/if} -->
       </div>
-      <div class="break-word overflow-hidden text-gray-1">
+      {#if zaps.length > 0}
+        <NotificationSection pubkeys={pluck("pubkey", zaps)}>Zapped by</NotificationSection>
+      {/if}
+      {#if likes.length > 0}
+        <NotificationSection pubkeys={pluck("pubkey", likes)}>Liked by</NotificationSection>
+      {/if}
+      {#if replies.length > 0}
+        <NotificationSection pubkeys={pluck("pubkey", replies)}
+          >Replies</NotificationSection>
+      {/if}
+      <div class="break-word overflow-hidden notification-referenced-post">
         <NoteContent maxLength={80} showMedia={false} {note} />
       </div>
     </Card>
