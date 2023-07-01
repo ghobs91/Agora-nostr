@@ -307,5 +307,10 @@ body,
   padding: 15px;
 }
 .notification-section {
-  margin-bottom: 10px;  
+  margin-bottom: 10px;
+  margin-left: 5px;
+}
+.notification-section-container {
+  display: flex;
+  align-items: baseline;
 }

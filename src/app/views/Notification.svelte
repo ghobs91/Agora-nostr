@@ -72,14 +72,23 @@
         {/if} -->
       </div>
       {#if zaps.length > 0}
-        <NotificationSection pubkeys={pluck("pubkey", zaps)}>Zapped by</NotificationSection>
+        <div class="notification-section-container">
+          <i class="fa fa-bolt cursor-pointer"/>
+          <NotificationSection pubkeys={pluck("pubkey", zaps)}>Zapped by</NotificationSection>
+        </div>
       {/if}
       {#if likes.length > 0}
+      <div class="notification-section-container">
+        <i class="fa fa-heart cursor-pointer"/>
         <NotificationSection pubkeys={pluck("pubkey", likes)}>Liked by</NotificationSection>
+      </div>
       {/if}
       {#if replies.length > 0}
+      <div class="notification-section-container">
+        <i class="fa fa-reply cursor-pointer"/>
         <NotificationSection pubkeys={pluck("pubkey", replies)}
           >Replies</NotificationSection>
+      </div>
       {/if}
       <div class="break-word overflow-hidden notification-referenced-post">
         <NoteContent maxLength={80} showMedia={false} {note} />
