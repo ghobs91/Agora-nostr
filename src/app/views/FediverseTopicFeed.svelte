@@ -37,7 +37,7 @@
         return json.slice(0, 20);
     }
 
-    let myAsyncLoopFunction = async (tagsArray) => {
+    let compilePosts = async (tagsArray) => {
             const allAsyncResults = []
 
             for (const item of tagsArray) {
@@ -65,13 +65,12 @@
       }
     }
   
-    $: myAsyncLoopFunction(tagsArray);
+    $: compilePosts(tagsArray);
   
   </script>
   
   <Content>
-    <div class="flex items-center gap-2 text-xl"><p>Popular Posts</p></div>
-    {#await myAsyncLoopFunction(tagsArray)}
+    {#await compilePosts(tagsArray)}
     <Spinner />
     {:then allAsyncResults }
         {#each allAsyncResults as topicArray}
