@@ -26,7 +26,7 @@
     })
 
     const relay = relays.get(url) || {url}
-    const mastodonFediTrendsAPI = 'https://api.feditrends.com/?hours=24&order=pop&query='
+    const mastodonFediTrendsAPI = 'https://api.feditrends.com/?hours=12&order=pop&query='
     document.title = 'Popular Posts'
 
     const getPostsForTopic = async (topic): Promise <any[]> => {
