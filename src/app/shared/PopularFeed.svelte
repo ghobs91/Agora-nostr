@@ -67,7 +67,7 @@
             </div>
             <div>{mastoPost.created_at.replace("T", " ").substring(0, 16)}</div>
           </div>
-        {mastoPost.content.replace( /(<([^>]+)>)/ig, '').replaceAll('&#39;', '')}
+        {mastoPost.content.replace( /(<([^>]+)>)/ig, '').replaceAll('&#39;', '').replaceAll('&quot;', '"').replaceAll('&amp;', '&')}
         <!-- {#if mastoPost.media_attachments}
           {mastoPost.media_attachments[0].url}
         {/if} -->

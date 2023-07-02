@@ -9,6 +9,7 @@
   import {Tags} from "src/util/nostr"
   import Anchor from "src/partials/Anchor.svelte"
   import user from "src/agent/user"
+    import FediverseTopicFeed from "./FediverseTopicFeed.svelte"
   export let topic
 
   const {profile, canPublish} = user
@@ -55,7 +56,8 @@
     }
   });
   const relays = sampleRelays(getUserReadRelays())
-  const filter = [{kinds: [1], "#t": [topic]}]
+  export let filter = [{kinds: [1], "#t": [topic]}]
+  const topicFromFilter = filter[0]["#t"]
 
   const addMoreTopicsModal = () => {
     console.log('followedTopicsList: ', topic);
@@ -118,5 +120,6 @@
     </div> -->
     {/if}
   </div>
+  <FediverseTopicFeed {topicFromFilter}></FediverseTopicFeed>
   <Feed {relays} {filter} />
 </Content>

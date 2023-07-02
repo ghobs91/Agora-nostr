@@ -15,7 +15,6 @@
   
     export let url = 'wss://feeds.nostr.band/popular'
     export let size = 10
-    export let topicFromFilter
   
     let list;
     let tagsArray = []
@@ -28,23 +27,23 @@
 
     const relay = relays.get(url) || {url}
     const mastodonFediTrendsAPI = 'https://api.feditrends.com/?hours=12&order=pop&query='
-    document.title = 'Popular Posts'
+    document.title = 'Home - Agora'
 
-    const getPostsForTopic = async (topicFromFilter): Promise <any[]> => {
-        const res = await fetch(`${mastodonFediTrendsAPI}${topicFromFilter}`, {method: "get"})
+    const getPostsForTopic = async (topic): Promise <any[]> => {
+        const res = await fetch(`${mastodonFediTrendsAPI}${topic}`, {method: "get"})
         console.log(`res: ${res}`)
         const json = await res.json()
         console.log(`json: ${json}`)
         return json.slice(0, 20);
     }
 
-    let compilePosts = async (topicFromFilter) => {
+    let compilePosts = async (tagsArray) => {
             const allAsyncResults = []
 
-            // for (const item of tagsArray) {
-                const asyncResult = await getPostsForTopic(topicFromFilter)
+            for (const item of tagsArray) {
+                const asyncResult = await getPostsForTopic(item)
                 allAsyncResults.push(asyncResult)
-            // }
+            }
             console.log(`allAsyncResults: ${allAsyncResults}`)
             return allAsyncResults;
         }
@@ -66,12 +65,12 @@
       }
     }
   
-    $: compilePosts(topicFromFilter);
+    $: compilePosts(tagsArray);
   
   </script>
   
   <Content>
-    {#await compilePosts(topicFromFilter)}
+    {#await compilePosts(tagsArray)}
     <Spinner />
     {:then allAsyncResults }
         {#each allAsyncResults as topicArray}
@@ -86,7 +85,7 @@
                     </div>
                     <div>{mastoPost.created_at.replace("T", " ").substring(0, 16)}</div>
                     </div>
-                {mastoPost.content.replace( /(<([^>]+)>)/ig, '').replaceAll('&#39;', '')}
+                {mastoPost.content.replace( /(<([^>]+)>)/ig, '').replaceAll('&#39;', '').replaceAll('&quot;', '"').replaceAll('&amp;', '&')}
                 <!-- {#if mastoPost.media_attachments}
                     {mastoPost.media_attachments[0].url}
                 {/if} -->
@@ -111,4 +110,5 @@
   </Content>
   <div class="border-b border-solid border-gray-6" />
   <Content>
+    <!-- <Feed relays={[relay]} filter={{kinds: [1]}} /> -->
   </Content>
