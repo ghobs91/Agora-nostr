@@ -13,7 +13,8 @@
   
     export let url = 'wss://feeds.nostr.band/popular'
     export let size = 10
-    export let startingArray = [];
+    export let topicsFeed = ['photography', 'news']
+    export let topicPostsArray = [];
   
     const relay = relays.get(url) || {url}
   
@@ -21,21 +22,35 @@
   
     document.title = 'Popular Posts'
 
-    const testTopicsArray = ['android', 'photography', 'history']
-  
+    const getPostsForTopic = async (topic): Promise <any[]> => {
+        const res = await fetch(`${mastodonFediTrendsAPI}${topic}`, {method: "get"})
+        console.log(`res: ${res}`)
+        const json = await res.json()
+        console.log(`json: ${json}`)
+        return json.slice(0, 10);
+    }
+
+    let myAsyncLoopFunction = async (topicsFeed) => {
+            const allAsyncResults = []
+
+            for (const item of topicsFeed) {
+                const asyncResult = await getPostsForTopic(item)
+                allAsyncResults.push(asyncResult)
+            }
+            console.log(`allAsyncResults: ${allAsyncResults}`)
+            return allAsyncResults;
+        }
+
     const popularMastodon = async (): Promise <any[]> => {
-        testTopicsArray.forEach(async (topic) => {
-            const res = await fetch(`${mastodonFediTrendsAPI}${topic}`, {method: "get"})
-            const json = await res.json()
-            console.log(`json: ${json}`)
-            // json.forEach((post) => {
-            //     console.log(`post: ${post}`)
-                startingArray.push(json);
-            // });
-            console.log(`startingArray: ${startingArray}`)
-        });
-        console.log(`startingArray: ${startingArray}`)
-        return startingArray;
+        let compiledArray = [];
+
+    //   topicsFeed.forEach(async (topic) => {
+    //     getPostsForTopic(topic).then((array) => {
+    //         compiledArray.concat(array);
+    //     })
+    //   });
+        console.log(`this.topicPostsArray from popularMastodon: ${topicPostsArray}`)
+        return compiledArray;
     }
   
     const getRsslayMastoProfile = async (mastoLink) => {
@@ -55,24 +70,16 @@
       }
     }
   
-    export let mastoArray = []
-  
-    $: popularMastodon().then((daArray) => {
-    // daArray.forEach((thing) => {
-        mastoArray.push(daArray);
-    // })
-      console.log(`daArray: ${daArray}`)
-      return daArray;
-    })
+    $: myAsyncLoopFunction(topicsFeed);
   
   </script>
   
   <Content>
     <div class="flex items-center gap-2 text-xl"><p>Popular Posts</p></div>
-    {#await popularMastodon()}
+    {#await myAsyncLoopFunction(topicsFeed)}
     <Spinner />
-    {:then resultArray }
-        {#each resultArray as mastoPost}
+    {:then allAsyncResults }
+        {#each allAsyncResults[0] as mastoPost}
           <Card class="discover-card" on:click={() => getRsslayMastoProfile(mastoPost.account.url)}>
             <div class="flex justify-between">
               <div class="flex">
