@@ -273,6 +273,7 @@ body,
   margin-left: 10px;
 }
 .discover-card {
+  display: flex;
   background-color: #151515 !important;
   cursor: pointer;
   margin-top: 10px;
@@ -313,4 +314,15 @@ body,
 .notification-section-container {
   display: flex;
   align-items: baseline;
+}
+.topic-post-info {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+  font-size: 0.8em;
+}
+.topic-post-buttons {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }

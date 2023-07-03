@@ -14,7 +14,7 @@
     import user from "src/agent/user"
   
     export let url = 'wss://feeds.nostr.band/popular'
-    export let size = 10
+    export let size = 6
   
     let list;
     let tagsArray = []
@@ -76,29 +76,35 @@
         {#each allAsyncResults as topicArray}
             {#each topicArray as mastoPost}
                 <Card class="discover-card" on:click={() => getRsslayMastoProfile(mastoPost.account.url)}>
+                  <div class="topic-post-buttons">
+                    <button class="note-buttons text-left">
+                        <i class="fa fa-reply cursor-pointer"/>
+                        {mastoPost.replies_count}
+                    </button>
+                    <button class="note-buttons text-left">
+                        <i class="fa fa-heart cursor-pointer"/>
+                        {mastoPost.favourites_count}
+                    </button>
+                  </div>
+                  <div class="topic-post-main-section">
                     <div class="flex justify-between">
-                    <div class="flex">
+                    </div>
+                    <div>
+                      {mastoPost.content.replace( /(<([^>]+)>)/ig, '').replaceAll('&#39;', '').replaceAll('&quot;', '"').replaceAll('&amp;', '&')}
+                    </div>
+                    <!-- {#if mastoPost.media_attachments}
+                        {mastoPost.media_attachments[0].url}
+                    {/if} -->
+                    <div class="topic-post-info">
+                      <div class="flex">
                         <Anchor class="text-lg font-bold" href={mastoPost.account.url}>
                         <ImageCircle {size} src={mastoPost.account.avatar} />
                         </Anchor>
                         <div class="discover-card-name-header">{mastoPost.account.display_name}</div>
+                      </div>
+                      <div>{mastoPost.created_at.replace("T", " ").substring(0, 16)}</div>
                     </div>
-                    <div>{mastoPost.created_at.replace("T", " ").substring(0, 16)}</div>
-                    </div>
-                {mastoPost.content.replace( /(<([^>]+)>)/ig, '').replaceAll('&#39;', '').replaceAll('&quot;', '"').replaceAll('&amp;', '&')}
-                <!-- {#if mastoPost.media_attachments}
-                    {mastoPost.media_attachments[0].url}
-                {/if} -->
-                <br>
-                <br>
-                <button class="note-buttons text-left">
-                    <i class="fa fa-reply cursor-pointer"/>
-                    {mastoPost.replies_count}
-                </button>
-                <button class="note-buttons text-left">
-                    <i class="fa fa-heart cursor-pointer"/>
-                    {mastoPost.favourites_count}
-                </button>
+                  </div>
                 </Card>
             {/each}
         {/each}

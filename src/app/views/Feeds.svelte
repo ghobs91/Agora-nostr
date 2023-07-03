@@ -149,8 +149,9 @@
     {#key $feedsTab}
       {#if $feedsTab === "Topics"}
         <FediverseTopicsFeed></FediverseTopicsFeed>
+        {:else}
+        <Feed {relays} {filter} />
       {/if}
-      <Feed {relays} {filter} />
     {/key}
   </div>
 </Content>
