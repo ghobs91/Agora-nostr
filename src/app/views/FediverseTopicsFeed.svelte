@@ -89,7 +89,7 @@
                   <div class="topic-post-main-section">
                     <div class="flex justify-between">
                     </div>
-                    <div>
+                    <div class="topic-post-content">
                       {mastoPost.content.replace( /(<([^>]+)>)/ig, '').replaceAll('&#39;', '').replaceAll('&quot;', '"').replaceAll('&amp;', '&')}
                     </div>
                     <!-- {#if mastoPost.media_attachments}

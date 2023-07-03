@@ -326,3 +326,7 @@ body,
   flex-direction: column;
   justify-content: center;
 }
+.topic-post-content {
+  width: 100%;
+  overflow: auto;
+}
