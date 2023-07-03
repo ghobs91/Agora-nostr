@@ -12,7 +12,7 @@
   import {formatTimestamp} from "src/util/misc"
 
   export let url = 'wss://feeds.nostr.band/popular'
-  export let size = 10
+  export let size = 6
 
   const relay = relays.get(url) || {url}
 
