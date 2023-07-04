@@ -12,6 +12,7 @@
     import {formatTimestamp} from "src/util/misc"
     import {pluck, find} from "ramda"
     import user from "src/agent/user"
+    import {modal} from "src/partials/state"
   
     export let url = 'wss://feeds.nostr.band/popular'
     export let size = 6
@@ -45,6 +46,21 @@
                 allAsyncResults.push(asyncResult)
             }
             console.log(`allAsyncResults: ${allAsyncResults}`)
+            allAsyncResults.forEach((topicArray) => {
+              topicArray.forEach((mastoPost) => {
+                let topicsInPost = []
+                topicsInPost.push(mastoPost.content.replace( /(<([^>]+)>)/ig, '').replaceAll('&#39;', '').match(/#\w+/g));
+                mastoPost.topicsInPost = []
+                topicsInPost.forEach((topic) => {
+                  topic = topic + ''
+                  mastoPost.topicsInPost.push(topic);
+                })
+
+                mastoPost.topicsInPost = mastoPost.topicsInPost[0].split(',').slice(0,4)
+                
+                console.log(`mastoPost.topicsInPost: ${mastoPost.topicsInPost}`)
+              });
+            });
             return allAsyncResults;
         }
   
@@ -87,8 +103,13 @@
                     </button>
                   </div>
                   <div class="topic-post-main-section">
-                    <div class="flex justify-between">
+                    <div class="topic-pill-section">
+                      {#each mastoPost.topicsInPost as topicPill}
+                        <div class="topic-pill">{topicPill}</div>
+                      {/each}
                     </div>
+                    <!-- <div class="flex justify-between">
+                    </div> -->
                     <div class="topic-post-content">
                       {mastoPost.content.replace( /(<([^>]+)>)/ig, '').replaceAll('&#39;', '').replaceAll('&quot;', '"').replaceAll('&amp;', '&')}
                     </div>

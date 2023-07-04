@@ -258,6 +258,8 @@ body,
   width: fit-content;
   padding: 2px 5px;
   text-decoration: none;
+  margin-right: 10px;
+  margin-bottom: 5px;
 }
 .topic-pill-login {
   margin-bottom: 10px;
@@ -328,5 +330,16 @@ body,
 }
 .topic-post-content {
   width: 100%;
+  overflow: auto;
+  padding-top: 5px;
+}
+.topic-pill-section {
+  border-bottom: 1px solid #494949;
+  overflow: auto;
+  display: flex;
+  flex-wrap: wrap;
+  padding-bottom: 5px;
+}
+.topic-post-main-section {
   overflow: auto;
 }
