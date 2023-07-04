@@ -50,7 +50,7 @@
                 const asyncResult = await getPostsForTopic(item)
                 allAsyncResults.push(asyncResult)
             }
-            console.log(`allAsyncResults: ${allAsyncResults}`)
+
             allAsyncResults.forEach((topicArray) => {
               topicArray.forEach((mastoPost) => {
                 let topicsInPost = []
@@ -60,10 +60,7 @@
                   topic = topic + ''
                   mastoPost.topicsInPost.push(topic);
                 })
-
                 mastoPost.topicsInPost = mastoPost.topicsInPost[0].split(',').slice(0,4)
-                
-                console.log(`mastoPost.topicsInPost: ${mastoPost.topicsInPost}`)
               });
             });
             return allAsyncResults;
@@ -108,13 +105,13 @@
                     </button>
                   </div>
                   <div class="topic-post-main-section">
-                    <div class="topic-pill-section">
-                      {#each mastoPost.topicsInPost as topicPill}
-                        <Anchor class="topic-pill" killEvent on:click={() => openTopic(topicPill.replace('#', ''))}>{topicPill}</Anchor>
-                      {/each}
-                    </div>
-                    <!-- <div class="flex justify-between">
-                    </div> -->
+                    {#if mastoPost.topicsInPost[0] != 'null'}
+                      <div class="topic-pill-section">
+                        {#each mastoPost.topicsInPost as topicPill}
+                          <Anchor class="topic-pill" killEvent on:click={() => openTopic(topicPill.replace('#', ''))}>{topicPill}</Anchor>
+                        {/each}
+                      </div>
+                    {/if}
                     <div class="topic-post-content">
                       {mastoPost.content.replace( /(<([^>]+)>)/ig, '').replaceAll('&#39;', '').replaceAll('&quot;', '"').replaceAll('&amp;', '&')}
                     </div>
