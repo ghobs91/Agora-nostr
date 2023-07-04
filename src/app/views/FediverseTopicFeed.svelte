@@ -17,15 +17,6 @@
     export let url = 'wss://feeds.nostr.band/popular'
     export let size = 6
     export let topicFromFilter
-  
-    let list;
-    let tagsArray = []
-    list = find(e => e.id !== list?.id && Tags.from(e).getMeta("d") === "agora_followed_topics", user.getLists());
-    list.tags.forEach((tag) => {
-        if (tag[0] === "t") {
-            tagsArray.push(tag[1])
-        }
-    })
 
     const relay = relays.get(url) || {url}
     const mastodonFediTrendsAPI = 'https://api.feditrends.com/?hours=12&order=pop&query='

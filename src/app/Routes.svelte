@@ -43,9 +43,6 @@
     <Route path="/discover" let:params>
       <PopularFeed/>
     </Route>
-    <Route path="/fediversetopictest" let:params>
-      <FediverseTopicFeed/>
-    </Route>
     <!-- <Route path="/topusers" let:params>
       <TopUsers/>
     </Route> -->
