@@ -13,6 +13,7 @@
     import {pluck, find} from "ramda"
     import user from "src/agent/user"
     import {modal} from "src/partials/state"
+    import Media from "src/partials/Media.svelte"
   
     export let url = 'wss://feeds.nostr.band/popular'
     export let size = 6
@@ -109,7 +110,6 @@
                   <div class="topic-post-main-section">
                     <div class="topic-pill-section">
                       {#each mastoPost.topicsInPost as topicPill}
-                        <!-- <div class="topic-pill">{topicPill}</div> -->
                         <Anchor class="topic-pill" killEvent on:click={() => openTopic(topicPill.replace('#', ''))}>{topicPill}</Anchor>
                       {/each}
                     </div>
@@ -118,9 +118,11 @@
                     <div class="topic-post-content">
                       {mastoPost.content.replace( /(<([^>]+)>)/ig, '').replaceAll('&#39;', '').replaceAll('&quot;', '"').replaceAll('&amp;', '&')}
                     </div>
-                    <!-- {#if mastoPost.media_attachments}
-                        {mastoPost.media_attachments[0].url}
-                    {/if} -->
+                    {#if mastoPost.media_attachments.length > 0}
+                      {#if mastoPost.media_attachments[0].url}
+                        <Media link={mastoPost.media_attachments[0]} onClose={close} />
+                      {/if}
+                    {/if}
                     <div class="topic-post-info">
                       <div class="flex">
                         <Anchor class="text-lg font-bold" href={mastoPost.account.url}>
