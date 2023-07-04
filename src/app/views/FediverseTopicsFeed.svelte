@@ -38,6 +38,10 @@
         return json.slice(0, 20);
     }
 
+    const openTopic = topic => {
+      modal.push({type: "topic/feed", topic})
+    }
+
     let compilePosts = async (tagsArray) => {
             const allAsyncResults = []
 
@@ -105,7 +109,8 @@
                   <div class="topic-post-main-section">
                     <div class="topic-pill-section">
                       {#each mastoPost.topicsInPost as topicPill}
-                        <div class="topic-pill">{topicPill}</div>
+                        <!-- <div class="topic-pill">{topicPill}</div> -->
+                        <Anchor class="topic-pill" killEvent on:click={() => openTopic(topicPill.replace('#', ''))}>{topicPill}</Anchor>
                       {/each}
                     </div>
                     <!-- <div class="flex justify-between">
