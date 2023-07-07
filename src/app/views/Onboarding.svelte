@@ -22,12 +22,16 @@
   import cmd from "src/agent/cmd"
   import {loadAppData} from "src/app/state"
   import {modal} from "src/partials/state"
+  import ListEdit from "./ListEdit.svelte"
+  import {pluck, find} from "ramda"
+  import {Tags} from "src/util/nostr"
 
   export let stage
 
   const privkey = generatePrivateKey()
   const profile = {}
   const {relays} = user
+  let list;
 
   if ($relays.length === 0) {
     user.updateRelays(() =>
@@ -58,8 +62,8 @@
 
     loadAppData(user.getPubkey())
 
-    modal.clear()
-    navigate("/notes")
+    modal.replace({type: "onboarding", stage: "topics"})
+    // navigate("/notes")
   }
 
   // Prime our people cache for hardcoded follows and a sample of people they follow
@@ -73,6 +77,9 @@
 
     await network.loadPeople(others, {relays})
   })
+
+  $: topic = find(e => e.id !== list?.id && Tags.from(e).getMeta("d") === "agora_followed_topics", user.getLists())
+
 </script>
 
 {#key stage}
@@ -84,11 +91,13 @@
     {:else if stage === "key"}
       <OnboardingKey {privkey} />
     {:else if stage === "relays"}
-      <OnboardingRelays />
-    {:else if stage === "follows"}
-      <OnboardingFollows {signup}/>
-    {:else if stage === "note"}
-      <OnboardingNote {signup} />
+      <OnboardingRelays {signup} />
+    {:else if stage === "topics"}
+      <ListEdit {topic}/>
+    <!-- {:else if stage === "follows"}
+      <OnboardingFollows {signup}/> -->
+    <!-- {:else if stage === "note"}
+      <OnboardingNote {signup} /> -->
     {/if}
   </div>
 {/key}

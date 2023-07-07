@@ -264,3 +264,25 @@ export const publishWithToast = (relays, thunk) =>
 
     toast.show("info", message, pending.size ? null : 5)
   })
+
+export const bootstrapRelays = [
+  "wss://purplepag.es",
+  "wss://relay.damus.io",
+  "wss://relay.nostr.band",
+  "wss://feeds.nostr.band/popular",
+  "wss://search.nos.today",
+  "wss://nos.lol",
+  "wss://e.nos.lol",
+  "wss://relay.snort.social",
+  "wss://rsslay.nostr.moe",
+  "wss://rsslay.onrender.com",
+  "wss://relay.current.fyi",
+  "wss://offchain.pub",
+  "wss://nostr.mom",
+  "wss://nostr.mutinywallet.com",
+  "wss://relay.mostr.pub",
+  "wss://nostr.relayer.se",
+  "wss://relayable.org",
+  "wss://relay.plebstr.com",
+  "wss://relay.primal.net"
+]

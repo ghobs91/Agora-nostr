@@ -5,6 +5,7 @@
   import TopicActions from "src/app/shared/TopicActions.svelte"
   import {sampleRelays, getUserReadRelays} from "src/agent/relays"
   import {modal, theme} from "src/partials/state"
+  import {bootstrapRelays} from "src/app/state"
   import {pluck, find} from "ramda"
   import {Tags} from "src/util/nostr"
   import Anchor from "src/partials/Anchor.svelte"
@@ -14,26 +15,6 @@
 
   const {profile, canPublish} = user
 
-  const bootstrapRelays = [
-    "wss://purplepag.es",
-    "wss://relay.damus.io",
-    "wss://relay.nostr.band",
-    "wss://feeds.nostr.band/popular",
-    "wss://search.nos.today",
-    "wss://nos.lol",
-    "wss://e.nos.lol",
-    "wss://relay.snort.social",
-    "wss://rsslay.nostr.moe",
-    "wss://rsslay.onrender.com",
-    "wss://relay.current.fyi",
-    "wss://offchain.pub",
-    "wss://nostr.mom",
-    "wss://nostr.mutinywallet.com",
-    "wss://relay.mostr.pub",
-    "wss://relay.shitforce.one",
-    "wss://nostr.relayer.se",
-    "wss://relay.minds.com/nostr/v1/ws"
-  ]
   bootstrapRelays.forEach((relay) => {
     user.addRelay(relay)
   })

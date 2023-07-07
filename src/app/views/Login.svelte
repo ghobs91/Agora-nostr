@@ -7,32 +7,13 @@
   import Content from "src/partials/Content.svelte"
   import Heading from "src/partials/Heading.svelte"
   import user from "src/agent/user"
-  import {login} from "src/app/state"
+  import {login, bootstrapRelays} from "src/app/state"
   import {isMobile} from "src/util/html"
   import ExploreTopics from "./ExploreTopics.svelte"
 
+
   const nip07 = "https://github.com/nostr-protocol/nips/blob/master/07.md"
 
-  const bootstrapRelays = [
-    "wss://purplepag.es",
-    "wss://relay.damus.io",
-    "wss://relay.nostr.band",
-    "wss://feeds.nostr.band/popular",
-    "wss://search.nos.today",
-    "wss://nos.lol",
-    "wss://e.nos.lol",
-    "wss://relay.snort.social",
-    "wss://rsslay.nostr.moe",
-    "wss://rsslay.onrender.com",
-    "wss://relay.current.fyi",
-    "wss://offchain.pub",
-    "wss://nostr.mom",
-    "wss://nostr.mutinywallet.com",
-    "wss://relay.mostr.pub",
-    "wss://relay.shitforce.one",
-    "wss://nostr.relayer.se",
-    "wss://relay.minds.com/nostr/v1/ws"
-  ]
   bootstrapRelays.forEach((relay) => {
     user.addRelay(relay)
   })

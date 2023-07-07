@@ -327,6 +327,7 @@ body,
   display: flex;
   flex-direction: column;
   justify-content: center;
+  padding: 0 5px 0 5px;
 }
 .topic-post-content {
   width: 100%;

@@ -12,10 +12,13 @@
 
   const {relays} = user
 
+  export let signup
+
   let q = ""
   let search
 
   const knownRelays = watch("relays", t => t.all())
+  const skip = () => signup()
 
   $: joined = new Set(pluck("url", $relays))
   $: search = fuzzy(
@@ -36,7 +39,7 @@
   <Anchor
     type="button-accent"
     class="text-center"
-    on:click={() => modal.replace({type: "onboarding", stage: "follows"})}>
+    on:click={() => modal.replace({type: "onboarding", stage: "topics"})}>
     Continue
   </Anchor>
   <div class="flex items-center gap-2">

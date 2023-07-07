@@ -54,7 +54,10 @@
             allAsyncResults.forEach((topicArray) => {
               topicArray.forEach((mastoPost) => {
                 let topicsInPost = []
-                topicsInPost.push(mastoPost.content.replace( /(<([^>]+)>)/ig, '').replaceAll('&#39;', '').match(/#\w+/g));
+                const topicInPost = mastoPost.content.replace( /(<([^>]+)>)/ig, '').replaceAll('&#39;', '').match(/#\w+/g);
+                if (tagsArray.includes(topicInPost.replace('#', ''))) {
+                  topicsInPost.push(mastoPost.content.replace( /(<([^>]+)>)/ig, '').replaceAll('&#39;', '').match(/#\w+/g));
+                }
                 mastoPost.topicsInPost = []
                 topicsInPost.forEach((topic) => {
                   topic = topic + ''

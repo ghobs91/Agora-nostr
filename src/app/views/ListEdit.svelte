@@ -11,6 +11,7 @@
   import {searchTopics, searchPeople, searchRelays, getPersonWithFallback} from "src/agent/db"
   import user from "src/agent/user"
   import {warn} from "src/util/logger"
+  import {navigate} from "svelte-routing"
 
   export let topic;
   console.log('the topic is: ', topic);
@@ -141,7 +142,8 @@
       })
     })
     toast.show("info", "Your list has been saved!")
-    modal.pop()
+    navigate("/notes")
+    // modal.pop()
   }
 </script>
 

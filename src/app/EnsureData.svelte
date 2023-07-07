@@ -82,7 +82,7 @@
       <PersonSearch hideFollows />
     </Content>
   </Modal>
-{:else if needsPeople()}
+<!-- {:else if needsPeople()}
   <Content size="lg">
     <div class="mt-12 flex flex-col items-center gap-4">
       <div class="flex items-center gap-2 text-xl">
@@ -93,7 +93,7 @@
         Click <Anchor href="/search">here</Anchor> to find some interesting people.
       </div>
     </div>
-  </Content>
+  </Content> -->
 {:else}
   <slot />
 {/if}
