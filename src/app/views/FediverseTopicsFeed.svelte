@@ -60,7 +60,19 @@
                   topic = topic + ''
                   mastoPost.topicsInPost.push(topic);
                 })
-                mastoPost.topicsInPost = mastoPost.topicsInPost[0].split(',').slice(0,4)
+                let matchedTopics = []
+                let topicArrayToMatchAgainst = mastoPost.topicsInPost[0].split(',')
+                topicArrayToMatchAgainst.forEach((topic) => {
+                  console.log(`tagsArray: ${tagsArray}`)
+                  if (tagsArray.includes(topic.replace('#', ''))) {
+                    matchedTopics.push(topic)
+                  }
+                })
+                if (matchedTopics.length > 0) {
+                  mastoPost.topicsInPost = matchedTopics;
+                } else {
+                  mastoPost.topicsInPost = mastoPost.topicsInPost[0].split(',').slice(0, 5)
+                }
               });
             });
             return allAsyncResults;
