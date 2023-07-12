@@ -42,14 +42,14 @@
     )
   }
 
-  const signup = async note => {
+  const signup = async () => {
     await keys.login("privkey", privkey)
 
     // Re-save preferences now that we have a key
     await Promise.all([
       user.updateRelays(() => user.getRelays()),
       cmd.updateUser(profile).publish(user.getRelays()),
-      note && cmd.createNote(note).publish(user.getRelays()),
+      // note && cmd.createNote(note).publish(user.getRelays()),
       user.updatePetnames(() =>
         user.getPetnamePubkeys().map(pubkey => {
           const [{url}] = sampleRelays(getPubkeyWriteRelays(pubkey))
@@ -61,9 +61,32 @@
     ])
 
     loadAppData(user.getPubkey())
+      window.location.reload();
+    // modal.replace({type: "onboarding", stage: "topics"})
+    navigate("/notes")
+  }
 
-    modal.replace({type: "onboarding", stage: "topics"})
-    // navigate("/notes")
+  const signupRelays = async () => {
+    await keys.login("privkey", privkey)
+
+    // Re-save preferences now that we have a key
+    await Promise.all([
+      user.updateRelays(() => user.getRelays()),
+      cmd.updateUser(profile).publish(user.getRelays()),
+      // note && cmd.createNote(note).publish(user.getRelays()),
+      user.updatePetnames(() =>
+        user.getPetnamePubkeys().map(pubkey => {
+          const [{url}] = sampleRelays(getPubkeyWriteRelays(pubkey))
+          const name = displayPerson(getPersonWithFallback(pubkey))
+
+          return ["p", pubkey, url, name]
+        })
+      ),
+    ])
+
+    loadAppData(user.getPubkey())
+    // modal.replace({type: "onboarding", stage: "topics"})
+    navigate("/notes")
   }
 
   // Prime our people cache for hardcoded follows and a sample of people they follow
@@ -78,7 +101,7 @@
     await network.loadPeople(others, {relays})
   })
 
-  $: topic = find(e => e.id !== list?.id && Tags.from(e).getMeta("d") === "agora_followed_topics", user.getLists())
+  $: topicList = find(e => e.id !== list?.id && Tags.from(e).getMeta("d") === "agora_followed_topics", user.getLists())
 
 </script>
 
@@ -91,9 +114,9 @@
     {:else if stage === "key"}
       <OnboardingKey {privkey} />
     {:else if stage === "relays"}
-      <OnboardingRelays {signup} />
+      <OnboardingRelays {signupRelays} />
     {:else if stage === "topics"}
-      <ListEdit {topic}/>
+      <OnboardingFollows {topicList} {signup}/>
     <!-- {:else if stage === "follows"}
       <OnboardingFollows {signup}/> -->
     <!-- {:else if stage === "note"}

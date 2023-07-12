@@ -21,7 +21,7 @@
     let list;
     let tagsArray = []
     list = find(e => e.id !== list?.id && Tags.from(e).getMeta("d") === "agora_followed_topics", user.getLists());
-    list.tags.forEach((tag) => {
+    list?.tags.forEach((tag) => {
         if (tag[0] === "t") {
             tagsArray.push(tag[1])
         }
@@ -63,7 +63,6 @@
                 let matchedTopics = []
                 let topicArrayToMatchAgainst = mastoPost.topicsInPost[0].split(',')
                 topicArrayToMatchAgainst.forEach((topic) => {
-                  console.log(`tagsArray: ${tagsArray}`)
                   if (tagsArray.includes(topic.replace('#', ''))) {
                     matchedTopics.push(topic)
                   }

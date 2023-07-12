@@ -11,7 +11,7 @@
   import pool from "src/agent/pool"
 
   export let enforceRelays = pool.forceUrls.length === 0
-  export let enforcePeople = true
+  export let enforcePeople = false
 
   const {petnamePubkeys, relays} = user
   const needsRelays = () => $relays.length === 0 && enforceRelays

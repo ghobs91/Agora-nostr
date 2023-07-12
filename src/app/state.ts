@@ -284,5 +284,8 @@ export const bootstrapRelays = [
   "wss://nostr.relayer.se",
   "wss://relayable.org",
   "wss://relay.plebstr.com",
-  "wss://relay.primal.net"
+  "wss://relay.primal.net",
+  "wss://nostr.bitcoiner.social",
+  "wss://nostr.w3ird.tech",
+  "wss://nostrue.com"
 ]
