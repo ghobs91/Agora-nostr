@@ -26,6 +26,7 @@
   import TopUsers from "./views/TopUsers.svelte"
   import TopicFeed from "src/app/views/TopicFeed.svelte"
   import FediverseTopicFeed from "./views/FediverseTopicFeed.svelte"
+    import PopularBluesky from "./shared/PopularBluesky.svelte"
 
   let ready = false
   let signup
@@ -41,6 +42,7 @@
     <Route path="/notifications" component={Notifications} />
     <Route path="/notifications/:activeTab" component={Notifications} />
     <Route path="/discover" let:params>
+      <PopularBluesky/>
       <PopularFeed/>
     </Route>
     <!-- <Route path="/topusers" let:params>
