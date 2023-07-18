@@ -53,7 +53,6 @@
 </script>
 
 <Content>
-  <div class="flex items-center gap-2 text-xl"><p>Popular Posts</p></div>
   {#await popularMastodon()}
   <Spinner />
   {:then resultArray }

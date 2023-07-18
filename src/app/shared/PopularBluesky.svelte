@@ -16,7 +16,7 @@
     export let size = 6
   
     const relay = relays.get(url) || {url}
-    const blueskyTrendingAPI = 'https://bsky.social/xrpc/app.bsky.feed.getFeed?feed=at://did:plc:z72i7hdynmk6r22z27h6tvur/app.bsky.feed.generator/whats-hot'
+    const blueskyTrendingAPI = 'https://bsky.social/xrpc/app.bsky.feed.getFeed?feed=at://did:plc:z72i7hdynmk6r22z27h6tvur/app.bsky.feed.generator/whats-hot&limit=50'
   
     document.title = 'Popular Posts'
   

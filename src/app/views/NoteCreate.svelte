@@ -22,12 +22,14 @@
   import user from "src/agent/user"
   import {toast, modal} from "src/partials/state"
   import {publishWithToast} from "src/app/state"
+  import Input from "src/partials/Input.svelte"
 
   export let quote = null
   export let pubkey = null
   export let writeTo: string[] | null = null
 
   let q = ""
+  let postTopic = ""
   let image = null
   let compose = null
   let showPreview = false
@@ -40,7 +42,7 @@
   )
 
   const onSubmit = async () => {
-    let content = compose.parse()
+    let content = postTopic + "\n" + compose.parse();
     const tags = []
 
     if (image) {
@@ -115,11 +117,15 @@
 
 <form on:submit|preventDefault={onSubmit} in:fly={{y: 20}}>
   <Content size="lg">
-    <Heading class="text-center">Create a note</Heading>
+    <Heading class="text-center">Create a post</Heading>
     <div class="flex w-full flex-col gap-4">
       <div class="flex flex-col gap-2">
-        <strong>What do you want to say?</strong>
         <div class="ml-2 mt-4 border-l-2 border-solid border-gray-6 pl-3">
+          <strong>What's the topic of your post?</strong>
+          <Input bind:value={postTopic} placeholder="ex: #photography"/>
+        </div>
+        <div class="ml-2 mt-4 border-l-2 border-solid border-gray-6 pl-3">
+          <strong>Start writing!</strong>
           <div class="compose-container">
             <Compose bind:this={compose} {onSubmit} />
           </div>
