@@ -42,7 +42,7 @@
     <Route path="/notifications" component={Notifications} />
     <Route path="/notifications/:activeTab" component={Notifications} />
     <Route path="/discover" let:params>
-      <PopularBluesky/>
+      <!-- <PopularBluesky/> -->
       <PopularFeed/>
     </Route>
     <!-- <Route path="/topusers" let:params>
