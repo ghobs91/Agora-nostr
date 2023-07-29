@@ -52,7 +52,7 @@
 
 </script>
 
-<Content>
+<!-- <Content>
   {#await popularMastodon()}
   <Spinner />
   {:then resultArray }
@@ -96,8 +96,8 @@
       Unable to load feditrends
     </p>
   {/await}
-</Content>
+</Content> -->
 <div class="border-b border-solid border-gray-6" />
 <Content>
-  <!-- <Feed relays={[relay]} filter={{kinds: [1]}} /> -->
+  <Feed relays={[relay]} filter={{kinds: [1]}} />
 </Content>
