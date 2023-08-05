@@ -28,7 +28,7 @@
     })
 
     const relay = relays.get(url) || {url}
-    const mastodonFediTrendsAPI = 'https://api.feditrends.com/?hours=12&order=pop&query='
+    const mastodonFediTrendsAPI = 'https://mastodon.social/api/v1/timelines/tag/'
     document.title = 'Home - Agora'
 
     const getPostsForTopic = async (topic): Promise <any[]> => {
