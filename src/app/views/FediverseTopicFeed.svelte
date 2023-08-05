@@ -19,7 +19,7 @@
     export let topicFromFilter
 
     const relay = relays.get(url) || {url}
-    const mastodonFediTrendsAPI = 'https://api.feditrends.com/?hours=12&order=pop&query='
+    const mastodonFediTrendsAPI = 'https://mastodon.social/api/v1/timelines/tag/'
     document.title = 'Popular Posts'
 
     const getPostsForTopic = async (topicFromFilter): Promise <any[]> => {

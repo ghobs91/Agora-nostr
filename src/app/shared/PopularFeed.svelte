@@ -17,7 +17,7 @@
 
   const relay = relays.get(url) || {url}
 
-  const mastodonFediTrendsAPI = 'https://api.feditrends.com/?order=pop&amp;hours=12'
+  const mastodonFediTrendsAPI = 'https://mastodon.social/api/v1/trends/statuses'
 
   document.title = 'Popular Posts'
 
@@ -52,7 +52,7 @@
 
 </script>
 
-<!-- <Content>
+<Content>
   {#await popularMastodon()}
   <Spinner />
   {:then resultArray }
@@ -96,7 +96,7 @@
       Unable to load feditrends
     </p>
   {/await}
-</Content> -->
+</Content>
 <div class="border-b border-solid border-gray-6" />
 <Content>
   <Feed relays={[relay]} filter={{kinds: [1]}} />

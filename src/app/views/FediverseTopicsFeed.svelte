@@ -32,10 +32,10 @@
     document.title = 'Home - Agora'
 
     const getPostsForTopic = async (topic): Promise <any[]> => {
-        const res = await fetch(`${mastodonFediTrendsAPI}${topic}`, {method: "get"})
-        console.log(`res: ${res}`)
+        const res = await fetch(`${mastodonFediTrendsAPI}${topic}?limit=10`, {method: "get"})
+        // console.log(`res: ${res}`)
         const json = await res.json()
-        console.log(`json: ${json}`)
+        // console.log(`json: ${json}`)
         return json.slice(0, 20);
     }
 
