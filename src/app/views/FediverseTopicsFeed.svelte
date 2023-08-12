@@ -29,9 +29,10 @@
 
     const relay = relays.get(url) || {url}
     const mastodonFediTrendsAPI = 'https://mastodon.social/api/v1/timelines/tag/'
+    const lemmyCommunityAPI = 'https://sh.itjust.works/api/v3/post/list?limit=10&page=1&sort=Hot&type_=All&community_name='
     document.title = 'Home - Agora'
 
-    const getPostsForTopic = async (topic): Promise <any[]> => {
+    const getMastodonPostsForTopic = async (topic): Promise <any[]> => {
         const res = await fetch(`${mastodonFediTrendsAPI}${topic}?limit=10`, {method: "get"})
         // console.log(`res: ${res}`)
         const json = await res.json()
@@ -39,42 +40,69 @@
         return json.slice(0, 20);
     }
 
+    const getLemmyPostsForTopic = async (topic): Promise <any[]> => {
+        const res = await fetch(`${lemmyCommunityAPI}${topic}%40lemmy.world`, {method: "get"})
+        // console.log(`res: ${res}`)
+        const json = await res.json()
+        // console.log(`json: ${json}`)
+        if (typeof json === "object") {
+          return json;
+        }
+        return [];
+    }
+
     const openTopic = topic => {
       modal.push({type: "topic/feed", topic})
     }
 
     let compilePosts = async (tagsArray) => {
-            const allAsyncResults = []
+            const allMastodonAsyncResults = []
+            const allLemmyAsyncResults = []
 
             for (const item of tagsArray) {
-                const asyncResult = await getPostsForTopic(item)
-                allAsyncResults.push(asyncResult)
+                const mastodonAsyncResult = await getMastodonPostsForTopic(item)
+                allMastodonAsyncResults.push(mastodonAsyncResult)
+                
+                const lemmyAsyncResult = await getLemmyPostsForTopic(item)
+                let processedLemmyPosts = []
+                if (lemmyAsyncResult['posts']) {
+                  lemmyAsyncResult['posts'].forEach((unProcessedLemmyPost) => {
+                    processedLemmyPosts.push({
+                      content: unProcessedLemmyPost.post.name,
+                      replies_count: unProcessedLemmyPost.counts.comments,
+                      favourites_count: unProcessedLemmyPost.counts.score
+                    })
+                  })
+                  if (processedLemmyPosts) {
+                    allMastodonAsyncResults.push(processedLemmyPosts);
+                  }
+                }
             }
 
-            allAsyncResults.forEach((topicArray) => {
-              topicArray.forEach((mastoPost) => {
-                let topicsInPost = []
-                topicsInPost.push(mastoPost.content.replace( /(<([^>]+)>)/ig, '').replaceAll('&#39;', '').match(/#\w+/g));
-                mastoPost.topicsInPost = []
-                topicsInPost.forEach((topic) => {
-                  topic = topic + ''
-                  mastoPost.topicsInPost.push(topic);
-                })
-                let matchedTopics = []
-                let topicArrayToMatchAgainst = mastoPost.topicsInPost[0].split(',')
-                topicArrayToMatchAgainst.forEach((topic) => {
-                  if (tagsArray.includes(topic.replace('#', ''))) {
-                    matchedTopics.push(topic)
-                  }
-                })
-                if (matchedTopics.length > 0) {
-                  mastoPost.topicsInPost = matchedTopics;
-                } else {
-                  mastoPost.topicsInPost = mastoPost.topicsInPost[0].split(',').slice(0, 5)
-                }
-              });
-            });
-            return allAsyncResults;
+            // allMastodonAsyncResults.forEach((topicArray) => {
+            //   topicArray.forEach((mastoPost) => {
+            //     let topicsInPost = []
+            //     topicsInPost.push(mastoPost.content.replace( /(<([^>]+)>)/ig, '').replaceAll('&#39;', '').match(/#\w+/g));
+            //     mastoPost.topicsInPost = []
+            //     topicsInPost.forEach((topic) => {
+            //       topic = topic + ''
+            //       mastoPost.topicsInPost.push(topic);
+            //     })
+            //     let matchedTopics = []
+            //     let topicArrayToMatchAgainst = mastoPost.topicsInPost[0].split(',')
+            //     topicArrayToMatchAgainst.forEach((topic) => {
+            //       if (tagsArray.includes(topic.replace('#', ''))) {
+            //         matchedTopics.push(topic)
+            //       }
+            //     })
+            //     if (matchedTopics.length > 0) {
+            //       mastoPost.topicsInPost = matchedTopics;
+            //     } else {
+            //       mastoPost.topicsInPost = mastoPost.topicsInPost[0].split(',').slice(0, 5)
+            //     }
+            //   });
+            // });
+            return allMastodonAsyncResults;
         }
   
     const getRsslayMastoProfile = async (mastoLink) => {
@@ -101,8 +129,8 @@
   <Content>
     {#await compilePosts(tagsArray)}
     <Spinner />
-    {:then allAsyncResults }
-        {#each allAsyncResults as topicArray}
+    {:then allMastodonAsyncResults }
+        {#each allMastodonAsyncResults as topicArray}
             {#each topicArray as mastoPost}
                 <Card class="discover-card" on:click={() => getRsslayMastoProfile(mastoPost.account.url)}>
                   <div class="topic-post-buttons">
