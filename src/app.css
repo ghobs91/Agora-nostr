@@ -337,12 +337,15 @@ body,
   margin-top: 10px;
 }
 .topic-pill-section {
-  border-bottom: 1px solid #494949;
+  border-top: 1px solid #494949;
   overflow: auto;
   display: flex;
   flex-wrap: wrap;
-  padding-bottom: 5px;
+  padding-top: 5px;
 }
 .topic-post-main-section {
   overflow: auto;
+}
+.thumbnail-container {
+  margin-bottom: 10px;
 }

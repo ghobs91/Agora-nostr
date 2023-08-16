@@ -52,38 +52,62 @@
         }
     }
 
+    const arrayShuffle = (originalArray): any[] => {
+      var array = [].concat(originalArray);
+      var currentIndex = array.length, temporaryValue, randomIndex;
+
+      // While there remain elements to shuffle...
+      while (0 !== currentIndex) {
+
+        // Pick a remaining element...
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex -= 1;
+
+        // And swap it with the current element.
+        temporaryValue = array[currentIndex];
+        array[currentIndex] = array[randomIndex];
+        array[randomIndex] = temporaryValue;
+      }
+
+      return array;
+    }
+
     const openTopic = topic => {
       modal.push({type: "topic/feed", topic})
     }
 
     let compilePosts = async (tagsArray) => {
-            const allMastodonAsyncResults = []
+            const allFediverseAsyncResults = []
             const allLemmyAsyncResults = []
 
             for (const item of tagsArray) {
                 // const mastodonAsyncResult = await getMastodonPostsForTopic(item)
-                // allMastodonAsyncResults.push(mastodonAsyncResult)
+                // allFediverseAsyncResults.push(mastodonAsyncResult)
                 
                 const lemmyAsyncResult = await getLemmyPostsForTopic(item)
                 let processedLemmyPosts = []
                 if (lemmyAsyncResult) {
                   lemmyAsyncResult['posts'].forEach((unProcessedLemmyPost) => {
-                    console.log(`mastopost.thumbnail: ${unProcessedLemmyPost.post.thumbnail_url}`)
+                    const instanceUrlBase = unProcessedLemmyPost.community.actor_id.split("/c/")[0]
+                    const instanceUrlSuffix = unProcessedLemmyPost.community.actor_id.split("/c/")[1]
                     processedLemmyPosts.push({
                       content: unProcessedLemmyPost.post.name,
                       replies_count: unProcessedLemmyPost.counts.comments,
                       favourites_count: unProcessedLemmyPost.counts.score,
                       postTopic: unProcessedLemmyPost.community.name,
-                      thumbnail: unProcessedLemmyPost.post.thumbnail_url ? {url: unProcessedLemmyPost.post.thumbnail_url, type: "image"} : null
+                      thumbnail: unProcessedLemmyPost.post.thumbnail_url ? {url: unProcessedLemmyPost.post.thumbnail_url, type: "image"} : null,
+                      account: {url: instanceUrlBase + '/feeds/c/' + instanceUrlSuffix + '.xml?sort=Hot'},
+                      contentUrl: unProcessedLemmyPost.post.url,
+                      postCreater: unProcessedLemmyPost.creator.name
                     })
                   })
                   if (processedLemmyPosts) {
-                    allMastodonAsyncResults.push(processedLemmyPosts);
+                    allFediverseAsyncResults.push(processedLemmyPosts);
                   }
                 }
             }
 
-            // allMastodonAsyncResults.forEach((topicArray) => {
+            // allFediverseAsyncResults.forEach((topicArray) => {
             //   topicArray.forEach((mastoPost) => {
             //     let topicsInPost = []
             //     topicsInPost.push(mastoPost.content.replace( /(<([^>]+)>)/ig, '').replaceAll('&#39;', '').match(/#\w+/g));
@@ -106,10 +130,19 @@
             //     }
             //   });
             // });
-            return allMastodonAsyncResults;
+            let monolithArray = []
+            allFediverseAsyncResults.forEach((topicArray) => {
+              topicArray.forEach((post) => {
+                monolithArray.push(post);
+                // console.log(`monolithArray: ${monolithArray}`)
+              })
+            })
+            
+            return arrayShuffle(monolithArray);
         }
   
-    const getRsslayMastoProfile = async (mastoLink) => {
+    const getRsslayMastoProfile = async (mastoPost) => {
+      const mastoLink = mastoPost.account.url
       const mastoLinkArray = mastoLink.split("/@")
       const mostrPubFormattedHandle = mastoLinkArray[1] + '_at_' + mastoLinkArray[0].replace('https://', '');
       const res = await fetch(`https://mostr.pub/.well-known/nostr.json?name=${mostrPubFormattedHandle}`, {method: "get"});
@@ -118,11 +151,18 @@
         const pubKey = mostrResponse.names[`${mostrPubFormattedHandle}`];
         window.location.href = `/people/${pubKey}/notes`
       } else {
-        const res = await fetch(`https://rsslay.onrender.com/api/feed?url=${mastoLink}.rss`, {method: "get"});
-        const rsslayResponse = await res.json();
-        const pubKey = rsslayResponse.NPubKey;
-        console.log(`pubkey: ${pubKey}`)
-        window.location.href = `/people/${pubKey}/notes`
+        if (mastoPost.contentUrl) {
+          window.location.href = mastoPost.contentUrl;
+        }
+
+        else {
+          // const res = await fetch(`https://rsslay.onrender.com/api/feed?url=${mastoLink}.rss`, {method: "get"});
+          const res = await fetch(`https://rsslay.onrender.com/api/feed?url=${mastoLink}`, {method: "get"});
+          const rsslayResponse = await res.json();
+          const pubKey = rsslayResponse.NPubKey;
+          console.log(`pubkey: ${pubKey}`)
+          window.location.href = `/people/${pubKey}/notes`
+        }
       }
     }
   
@@ -133,10 +173,10 @@
   <Content>
     {#await compilePosts(tagsArray)}
     <Spinner />
-    {:then allMastodonAsyncResults }
-        {#each allMastodonAsyncResults as topicArray}
-            {#each topicArray as mastoPost}
-                <Card class="discover-card" on:click={() => getRsslayMastoProfile(mastoPost.account.url)}>
+    {:then monolithArray }
+        <!-- {#each allFediverseAsyncResults as topicArray} -->
+            {#each monolithArray as mastoPost}
+                <Card class="discover-card" on:click={() => getRsslayMastoProfile(mastoPost)}>
                   <div class="topic-post-buttons">
                     <button class="note-buttons text-left">
                       <i class="fa-solid fa-arrow-up fa-lg cursor-pointer"/>
@@ -148,11 +188,6 @@
                     </button>
                   </div>
                   <div class="topic-post-main-section">
-                    {#if mastoPost.postTopic}
-                      <div class="topic-pill-section">
-                          <Anchor class="topic-pill" killEvent on:click={() => openTopic(mastoPost.postTopic.replace('#', ''))}>#{mastoPost.postTopic}</Anchor>
-                      </div>
-                    {/if}
                     <!-- {#if mastoPost.topicsInPost[0] != 'null'}
                       <div class="topic-pill-section">
                         {#each mastoPost.topicsInPost as topicPill}
@@ -169,22 +204,32 @@
                       {/if}
                     {/if} -->
                     {#if mastoPost.thumbnail}
+                      <div class="thumbnail-container">
                         <Media link={mastoPost.thumbnail} onClose={close} />
+                      </div>
+                    {/if}
+
+                    {#if mastoPost.postTopic}
+                      <div class="topic-pill-section">
+                          <Anchor class="topic-pill" killEvent on:click={() => openTopic(mastoPost.postTopic.replace('#', ''))}>#{mastoPost.postTopic}</Anchor>
+                      </div>
                     {/if}
                     
-                    <!-- <div class="topic-post-info">
+                    <div class="topic-post-info">
                       <div class="flex">
-                        <Anchor class="text-lg font-bold" href={mastoPost.account.url}>
-                        <ImageCircle {size} src={mastoPost.account.avatar} />
-                        </Anchor>
-                        <div class="discover-card-name-header">{mastoPost.account.display_name}</div>
+                        <!-- <Anchor class="text-lg font-bold" href={mastoPost.account.url}> -->
+                        <ImageCircle {size} src={'https://lemmy.world/pictrs/image/f9b045ca-ca15-43b4-aeed-1188183d7087.png?format=webp&thumbnail=96'} />
+                        <!-- </Anchor> -->
+                        {#if mastoPost.postCreater}
+                          <div class="discover-card-name-header">/u/{mastoPost.postCreater}</div>
+                        {/if}
                       </div>
-                      <div>{mastoPost.created_at.replace("T", " ").substring(0, 16)}</div>
-                    </div> -->
+                      <!-- <div>{mastoPost.created_at.replace("T", " ").substring(0, 16)}</div> -->
+                    </div>
                   </div>
                 </Card>
             {/each}
-        {/each}
+        <!-- {/each} -->
     {:catch}
       <p class="mb-1 py-24 px-12 text-center text-gray-5">
         Unable to load feditrends
