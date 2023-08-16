@@ -43,12 +43,13 @@
     const getLemmyPostsForTopic = async (topic): Promise <any[]> => {
         const res = await fetch(`${lemmyCommunityAPI}${topic}%40lemmy.world`, {method: "get"})
         // console.log(`res: ${res}`)
-        const json = await res.json()
-        // console.log(`json: ${json}`)
-        if (typeof json === "object") {
-          return json;
+        if (res.status === 200) {
+          const json = await res.json()
+          // console.log(`json: ${json}`)
+          if (typeof json === "object") {
+            return json;
+          }
         }
-        return [];
     }
 
     const openTopic = topic => {
@@ -60,17 +61,20 @@
             const allLemmyAsyncResults = []
 
             for (const item of tagsArray) {
-                const mastodonAsyncResult = await getMastodonPostsForTopic(item)
-                allMastodonAsyncResults.push(mastodonAsyncResult)
+                // const mastodonAsyncResult = await getMastodonPostsForTopic(item)
+                // allMastodonAsyncResults.push(mastodonAsyncResult)
                 
                 const lemmyAsyncResult = await getLemmyPostsForTopic(item)
                 let processedLemmyPosts = []
-                if (lemmyAsyncResult['posts']) {
+                if (lemmyAsyncResult) {
                   lemmyAsyncResult['posts'].forEach((unProcessedLemmyPost) => {
+                    console.log(`mastopost.thumbnail: ${unProcessedLemmyPost.post.thumbnail_url}`)
                     processedLemmyPosts.push({
                       content: unProcessedLemmyPost.post.name,
                       replies_count: unProcessedLemmyPost.counts.comments,
-                      favourites_count: unProcessedLemmyPost.counts.score
+                      favourites_count: unProcessedLemmyPost.counts.score,
+                      postTopic: unProcessedLemmyPost.community.name,
+                      thumbnail: unProcessedLemmyPost.post.thumbnail_url ? {url: unProcessedLemmyPost.post.thumbnail_url, type: "image"} : null
                     })
                   })
                   if (processedLemmyPosts) {
@@ -135,31 +139,40 @@
                 <Card class="discover-card" on:click={() => getRsslayMastoProfile(mastoPost.account.url)}>
                   <div class="topic-post-buttons">
                     <button class="note-buttons text-left">
-                        <i class="fa fa-reply cursor-pointer"/>
-                        {mastoPost.replies_count}
+                      <i class="fa-solid fa-arrow-up fa-lg cursor-pointer"/>
+                        {mastoPost.favourites_count}
                     </button>
                     <button class="note-buttons text-left">
-                        <i class="fa fa-heart cursor-pointer"/>
-                        {mastoPost.favourites_count}
+                      <i class="fa-regular fa-comment cursor-pointer"/>
+                      {mastoPost.replies_count}
                     </button>
                   </div>
                   <div class="topic-post-main-section">
-                    {#if mastoPost.topicsInPost[0] != 'null'}
+                    {#if mastoPost.postTopic}
+                      <div class="topic-pill-section">
+                          <Anchor class="topic-pill" killEvent on:click={() => openTopic(mastoPost.postTopic.replace('#', ''))}>#{mastoPost.postTopic}</Anchor>
+                      </div>
+                    {/if}
+                    <!-- {#if mastoPost.topicsInPost[0] != 'null'}
                       <div class="topic-pill-section">
                         {#each mastoPost.topicsInPost as topicPill}
                           <Anchor class="topic-pill" killEvent on:click={() => openTopic(topicPill.replace('#', ''))}>{topicPill}</Anchor>
                         {/each}
                       </div>
-                    {/if}
+                    {/if} -->
                     <div class="topic-post-content">
                       {mastoPost.content.replace( /(<([^>]+)>)/ig, '').replaceAll('&#39;', '').replaceAll('&quot;', '"').replaceAll('&amp;', '&')}
                     </div>
-                    {#if mastoPost.media_attachments.length > 0}
+                    <!-- {#if mastoPost.media_attachments.length > 0}
                       {#if mastoPost.media_attachments[0].url}
                         <Media link={mastoPost.media_attachments[0]} onClose={close} />
                       {/if}
+                    {/if} -->
+                    {#if mastoPost.thumbnail}
+                        <Media link={mastoPost.thumbnail} onClose={close} />
                     {/if}
-                    <div class="topic-post-info">
+                    
+                    <!-- <div class="topic-post-info">
                       <div class="flex">
                         <Anchor class="text-lg font-bold" href={mastoPost.account.url}>
                         <ImageCircle {size} src={mastoPost.account.avatar} />
@@ -167,7 +180,7 @@
                         <div class="discover-card-name-header">{mastoPost.account.display_name}</div>
                       </div>
                       <div>{mastoPost.created_at.replace("T", " ").substring(0, 16)}</div>
-                    </div>
+                    </div> -->
                   </div>
                 </Card>
             {/each}
