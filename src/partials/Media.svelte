@@ -37,7 +37,7 @@
   {:else if link.type === "video"}
     <video controls src={link.url} class="max-h-96 object-contain object-center" />
   {:else}
-    <!-- {#if link.url.indexOf('bsky.app') < 0}
+    {#if link.url.indexOf('bsky.app') < 0}
       {#await loadPreview()}
         <Spinner />
       {:then { title, description, image }}
@@ -56,6 +56,6 @@
           Unable to load a preview for {link.url}
         </p>
       {/await}
-    {/if} -->
+    {/if}
   {/if}
 </Anchor>
