@@ -123,8 +123,8 @@ body,
   background-color: black !important;
 }
 .note .card{
-  border-color: #2d2d2d !important;
-  border-radius: 12px;
+  border-color: #000 !important;
+  border-radius: .75rem;
   background-color: #151515 !important;
 }
 .navbar-bg {
@@ -276,6 +276,8 @@ body,
 }
 .discover-card {
   display: flex;
+  border-color: #000 !important;
+  border-radius: .75rem;
   background-color: #151515 !important;
   cursor: pointer;
   margin-top: 10px;
