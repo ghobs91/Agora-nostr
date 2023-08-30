@@ -41,7 +41,8 @@
 
     try {
       const {id} = quote.uploads[0]
-      const {url} = await uploadFile(user.dufflepud(`/upload/${id}`), file)
+      // const {url} = await uploadFile(user.dufflepud(`/upload/${id}`), file)
+      const {url} = await uploadFile(`https://api.imgur.com/3/image`, file)
 
       value = url
     } finally {

@@ -312,7 +312,10 @@ export const uploadFile = (url, fileObj) => {
 
   body.append("file", fileObj)
 
-  return fetchJson(url, {method: "POST", body})
+  return fetchJson(url, {method: "POST", body: fileObj, headers: {
+    Authorization: 'Client-ID ' + '536a4b82091e0ff',
+    Accept: 'application/json'
+  }})
 }
 
 export const hexToBech32 = (prefix, url) =>
