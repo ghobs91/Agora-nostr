@@ -29,6 +29,7 @@
 
     const relay = relays.get(url) || {url}
     const mastodonFediTrendsAPI = 'https://mastodon.social/api/v1/timelines/tag/'
+    const lemmyCommunitySearchAPI = 'https://sh.itjust.works/api/v3/search?q='
     const lemmyCommunityAPI = 'https://sh.itjust.works/api/v3/post/list?limit=10&page=1&sort=Hot&type_=All&community_name='
     document.title = 'Home - Agora'
 
@@ -41,15 +42,40 @@
     }
 
     const getLemmyPostsForTopic = async (topic): Promise <any[]> => {
-        const res = await fetch(`${lemmyCommunityAPI}${topic}%40lemmy.world`, {method: "get"})
-        // console.log(`res: ${res}`)
-        if (res.status === 200) {
-          const json = await res.json()
-          // console.log(`json: ${json}`)
-          if (typeof json === "object") {
-            return json;
+
+      const lemmyCommunitySearchResponse = await fetch(`${lemmyCommunitySearchAPI}${topic}&type_=Communities&sort=TopAll&listing_type=All&page=1&limit=5`, {method: "get"})
+      if (lemmyCommunitySearchResponse.status === 200) {
+        const json = await lemmyCommunitySearchResponse.json()
+        if (typeof json === "object") {
+          const baseUrl = json.communities[0].community.actor_id.replace('https://', '')
+          const community = baseUrl.split('/c/')[1];
+          const instance = baseUrl.split('/c/')[0];
+          const fullCommunityHandle = community + '@' + instance;
+          const res = await fetch(`${lemmyCommunityAPI}${fullCommunityHandle}`, {method: "get"})
+          if (res.status === 200) {
+            const json = await res.json()
+            if (typeof json === "object") {
+              return json;
+            }
           }
         }
+      }
+
+      // const res = await fetch(`${lemmyCommunityAPI}${topic}%40lemmy.world`, {method: "get"})
+      // if (res.status === 200) {
+      //   const json = await res.json()
+      //   if (typeof json === "object") {
+      //     return json;
+      //   }
+      // } else {
+      //   const res = await fetch(`${lemmyCommunityAPI}${topic}%40lemmy.ml`, {method: "get"})
+      //   if (res.status === 200) {
+      //     const json = await res.json()
+      //     if (typeof json === "object") {
+      //       return json;
+      //     }
+      //   }
+      // }
     }
 
     const arrayShuffle = (originalArray): any[] => {
