@@ -42,7 +42,6 @@
     }
 
     const getLemmyPostsForTopic = async (topic): Promise <any[]> => {
-
       const lemmyCommunitySearchResponse = await fetch(`${lemmyCommunitySearchAPI}${topic}&type_=Communities&sort=TopAll&listing_type=All&page=1&limit=5`, {method: "get"})
       if (lemmyCommunitySearchResponse.status === 200) {
         const json = await lemmyCommunitySearchResponse.json()

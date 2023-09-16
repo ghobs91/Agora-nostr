@@ -25,7 +25,8 @@
           const opts = filter(identity, {maxWidth, maxHeight})
 
           file = blobToFile(await stripExifData(inputFile, opts))
-          quote = await postJson(user.dufflepud("/upload/quote"), {
+          // quote = await postJson(user.dufflepud("/upload/quote"), {
+          quote = await postJson(`https://api.imgur.com/3/image`, {
             uploads: [{size: file.size}],
           })
         } else {
@@ -40,9 +41,9 @@
     loading = true
 
     try {
-      const {id} = quote.uploads[0]
+      // const {id} = quote.uploads[0]
       // const {url} = await uploadFile(user.dufflepud(`/upload/${id}`), file)
-      const {url} = await uploadFile(`https://api.imgur.com/3/image`, file)
+      const url = await uploadFile(`https://api.imgur.com/3/image`, file)
 
       console.log(`url object: ${url}`);
       value = url.data.link

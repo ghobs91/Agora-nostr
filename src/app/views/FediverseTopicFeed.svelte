@@ -20,9 +20,31 @@
 
     const relay = relays.get(url) || {url}
     const mastodonFediTrendsAPI = 'https://mastodon.social/api/v1/timelines/tag/'
+    const lemmyCommunitySearchAPI = 'https://sh.itjust.works/api/v3/search?q='
+    const lemmyCommunityAPI = 'https://sh.itjust.works/api/v3/post/list?limit=10&page=1&sort=Hot&type_=All&community_name='
     document.title = 'Popular Posts'
 
-    const getPostsForTopic = async (topicFromFilter): Promise <any[]> => {
+    const getLemmyPostsForTopic = async (topicFromFilter): Promise <any[]> => {
+      const lemmyCommunitySearchResponse = await fetch(`${lemmyCommunitySearchAPI}${topicFromFilter}&type_=Communities&sort=TopAll&listing_type=All&page=1&limit=5`, {method: "get"})
+      if (lemmyCommunitySearchResponse.status === 200) {
+        const json = await lemmyCommunitySearchResponse.json()
+        if (typeof json === "object") {
+          const baseUrl = json.communities[0].community.actor_id.replace('https://', '')
+          const community = baseUrl.split('/c/')[1];
+          const instance = baseUrl.split('/c/')[0];
+          const fullCommunityHandle = community + '@' + instance;
+          const res = await fetch(`${lemmyCommunityAPI}${fullCommunityHandle}`, {method: "get"})
+          if (res.status === 200) {
+            const json = await res.json()
+            if (typeof json === "object") {
+              return json;
+            }
+          }
+        }
+      }
+    }
+
+    const getMastodonPostsForTopic = async (topicFromFilter): Promise <any[]> => {
         const res = await fetch(`${mastodonFediTrendsAPI}${topicFromFilter}`, {method: "get"})
         console.log(`res: ${res}`)
         const json = await res.json()
@@ -34,12 +56,35 @@
             const allAsyncResults = []
 
             // for (const item of tagsArray) {
-                const asyncResult = await getPostsForTopic(topicFromFilter)
+                const asyncResult = await getLemmyPostsForTopic(topicFromFilter)
                 allAsyncResults.push(asyncResult)
             // }
             console.log(`allAsyncResults: ${allAsyncResults}`)
             return allAsyncResults;
         }
+    // let compileLemmyPosts = async () => {
+    //   const lemmyAsyncResult = await getLemmyPostsForTopic(topicFromFilter)
+    //   let processedLemmyPosts = []
+    //   if (lemmyAsyncResult) {
+    //     lemmyAsyncResult['posts'].forEach((unProcessedLemmyPost) => {
+    //       const instanceUrlBase = unProcessedLemmyPost.community.actor_id.split("/c/")[0]
+    //       const instanceUrlSuffix = unProcessedLemmyPost.community.actor_id.split("/c/")[1]
+    //       processedLemmyPosts.push({
+    //         content: unProcessedLemmyPost.post.name,
+    //         replies_count: unProcessedLemmyPost.counts.comments,
+    //         favourites_count: unProcessedLemmyPost.counts.score,
+    //         postTopic: unProcessedLemmyPost.community.name,
+    //         thumbnail: unProcessedLemmyPost.post.thumbnail_url ? {url: unProcessedLemmyPost.post.thumbnail_url, type: "image"} : null,
+    //         account: {url: instanceUrlBase + '/feeds/c/' + instanceUrlSuffix + '.xml?sort=Hot'},
+    //         contentUrl: unProcessedLemmyPost.post.url,
+    //         postCreater: unProcessedLemmyPost.creator.name
+    //       })
+    //     })
+    //     if (processedLemmyPosts) {
+    //       allFediverseAsyncResults.push(processedLemmyPosts);
+    //     }
+    //   }
+    // }
   
     const getRsslayMastoProfile = async (mastoLink) => {
       const mastoLinkArray = mastoLink.split("/@")
