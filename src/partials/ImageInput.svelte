@@ -22,9 +22,8 @@
     if (input) {
       listener = listenForFile(input, async inputFile => {
         if (inputFile) {
-        //   const opts = filter(identity, {maxWidth, maxHeight})
-
-        //   file = blobToFile(await stripExifData(inputFile, opts))
+          const opts = filter(identity, {maxWidth, maxHeight})
+          file = blobToFile(await stripExifData(inputFile, opts))
         //   // quote = await postJson(user.dufflepud("/upload/quote"), {
         //   quote = await postJson(`https://api.imgur.com/3/image`, {
         //     uploads: [{size: file.size}],
