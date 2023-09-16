@@ -24,17 +24,10 @@
         if (inputFile) {
           const opts = filter(identity, {maxWidth, maxHeight})
           file = blobToFile(await stripExifData(inputFile, opts))
-        //   // quote = await postJson(user.dufflepud("/upload/quote"), {
-        //   quote = await postJson(`https://api.imgur.com/3/image`, {
-        //     uploads: [{size: file.size}],
-        //   })
-        // } else {
-          // file = null
           quote = {
             termsLine1: `If someone else might own the copyright to it, don't upload it. Don't upload gore, "hate speech" (i.e. demeaning race, gender, age, religious or sexual orientation, etc.), or material that is threatening, harassing, defamatory, or that encourages violence or crime.`,
             termsLine2: `Don't upload illegal content such as child sexual abuse material or nonconsensual ("revenge") porn. Don't hotlink to adult content or to file-sharing, gambling, torrent, warez, or Imgur rip-off sites. Don't impersonate someone else. Also, don't use Imgur to host image libraries you link to from elsewhere, content for your website, advertising, avatars, or anything else that turns us into your content delivery network.`,
             termsLine3: `If you do – and we will be the judge – or if you do anything illegal, in addition to any other legal rights we may have, we will ban you along with the site you're hotlinking from, delete all your images, report you to the authorities if necessary, and prevent you from viewing any images hosted on Imgur.com. We mean it.`
-
           }
         }
       })
