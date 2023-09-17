@@ -30,7 +30,7 @@
     const relay = relays.get(url) || {url}
     const mastodonFediTrendsAPI = 'https://mastodon.social/api/v1/timelines/tag/'
     const lemmyCommunitySearchAPI = 'https://sh.itjust.works/api/v3/search?q='
-    const lemmyCommunityAPI = 'https://sh.itjust.works/api/v3/post/list?limit=10&page=1&sort=Hot&type_=All&community_name='
+    const lemmyCommunityAPI = 'https://sh.itjust.works/api/v3/post/list?limit=5&page=1&sort=Hot&type_=All&community_name='
     document.title = 'Home - Agora'
 
     const getMastodonPostsForTopic = async (topic): Promise <any[]> => {
@@ -42,19 +42,31 @@
     }
 
     const getLemmyPostsForTopic = async (topic): Promise <any[]> => {
-      const lemmyCommunitySearchResponse = await fetch(`${lemmyCommunitySearchAPI}${topic}&type_=Communities&sort=TopAll&listing_type=All&page=1&limit=5`, {method: "get"})
-      if (lemmyCommunitySearchResponse.status === 200) {
-        const json = await lemmyCommunitySearchResponse.json()
-        if (typeof json === "object") {
-          const baseUrl = json.communities[0].community.actor_id.replace('https://', '')
-          const community = baseUrl.split('/c/')[1];
-          const instance = baseUrl.split('/c/')[0];
-          const fullCommunityHandle = community + '@' + instance;
-          const res = await fetch(`${lemmyCommunityAPI}${fullCommunityHandle}`, {method: "get"})
-          if (res.status === 200) {
-            const json = await res.json()
-            if (typeof json === "object") {
-              return json;
+      const savedCommunitySlug = localStorage.getItem(topic);
+      if (savedCommunitySlug) {
+        const res = await fetch(`${lemmyCommunityAPI}${savedCommunitySlug}`, {method: "get"})
+        if (res.status === 200) {
+          const json = await res.json()
+          if (typeof json === "object") {
+            return json;
+          }
+        }
+      } else {
+        const lemmyCommunitySearchResponse = await fetch(`${lemmyCommunitySearchAPI}${topic}&type_=Communities&sort=TopAll&listing_type=All&page=1&limit=5`, {method: "get"})
+        if (lemmyCommunitySearchResponse.status === 200) {
+          const json = await lemmyCommunitySearchResponse.json()
+          if (typeof json === "object") {
+            const baseUrl = json.communities[0].community.actor_id.replace('https://', '')
+            const community = baseUrl.split('/c/')[1];
+            const instance = baseUrl.split('/c/')[0];
+            const fullCommunityHandle = community + '@' + instance;
+            localStorage.setItem(topic, fullCommunityHandle);
+            const res = await fetch(`${lemmyCommunityAPI}${fullCommunityHandle}`, {method: "get"})
+            if (res.status === 200) {
+              const json = await res.json()
+              if (typeof json === "object") {
+                return json;
+              }
             }
           }
         }
