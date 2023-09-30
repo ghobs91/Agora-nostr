@@ -21,6 +21,7 @@
   import ListEdit from "src/app/views/ListEdit.svelte"
   import RelayAdd from "src/app/views/RelayAdd.svelte"
   import RelayDetail from "src/app/views/RelayDetail.svelte"
+  import MutedWordsListEdit from "./views/MutedWordsListEdit.svelte"
 
   export let m
 </script>
@@ -71,6 +72,8 @@
   <ListSelect item={m.item} />
 {:else if m.type === "list/edit"}
   <ListEdit topic={m.topic} />
+{:else if m.type === "list/mutedwords"}
+  <MutedWordsListEdit topic={m.topic} />
 {:else if m.type === "message"}
   <Content size="lg">
     <div class="text-center">{m.message}</div>

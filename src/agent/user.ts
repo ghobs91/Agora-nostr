@@ -21,6 +21,8 @@ import {derived} from "svelte/store"
 import keys from "src/agent/keys"
 import pool from "src/agent/pool"
 import cmd from "src/agent/cmd"
+import {Tags} from "src/util/nostr"
+import user from "src/agent/user"
 
 const profile = synced("agent/user/profile", {
   pubkey: null,
@@ -34,6 +36,7 @@ const profile = synced("agent/user/profile", {
     reportAnalytics: true,
     dufflepudUrl: import.meta.env.VITE_DUFFLEPUD_URL,
     multiplextrUrl: import.meta.env.VITE_MULTIPLEXTR_URL,
+    mutedWords: []
   },
   rooms_joined: [],
   last_checked: {},
@@ -94,6 +97,11 @@ export default {
     profile.update($p => ({...$p, settings}))
 
     return this.setAppData("settings/v1", settings)
+  },
+  async getMutedWords() {
+    let list;
+    const mutedWords = find(e => e.id !== list?.id && Tags.from(e).getMeta("d") === "agora_muted_words", user.getLists())
+    return mutedWords
   },
 
   // App data
@@ -176,9 +184,22 @@ export default {
   getMutes: () => profileCopy.mutes,
   applyMutes: events => {
     const m = new Set(profileCopy.mutes.map(m => m[1]))
+    
+    let list;
+    const mutedWords = find(e => e.id !== list?.id && Tags.from(e).getMeta("d") === "agora_muted_words", user.getLists())
+    let mutedWordsSimplified = []
+
+    mutedWords.tags.forEach(element => {
+      if (element[0] === "t") {
+        mutedWordsSimplified.push(element[1])
+      }
+    });
+
+    console.log(`the first events object: ${events[0]}`)
+    console.log(`mutedWordsSimplified: ${mutedWordsSimplified}`)
 
     return events.filter(
-      e => !(m.has(e.id) || m.has(e.pubkey) || m.has(findReplyId(e)) || m.has(findRootId(e)))
+      e => !(m.has(e.id) || m.has(e.pubkey) || m.has(findReplyId(e)) || m.has(findRootId(e)) || mutedWordsSimplified.some(substring => e.content.includes(substring)) )
     )
   },
   updateMutes(f) {

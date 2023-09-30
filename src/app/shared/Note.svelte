@@ -18,6 +18,7 @@
   import {getPersonWithFallback} from "src/agent/db"
   import {watch} from "src/agent/db"
   import NoteContent from "src/app/shared/NoteContent.svelte"
+  import {Tags} from "src/util/nostr"
 
   export let note
   export let feedRelay
@@ -27,6 +28,9 @@
   export let showParent = true
   export let showContext = false
   export let invertColors = false
+
+  let list;
+  list = find(e => e.id !== list?.id && Tags.from(e).getMeta("d") === "agora_muted_words", user.getLists());
 
   let reply = null
   let replyIsActive = false
@@ -99,6 +103,20 @@
 
   onMount(() => {
     const interval = setInterval(setBorderHeight, 400)
+
+    // let noteContent = note.content;
+    // for (let i = 0; i < noteContent.length; i++) {
+    //   const {type, value} = noteContent[i]
+    //   console.log(`content[i].value: ${noteContent[i].value} content[i].type: ${noteContent[i].type}`);
+
+    //   // if (noteContent[i].type === "text") {
+    //     list.forEach(mutedWord => {
+    //       if (noteContent[i].value.includes(mutedWord)) {
+    //         return;
+    //       }
+    //     });
+    //   // }
+    // }
 
     return () => {
       clearInterval(interval)

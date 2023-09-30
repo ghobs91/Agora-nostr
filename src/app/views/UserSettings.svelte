@@ -11,14 +11,26 @@
   import Heading from "src/partials/Heading.svelte"
   import user from "src/agent/user"
   import pool from "src/agent/pool"
+  import {modal} from "src/partials/state"
+  import {find} from "ramda"
+  import {Tags} from "src/util/nostr"
+
+  let list;
 
   let values = {...user.getSettings()}
+  $: mutedWordsList = find(e => e.id !== list?.id && Tags.from(e).getMeta("d") === "agora_muted_words", user.getLists())
+
 
   onMount(async () => {
     if (!user.getProfile()) {
       return navigate("/login")
     }
   })
+
+  const editMutedWordsModal = mutedWordsList => {
+    console.log('mutedWordsList: ', mutedWordsList);
+    modal.push({type: "list/mutedwords", mutedWordsList})
+  }
 
   const submit = () => {
     user.setSettings(values)
@@ -36,6 +48,9 @@
       <p>Make {appName} work the way you want it to.</p>
     </div>
     <div class="flex w-full flex-col gap-8">
+      <Anchor type="button-accent" on:click={() => editMutedWordsModal(mutedWordsList)}>
+        <i class="fa fa-plus" /> Edit Muted Words
+      </Anchor>
       <div class="flex flex-col gap-1">
         <div class="flex items-center gap-2">
           <strong>Show images and link previews</strong>

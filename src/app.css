@@ -123,18 +123,18 @@ body,
   background-color: black !important;
 }
 .note .card{
-  border-color: #000 !important;
+  border-color: #18181c !important;
   border-radius: .75rem;
-  background-color: #151515 !important;
+  background-color: #18181c !important;
+}
+.border-gray-7 {
+  border-color: #242424;
 }
 .navbar-bg {
-  background-color: black !important;
-}
-.navbar-bg {
-  background-color: #151515 !important;
+  background-color: #18181c !important;
 }
 .border-gray-6 {
-  border-color: #26272d !important;
+  border-color: #18181c !important;
 }
 .active-tab {
   border-color: #7239dd;
@@ -206,10 +206,10 @@ body,
   margin-left: 0.5rem;
 }
 .notification-card {
-  background-color: #151515 !important;
+  background-color: #18181c !important;
 }
 .routes-container {
-  background-color: black;
+  background-color: #101014 !important;
 }
 .top-users-container {
   padding: 0 !important;
@@ -276,9 +276,9 @@ body,
 }
 .discover-card {
   display: flex;
-  border-color: #000 !important;
+  border-color: #18181c !important;
   border-radius: .75rem;
-  background-color: #151515 !important;
+  background-color: #18181c !important;
   cursor: pointer;
   margin-top: 10px;
   margin-bottom: 10px;
@@ -291,7 +291,7 @@ body,
   margin-bottom: 10px;
 }
 .notification-card {
-  background-color: #151515;
+  background-color: #18181c;
 }
 .note-author-name {
   overflow: hidden;
