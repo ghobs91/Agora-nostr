@@ -32,8 +32,6 @@
   // Find links and preceding whitespace
   for (let i = 0; i < content.length; i++) {
     const {type, value} = content[i]
-    console.log(`content[i].value: ${content[i].value} content[i].type: ${content[i].type}`);
-
     if (type === "link" && !value.startsWith("ws")) {
       links.push(value)
 
