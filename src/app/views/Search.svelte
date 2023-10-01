@@ -29,16 +29,13 @@
   }
 
   async function createBridgedBluesky(handle) {
-    try {
-        const sanitizedHandle = handle.replace('@', '');
-        const res = await fetch(`https://rsslay.onrender.com/api/feed?url=https://ghobs91-bluestream.deno.dev/${sanitizedHandle}`, {method: "get"});
-        const rsslayResponse = await res.json();
-        const pubKey = rsslayResponse.PubKey;
-        console.log('PubKey: ', pubKey);
-        window.location.href = `/people/${pubKey}/notes`
-      } catch (e) {
-        console.log('rsslay call failed!');
-      }
+    const mostrPubFormattedHandle = handle + '_at_atproto.brid.gy'
+    const res = await fetch(`https://mostr.pub/.well-known/nostr.json?name=${mostrPubFormattedHandle}`, {method: "get"});
+    const mostrResponse = await res.json();
+    if (!mostrResponse.error) {
+      const pubKey = mostrResponse.names[`${mostrPubFormattedHandle}`];
+      window.location.href = `/people/${pubKey}/notes`
+    }
   }
 
   async function createBridgedLemmy(communityRSSUrl) {
@@ -100,7 +97,7 @@
     if (q.indexOf('npub') > -1) {
       window.location.href = `/people/${q}/notes`
     }
-    if (q.indexOf('bsky.social') > -1) {
+    if ((q.indexOf('bsky.social') > -1) || (q.indexOf('bsky.team') > -1)) {
       console.log('we searchin for Bluesky?');
       createBridgedBluesky(search);
     }
