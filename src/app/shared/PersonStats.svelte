@@ -9,10 +9,21 @@
   import pool from "src/agent/pool"
 
   export let person
+  export let followersCountFromNostrBand
 
   const interpolate = (a, b) => t => a + Math.round((b - a) * t)
 
   let followersCount = tweened(0, {interpolate, duration: 1000})
+
+  const nostrBandApi = 'https://api.nostr.band/v0/stats/profile/' + person.pubkey
+
+  const nostrbandFollowersCount = async (): Promise <any[]> => {
+      const res = await fetch(nostrBandApi, {
+                method: "GET"
+              })
+      const json = await res.json()
+      return json.stats[person.pubkey]
+    }
 
   const showFollows = () => {
     modal.push({type: "person/follows", pubkey: person.pubkey})
@@ -23,6 +34,11 @@
   }
 
   onMount(async () => {
+    nostrbandFollowersCount().then((response) => {
+      followersCountFromNostrBand = response["followers_pubkey_count"];
+      followersCountFromNostrBand = followersCountFromNostrBand.toLocaleString();
+    })
+    
     // Get our followers count
     const count = await pool.count({kinds: [3], "#p": [person.pubkey]})
 
@@ -50,10 +66,11 @@
 {#if person?.petnames}
   <div class="flex gap-8" in:fly={{y: 20}}>
     <button on:click={showFollows}>
-      <strong>{person.petnames.length}</strong> following
+      <strong>{person.petnames.length.toLocaleString()}</strong> Following
     </button>
     <button on:click={showFollowers}>
-      <strong>{numberFmt.format($followersCount)}</strong> followers
+      <!-- <strong>{numberFmt.format($followersCount)}</strong> followers -->
+      <strong>{followersCountFromNostrBand}</strong> Followers
     </button>
   </div>
 {/if}
