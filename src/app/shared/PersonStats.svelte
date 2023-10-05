@@ -63,14 +63,14 @@
   })
 </script>
 
-{#if person?.petnames}
-  <div class="flex gap-8" in:fly={{y: 20}}>
+<div class="flex gap-8" in:fly={{y: 20}}>
+  {#if person?.petnames}
     <button on:click={showFollows}>
       <strong>{person.petnames.length.toLocaleString()}</strong> Following
     </button>
-    <button on:click={showFollowers}>
-      <!-- <strong>{numberFmt.format($followersCount)}</strong> followers -->
-      <strong>{followersCountFromNostrBand}</strong> Followers
-    </button>
-  </div>
-{/if}
+  {/if}
+  <button on:click={showFollowers}>
+    <!-- <strong>{numberFmt.format($followersCount)}</strong> followers -->
+    <strong>{followersCountFromNostrBand}</strong> Followers
+  </button>
+</div>
