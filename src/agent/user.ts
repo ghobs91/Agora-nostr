@@ -196,7 +196,7 @@ export default {
     });
 
     return events.filter(
-      e => !(m.has(e.id) || m.has(e.pubkey) || m.has(findReplyId(e)) || m.has(findRootId(e)) || mutedWordsSimplified.some(substring => e.content.includes(substring)) )
+      e => !(m.has(e.id) || m.has(e.pubkey) || m.has(findReplyId(e)) || m.has(findRootId(e)) || mutedWordsSimplified.some(substring => e.content.toLowerCase().includes(substring.toLowerCase())) )
     )
   },
   updateMutes(f) {
