@@ -4,6 +4,7 @@
   import RelayCard from "src/app/shared/RelayCard.svelte"
 
   export let relays
+  export let indexedRelays
   export let fromNostrBand
 </script>
 
@@ -13,11 +14,11 @@
       Below are the relays this user publishes to. Join one or more to make sure you never miss
       their updates.
     </p>
-    {#if relays.length === 0}
+    <!-- {#if relays.length === 0}
       <div class="pt-8 text-center">No relays found</div>
-    {:else}
+    {:else} -->
       {#if fromNostrBand}
-        {#each relays as relay (relay)}
+        {#each indexedRelays as relay (relay)}
           <RelayCard {relay} />
         {/each}
       {:else}
@@ -25,6 +26,6 @@
           <RelayCard {relay} />
         {/each}
       {/if}
-    {/if}
+    <!-- {/if} -->
   </Content>
 </div>

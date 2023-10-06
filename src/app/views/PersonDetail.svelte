@@ -53,7 +53,7 @@
         const relayKeys = response["people"][0]["relays"];
         const relayListFromKeys = [];
         relayKeys.forEach(key => {
-          relayListFromKeys.push(response["relays"][key])
+          relayListFromKeys.push({url: response["relays"][key]})
         });
         console.log(`final relayListFromKeys: ${relayListFromKeys}`);
         fromNostrBand = true;
@@ -117,13 +117,13 @@
     <PersonLikes {pubkey} {relays} />
   {:else if activeTab === "relays"}
     {#await getRelaysFromNostrBand()}
-      <Spinner />
-      {:then indexedRelays}
-      {#if indexedRelays}
-          <PersonRelays relays={indexedRelays} fromNostrBand={true} />
-      {:else}
-          <PersonRelays relays={ownRelays} fromNostrBand={false} />
-      {/if}
+    <!-- <Spinner /> -->
+      {:then}
+        {#if indexedRelays}
+            <PersonRelays indexedRelays={indexedRelays} relays={null} fromNostrBand={true} />
+        {:else}
+            <PersonRelays indexedRelays={null} relays={ownRelays} fromNostrBand={false} />
+        {/if}
       <!-- {:else if loading}
         <Spinner />
       {:else}
