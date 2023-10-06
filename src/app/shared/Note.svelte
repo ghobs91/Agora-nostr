@@ -164,7 +164,7 @@
             {timestamp}
           </Anchor>
         </div>
-        <div class="flex flex-col gap-2">
+        <div class="flex flex-col gap-2 note-container">
           <div class="flex gap-2">
             {#if findReplyId(note) && showParent}
               <small class="text-gray-1">

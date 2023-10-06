@@ -23,16 +23,45 @@
   export let npub
   export let activeTab
   export let relays = []
+  export let fromNostrBand;
+  export let indexedRelays;
 
   const tabs = ["notes", "likes", pool.forceUrls.length === 0 && "relays"].filter(identity)
   const pubkey = toHex(npub)
   const person = watch("people", () => getPersonWithFallback(pubkey))
+  const nostrBandApi = `https://api.nostr.band/nostr?method=search&count=1&q=${pubkey}`
 
   let loading = true
   let rgb, rgba
 
   $: ownRelays = getPubkeyWriteRelays(pubkey)
+  // $: indexedRelays = getRelaysFromNostrBand()
   $: relays = sampleRelays(relays.concat(ownRelays))
+
+
+  
+  const nostrbandProfileInfo = async (): Promise <any[]> => {
+    const res = await fetch(nostrBandApi, {
+              method: "GET"
+            })
+    const json = await res.json()
+    return json;
+  }
+
+  const getRelaysFromNostrBand = async (): Promise<any> => {
+      nostrbandProfileInfo().then((response) => {
+        const relayKeys = response["people"][0]["relays"];
+        const relayListFromKeys = [];
+        relayKeys.forEach(key => {
+          relayListFromKeys.push(response["relays"][key])
+        });
+        console.log(`final relayListFromKeys: ${relayListFromKeys}`);
+        fromNostrBand = true;
+        indexedRelays = relayListFromKeys;
+        return indexedRelays;
+      });
+  }
+
 
   $: {
     const color = parseHex(getThemeColor($theme, "gray-8"))
@@ -46,6 +75,7 @@
   document.title = displayPerson($person)
 
   const setActiveTab = tab => navigate(routes.person(pubkey, tab))
+  console.log('running PersonDetail');
 </script>
 
 <div
@@ -86,12 +116,19 @@
   {:else if activeTab === "likes"}
     <PersonLikes {pubkey} {relays} />
   {:else if activeTab === "relays"}
-    {#if ownRelays.length > 0}
-      <PersonRelays relays={ownRelays} />
-    {:else if loading}
+    {#await getRelaysFromNostrBand()}
       <Spinner />
-    {:else}
-      <Content size="lg" class="text-center">Unable to show network for this person.</Content>
-    {/if}
+      {:then indexedRelays}
+      {#if indexedRelays}
+          <PersonRelays relays={indexedRelays} fromNostrBand={true} />
+      {:else}
+          <PersonRelays relays={ownRelays} fromNostrBand={false} />
+      {/if}
+      <!-- {:else if loading}
+        <Spinner />
+      {:else}
+        <Content size="lg" class="text-center">Unable to show network for this person.</Content>
+      {/if} -->
+    {/await}
   {/if}
 </Content>

@@ -71,6 +71,6 @@
   {/if}
   <button on:click={showFollowers}>
     <!-- <strong>{numberFmt.format($followersCount)}</strong> followers -->
-    <strong>{followersCountFromNostrBand}</strong> Followers
+    <strong>{followersCountFromNostrBand ? followersCountFromNostrBand: '___'}</strong> Followers
   </button>
 </div>

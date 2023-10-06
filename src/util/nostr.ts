@@ -13,6 +13,9 @@ export const appDataKeys = [
   "coracle/rooms_joined/v1",
 ]
 
+export let profileNameFromNostrBand;
+export let profileImageFromNostrBand;
+
 export class Tags {
   tags: Array<any>
   constructor(tags) {
@@ -105,6 +108,25 @@ export const findRoot = e => prop("root", findReplyAndRoot(e))
 export const findRootId = e => findRoot(e)?.[1]
 
 export const displayPerson = p => {
+  // const nostrBandApi = `https://api.nostr.band/nostr?method=search&count=1&q=${p.pubkey}`
+  // const nostrbandProfileInfo = async (): Promise <any[]> => {
+  //   const res = await fetch(nostrBandApi, {
+  //             method: "GET"
+  //           })
+  //   const json = await res.json()
+  //   return json.people[0]
+  // }
+  // try {
+  //   nostrbandProfileInfo().then((response) => {
+  //     const profileName = response["display_name"];
+  //     return profileName;
+  //   });
+  // } catch (e) {
+  //   console.error(e)
+
+  //   return ""
+  // }
+
   if (p.kind0?.display_name) {
     return ellipsize(p.kind0?.display_name, 60).replace('(RSS Feed)', '');
   }

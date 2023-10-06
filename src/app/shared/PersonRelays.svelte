@@ -4,6 +4,7 @@
   import RelayCard from "src/app/shared/RelayCard.svelte"
 
   export let relays
+  export let fromNostrBand
 </script>
 
 <div in:fly={{y: 20}}>
@@ -15,9 +16,15 @@
     {#if relays.length === 0}
       <div class="pt-8 text-center">No relays found</div>
     {:else}
-      {#each relays as relay (relay.url)}
-        <RelayCard {relay} />
-      {/each}
+      {#if fromNostrBand}
+        {#each relays as relay (relay)}
+          <RelayCard {relay} />
+        {/each}
+      {:else}
+        {#each relays as relay (relay.url)}
+          <RelayCard {relay} />
+        {/each}
+      {/if}
     {/if}
   </Content>
 </div>

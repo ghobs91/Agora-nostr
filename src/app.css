@@ -356,3 +356,6 @@ body,
 .thumbnail-container {
   margin-bottom: 10px;
 }
+.note-container {
+  margin-left: -55px;
+}
