@@ -33,8 +33,17 @@ export default defineConfig({
         theme_color: "#151515",
         protocol_handlers: [{protocol: "web+nostr", url: "/%s"}],
         icons: [
-          {type: "image/png", sizes: "192x192", src: "/images/favicon/192.png"},
-          {type: "image/png", sizes: "512x512", src: "/images/favicon/512.png"},
+          {
+            type: "image/png", 
+            sizes: "192x192", 
+            src: "/images/favicon/192.png"
+          },
+          {
+            type: "image/png", 
+            sizes: "512x512", 
+            src: "/images/favicon/512.png",
+            purpose: "any maskable"
+          },
         ],
       },
     }),
