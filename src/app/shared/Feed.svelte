@@ -28,7 +28,7 @@
 
   // Add a short buffer so we can get the most possible results for recent notes
   const since = now()
-  const maxNotes = 100
+  const maxNotes = 20
   const seen = new Set()
   const cursor = new network.Cursor({relays, delta})
   const getModal = () => last(document.querySelectorAll(".modal-content"))
@@ -77,7 +77,7 @@
     // Stream in additional data and merge it in
     network.streamContext({
       maxDepth: 2,
-      notes: combined.filter(propEq("kind", 1)),
+      notes: combined.filter(propEq("kind", 1)).slice(0, 10),
       onChunk: context => {
         context = user.applyMutes(context)
 

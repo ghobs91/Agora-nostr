@@ -15,6 +15,7 @@
   import {feedsTab} from "src/app/state"
   import {pluck, find} from "ramda"
   import FediverseTopicsFeed from "src/app/views/FediverseTopicsFeed.svelte"
+  import TopicsFeed from "src/app/views/TopicsFeed.svelte"
 
 
   const {lists, canPublish} = user
@@ -148,6 +149,7 @@
     </Tabs>
     {#key $feedsTab}
       {#if $feedsTab === "Topics"}
+        <!-- <TopicsFeed followedTopicsList={followedTopicsList}></TopicsFeed> -->
         <FediverseTopicsFeed></FediverseTopicsFeed>
         {:else}
         <Feed {relays} {filter} />

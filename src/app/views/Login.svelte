@@ -65,13 +65,13 @@
 </script>
 
 <div in:fly={{y: 20}}>
-  <Content size="lg" class="text-center">
-    <div class="flex max-w-2xl flex-col gap-8">
+  <Content size="lg" class="text-center content-container">
+    <div class="flex max-w-2xl flex-col gap-8 content-container-child">
       <div class="mb-4 flex flex-col items-center justify-center">
         <Heading>Welcome!</Heading>
       </div>
       <p class="text-center">
-        Follow your favorite topics across Nostr, Bluesky, Mastodon, and Twitter.
+        Follow your favorite topics across Nostr, Bluesky, and Mastodon.
       </p>
       <!-- <div class="flex flex-col w-full border-opacity-50">
         <div class="divider"></div>

@@ -31,12 +31,14 @@
   let isFollowingTopic = null;
   const topicsList = values.params;
 
-  topicsList.forEach((topicObject) => {
-    if (topicObject[1] === topic.toLowerCase()) {
-      isFollowingTopic = true;
-    }
-  });
+  // topicsList.forEach((topicObject) => {
+  //   if (topicObject[1] === topic.toLowerCase()) {
+  //     isFollowingTopic = true;
+  //   }
+  // });
   const relays = sampleRelays(getUserReadRelays())
+  console.log(`relays: ${relays[0].url}`);
+  // const relays = ['wss://relay.nostr.band']
   export let filter = [{kinds: [1], "#t": [topic]}]
   const topicFromFilter = filter[0]["#t"]
 
@@ -87,20 +89,19 @@
 <Content>
   <div class="flex justify-between gap-2">
     <Heading>#{topic}</Heading>
-    {#if !isFollowingTopic && $profile.pubkey}
+    <!-- {#if !isFollowingTopic && $profile.pubkey}
     <div class="flex items-center justify-between">
       <Anchor type="button-accent" on:click={() => addToTopicsList()}>
         <i class="fa fa-plus" /> Follow Topic
       </Anchor>
-    </div>
+    </div> -->
     <!-- {:else}
     <div class="flex items-center justify-between">
       <Anchor type="button-accent" on:click={() => removeFromTopicsList()}>
         <i class="fa fa-minus" /> Unfollow Topic
       </Anchor>
     </div> -->
-    {/if}
+    <!-- {/if} -->
   </div>
-  <FediverseTopicFeed {topicFromFilter}></FediverseTopicFeed>
   <Feed {relays} {filter} />
 </Content>

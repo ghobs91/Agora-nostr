@@ -274,6 +274,7 @@ body,
 }
 .explore-topic-wrapper {
   width: 100%;
+  padding-bottom: 0 !important;
 }
 .discover-card-name-header {
   margin-left: 10px;
@@ -358,4 +359,11 @@ body,
 }
 .note-container {
   margin-left: -55px;
+}
+.content-container {
+  padding-bottom: 6.5rem !important;
+  padding-top: 2rem !important;
+}
+.content-container-child {
+  gap: .5rem !important;
 }
