@@ -27,6 +27,7 @@
   import TopicFeed from "src/app/views/TopicFeed.svelte"
   import FediverseTopicFeed from "./views/FediverseTopicFeed.svelte"
     import PopularBluesky from "./shared/PopularBluesky.svelte"
+    import FediverseTopicsFeed from "./views/FediverseTopicsFeed.svelte"
 
   let ready = false
   let signup
@@ -88,7 +89,8 @@
       {/key}
     </Route>
     <Route path="/topic/:topic" let:params>
-      <TopicFeed topic={params.topic} />
+      <!-- <TopicFeed topic={params.topic} /> -->
+      <FediverseTopicFeed topicFromFilter={params.topic}/>
     </Route>
     <Route path="/profile" component={UserProfile} />
     <Route path="/settings" component={UserSettings} />

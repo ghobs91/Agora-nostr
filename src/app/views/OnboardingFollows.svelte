@@ -14,7 +14,7 @@
   import {navigate} from "svelte-routing"
 
   export let topicList;
-  export let signup;
+  export let signupTopics;
   let list;
   list = find(e => e.id !== list?.id && Tags.from(e).getMeta("d") === "agora_followed_topics", user.getLists());
 
@@ -142,7 +142,7 @@
       })
     })
     toast.show("info", "Your list has been saved!")
-    signup(true)
+    signupTopics(true)
     // navigate("/notes")
     // modal.pop()
   }

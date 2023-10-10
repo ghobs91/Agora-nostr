@@ -13,7 +13,7 @@
     import {warn} from "src/util/logger"
     import {navigate} from "svelte-routing"
   
-    export let topic;
+    export let signup;
     let list;
     list = find(e => e.id !== list?.id && Tags.from(e).getMeta("d") === "agora_muted_words", user.getLists());
   
@@ -48,14 +48,11 @@
         list.id = existingList.id;
       }
   
-      if (values.params.length < 1) {
-        return toast.show("error", "Add at least 1 word to mute!")
-      }
-  
       const {name, params, relays} = values
   
       user.putList(list?.id, name, params, relays)
       toast.show("info", "Your list has been saved!")
+      signup(true)
       navigate("/notes")
       // modal.pop()
     }

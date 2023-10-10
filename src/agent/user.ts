@@ -189,11 +189,13 @@ export default {
     const mutedWords = find(e => e.id !== list?.id && Tags.from(e).getMeta("d") === "agora_muted_words", user.getLists())
     let mutedWordsSimplified = []
 
-    mutedWords.tags.forEach(element => {
-      if (element[0] === "t") {
-        mutedWordsSimplified.push(element[1])
-      }
-    });
+    if (mutedWords) {
+      mutedWords.tags.forEach(element => {
+        if (element[0] === "t") {
+          mutedWordsSimplified.push(element[1])
+        }
+      });
+    }
 
     return events.filter(
       e => !(m.has(e.id) || m.has(e.pubkey) || m.has(findReplyId(e)) || m.has(findRootId(e)) || mutedWordsSimplified.some(substring => e.content.toLowerCase().includes(substring.toLowerCase())) )

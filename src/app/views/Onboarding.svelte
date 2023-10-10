@@ -12,6 +12,7 @@
   import OnboardingRelays from "src/app/views/OnboardingRelays.svelte"
   import OnboardingFollows from "src/app/views/OnboardingFollows.svelte"
   import OnboardingNote from "src/app/views/OnboardingNote.svelte"
+  import OnboardingMutedWords from "src/app/views/OnboardingMutedWords.svelte"
   import {getFollows, defaultFollows} from "src/agent/social"
   import {getPubkeyWriteRelays, sampleRelays} from "src/agent/relays"
   import {getPersonWithFallback} from "src/agent/db"
@@ -62,8 +63,8 @@
 
     loadAppData(user.getPubkey())
       window.location.reload();
-    // modal.replace({type: "onboarding", stage: "topics"})
-    navigate("/notes")
+    modal.replace({type: "onboarding", stage: "topics"})
+    // navigate("/notes")
   }
 
   const signupRelays = async () => {
@@ -85,8 +86,16 @@
     ])
 
     loadAppData(user.getPubkey())
-    // modal.replace({type: "onboarding", stage: "topics"})
-    navigate("/notes")
+    modal.replace({type: "onboarding", stage: "topics"})
+    // navigate("/notes")
+  }
+
+  const signupTopics = async () => {
+    await keys.login("privkey", privkey)
+
+    loadAppData(user.getPubkey())
+    modal.replace({type: "onboarding", stage: "mutedwords"})
+    // navigate("/notes")
   }
 
   // Prime our people cache for hardcoded follows and a sample of people they follow
@@ -116,7 +125,9 @@
     {:else if stage === "relays"}
       <OnboardingRelays {signupRelays} />
     {:else if stage === "topics"}
-      <OnboardingFollows {topicList} {signup}/>
+      <OnboardingFollows {topicList} {signupTopics}/>
+    {:else if stage === "mutedwords"}
+      <OnboardingMutedWords {signup}/>
     <!-- {:else if stage === "follows"}
       <OnboardingFollows {signup}/> -->
     <!-- {:else if stage === "note"}

@@ -51,7 +51,12 @@
       const authors = shuffle(getUserFollows()).slice(0, 256)
 
       filter = {authors}
-      relays = sampleRelays(getAllPubkeyWriteRelays(authors))
+
+      if (authors.length < 1) {
+        relays = [{url: 'wss://feeds.nostr.band/popular'}]
+      } else {
+        relays = sampleRelays(getAllPubkeyWriteRelays(authors))
+      }
     } else if ($feedsTab === "Global") {
       const authors = shuffle(getUserNetwork()).slice(0, 256)
 
@@ -152,8 +157,13 @@
         <!-- <TopicsFeed followedTopicsList={followedTopicsList}></TopicsFeed> -->
         <FediverseTopicsFeed></FediverseTopicsFeed>
         {:else}
-        <Feed {relays} {filter} />
+        {#if getUserFollows().length < 5}
+          <Feed relays={[{url: 'wss://feeds.nostr.band/popular'}]} filter={{kinds: [1]}} />
+          {:else}
+            <Feed {relays} {filter} />
+        {/if}
       {/if}
+      
     {/key}
   </div>
 </Content>

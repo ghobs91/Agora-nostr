@@ -56,7 +56,7 @@
             const allAsyncResults = []
 
             // for (const item of tagsArray) {
-                const asyncResult = await getLemmyPostsForTopic(topicFromFilter)
+                const asyncResult = await getMastodonPostsForTopic(topicFromFilter)
                 allAsyncResults.push(asyncResult)
             // }
             console.log(`allAsyncResults: ${allAsyncResults}`)
