@@ -72,11 +72,7 @@
       const pubKey = mostrResponse.names[`${mostrPubFormattedHandle}`];
       window.location.href = `/people/${pubKey}/notes`
     } else {
-      const res = await fetch(`https://rsslay.onrender.com/api/feed?url=@${handle}.rss`, {method: "get"});
-      const rsslayResponse = await res.json();
-      const pubKey = rsslayResponse.NPubKey;
-      console.log(`pubkey: ${pubKey}`)
-      window.location.href = `/people/${pubKey}/notes`
+      return false;
     }
   }
 
@@ -94,25 +90,32 @@
         filter: [{kinds: [0], limit: 50}],
       })
     }
-    if (q.indexOf('npub') > -1) {
-      window.location.href = `/people/${q}/notes`
+
+    if (q[0] === '@') {
+      q === q.replace('@', '');
     }
-    if ((q.indexOf('bsky.social') > -1) || (q.indexOf('bsky.team') > -1)) {
-      console.log('we searchin for Bluesky?');
-      createBridgedBluesky(search);
-    }
-    if (q.indexOf('@twitter') > -1) {
-      console.log('we searchin for Twitter?');
-      createBridgedTwitter(search);
-    }
-    if ( (q.indexOf('@mastodon.social') > -1) || (q.indexOf('@lemmy.world') > -1) || (q.indexOf('@mastodon.cloud') > -1) || (q.indexOf('@mstdn.social') > -1) || (q.indexOf('@mastodon.online') > -1) || (q.indexOf('@mastodon.world') > -1) ) {
-      console.log('we searchin for Mastodon?');
+    const mastodonResult = createBridgedFediverse(search);
+
+    if (!mastodonResult) {
+      if (q.indexOf('npub') > -1) {
+        window.location.href = `/people/${q}/notes`
+      }
+      if ((q.indexOf('bsky.social') > -1) || (q.indexOf('bsky.team') > -1)) {
+        console.log('we searchin for Bluesky?');
+        createBridgedBluesky(search);
+      }
+      if (q.indexOf('@twitter') > -1) {
+        console.log('we searchin for Twitter?');
+        createBridgedTwitter(search);
+      }
+      if (q.indexOf('/c/') > -1) {
+        console.log('we searchin for Lemmy?');
+        createBridgedLemmy(search);
+      }
+    } else {
       createBridgedFediverse(search);
     }
-    if (q.indexOf('/c/') > -1) {
-      console.log('we searchin for Lemmy?');
-      createBridgedLemmy(search);
-    }
+
   })
 
   const tryParseEntity = debounce(500, async entity => {
