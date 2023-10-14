@@ -18,6 +18,7 @@
   import user from "src/agent/user"
   import TopUsers from "./TopUsers.svelte"
   import ExploreTopics from "./ExploreTopics.svelte"
+    import { compute_rest_props } from "svelte/internal"
 
   let q = ""
   let options = []
@@ -51,21 +52,8 @@
   }
 
   async function createBridgedTwitter(handle) {
-    try {
-        const sanitizedHandle = handle.replace('@twitter', '');
-        const res = await fetch(`https://rsslay.onrender.com/api/feed?url=https://nitter.moomoo.me/${sanitizedHandle}/rss`, {method: "get"});
-        const rsslayResponse = await res.json();
-        const pubKey = rsslayResponse.PubKey;
-        console.log('PubKey: ', pubKey);
-        window.location.href = `/people/${pubKey}/notes`
-      } catch (e) {
-        console.log('rsslay call failed!');
-      }
-  }
-
-  async function createBridgedFediverse(handle) {
-    const handleDomain = handle.split('@')[1];
-    const mostrPubFormattedHandle = handle.replace('@', '_at_');
+    const sanitizedHandle = handle.replace('@twitter', '');
+    const mostrPubFormattedHandle = sanitizedHandle + '_at_bird.makeup';
     const res = await fetch(`https://mostr.pub/.well-known/nostr.json?name=${mostrPubFormattedHandle}`, {method: "get"});
     const mostrResponse = await res.json();
     if (!mostrResponse.error) {
@@ -74,6 +62,34 @@
     } else {
       return false;
     }
+  }
+
+  async function createBridgedFediverse(handle) {
+    let theHandle = handle;
+    if (theHandle[0] === '@') {
+      theHandle = theHandle.substring(1);
+    }
+    if (theHandle.indexOf('@') > 0) {
+      let formattedHandleInstance = theHandle.split('@')[1];
+      let handleName = theHandle.split('@')[0];
+      const res = await fetch(`https://mostr.pub/.well-known/nostr.json?name=${handleName}_at_${formattedHandleInstance}`, {method: "get"});
+      const mostrResponse = await res.json();
+      if (!mostrResponse.error) {
+        const pubKey = mostrResponse.names[`${handleName}_at_${formattedHandleInstance}`];
+        window.location.href = `/people/${pubKey}/notes`
+      } else {
+        return false;
+      }
+    } else {
+      return false;
+    }
+  }
+
+  const checkMastodon = async (q) => {
+    const mastodonUserSearch = 'https://mastodon.social/api/v2/search?q='
+    const res = await fetch(`${mastodonUserSearch}${q}`, {method: "get"})
+    const json = await res.json()
+    return json;
   }
 
   const loadPeople = debounce(500, search => {
@@ -90,30 +106,34 @@
         filter: [{kinds: [0], limit: 50}],
       })
     }
+    
+    // var regEx = /@?\b([A-Z0-9._%+-]+)@([A-Z0-9.-]+\.[A-Z]{2,})\b/;
 
-    if (q[0] === '@') {
-      q === q.replace('@', '');
+    checkMastodon(q).then((results) => {
+      // console.log(`mastodon user search results json: ${results}`)
+      if (results.accounts && results.accounts.length > 0) {
+        createBridgedFediverse(search);
+      }
+    })
+
+    // if ((search.match(/@/g)||[]).length > 1 && (search.match(/./g)||[]).length >= 1) {
+    //   createBridgedFediverse(search);
+    // }
+
+    if (q.indexOf('npub') > -1) {
+      window.location.href = `/people/${q}/notes`
     }
-    const mastodonResult = createBridgedFediverse(search);
-
-    if (!mastodonResult) {
-      if (q.indexOf('npub') > -1) {
-        window.location.href = `/people/${q}/notes`
-      }
-      if ((q.indexOf('bsky.social') > -1) || (q.indexOf('bsky.team') > -1)) {
-        console.log('we searchin for Bluesky?');
-        createBridgedBluesky(search);
-      }
-      if (q.indexOf('@twitter') > -1) {
-        console.log('we searchin for Twitter?');
-        createBridgedTwitter(search);
-      }
-      if (q.indexOf('/c/') > -1) {
-        console.log('we searchin for Lemmy?');
-        createBridgedLemmy(search);
-      }
-    } else {
-      createBridgedFediverse(search);
+    if ((q.indexOf('bsky.social') > -1) || (q.indexOf('bsky.team') > -1)) {
+      console.log('we searchin for Bluesky?');
+      createBridgedBluesky(search);
+    }
+    if (q.indexOf('@twitter') > -1) {
+      console.log('we searchin for Twitter?');
+      createBridgedTwitter(search);
+    }
+    if (q.indexOf('/c/') > -1) {
+      console.log('we searchin for Lemmy?');
+      createBridgedLemmy(search);
     }
 
   })
@@ -198,7 +218,7 @@
       To find a <b>Twitter</b> profile, search their handle in this format: <b>elonmusk@twitter</b>
     </p>
     <p>
-      To find a <b>Mastodon</b> profile, search their handle in this format: <b>Gargron@mastodon.social</b>
+      To find a <b>Mastodon</b> profile, search their handle in this format: <b>@gargron@mastodon.social</b>
     </p>
   </div>
   <Input bind:value={q} placeholder="Search for people or topics">

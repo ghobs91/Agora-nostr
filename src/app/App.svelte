@@ -58,13 +58,16 @@
 
   // When we get an AUTH challenge from our pool, attempt to authenticate
   pool.Config.authHandler = async (url, challenge) => {
-    if (keys.canSign() && !seenChallenges.has(challenge)) {
-      seenChallenges.add(challenge)
+    // if (keys.canSign() && !seenChallenges.has(challenge)) {
+    //   seenChallenges.add(challenge)
 
-      const publishable = await cmd.authenticate(url, challenge)
+    //   const publishable = await cmd.authenticate(url, challenge)
 
-      return first(publishable.publish([{url}], null, "AUTH"))
-    }
+    //   return first(publishable.publish([{url}], null, "AUTH"))
+    // }
+
+    // makeshift fix for auth spam from paid relays
+    return false;
   }
 
   onMount(() => {
