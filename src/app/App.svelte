@@ -179,7 +179,7 @@
     <ForegroundButtons />
     <SideNav />
     <TopNav />
-    {#if isMobile}
+    <!-- {#if isMobile} -->
       <div class="bottom-bar fixed bottom-0 z-10 flex h-16 w-full items-center justify-between border-b border-gray-6 navbar-bg p-4 text-gray-2">
         <li class="botton-bar-button-container relative cursor-pointer">
           <a class="bottom-bar-button block px-4 py-2 transition-all hover:bg-accent hover:text-white" href="/notes">
@@ -219,7 +219,7 @@
           </a>
         </li>
       </div>
-    {/if}
+    <!-- {/if} -->
     <Modal />
     <Toast />
   </div>
