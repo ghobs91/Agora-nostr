@@ -1,5 +1,5 @@
 <script lang="ts">
-  import {displayRelay} from "src/util/nostr"
+  import {Tags, displayRelay} from "src/util/nostr"
   import Content from "src/partials/Content.svelte"
   import Feed from "src/app/shared/Feed.svelte"
   import RelayTitle from "src/app/shared/RelayTitle.svelte"
@@ -11,9 +11,21 @@
   import Anchor from "src/partials/Anchor.svelte"
   import {formatTimestamp} from "src/util/misc"
   import Media from "src/partials/Media.svelte"
+  import {pluck, find} from "ramda"
+  import user from "src/agent/user"
 
   export let url = 'wss://feeds.nostr.band/popular'
   export let size = 6
+  export let mutedWordsArray = []
+
+  let mutedWordsList;
+  mutedWordsList = find(e => e.id !== mutedWordsList?.id && Tags.from(e).getMeta("d") === "agora_muted_words", user.getLists());
+
+  mutedWordsList.tags.forEach(element => {
+    if (element[0] === "t") {
+      mutedWordsArray.push(element[1])
+    }
+  });
 
   const relay = relays.get(url) || {url}
 
@@ -24,7 +36,8 @@
   const popularMastodon = async (): Promise <any[]> => {
     const res = await fetch(`${mastodonFediTrendsAPI}`, {method: "get"})
     const json = await res.json()
-    return json
+    const filteredJson = filterOutMutedWords(json);
+    return filteredJson
   }
 
   const getRsslayMastoProfile = async (mastoLink) => {
@@ -44,13 +57,49 @@
     }
   }
 
+  const filterOutMutedWords = async (json): Promise <any[]> => {
+    json.forEach((post) => {
+        mastoArray.push(post)
+    })
+
+    // mastoArray = mastoArray.filter(post => !mutedWordsArray.some(mutedWord => post.content.toLowerCase().includes(mutedWord.toLowerCase())));
+
+    mastoArray.forEach((post, index) => {
+      if (mutedWordsArray.some(mutedWord => post.content.toLowerCase().includes(mutedWord.toLowerCase()))) {
+        console.log(`this post has a muted word: ${post.content.toLowerCase()}`);
+        mastoArray = mastoArray.splice(index, 1);
+      }
+    })
+
+    return json;
+  }
+
   export let mastoArray = []
 
   $: popularMastodon().then((daArray) => {
-    mastoArray.push(daArray);
+    daArray.forEach((post) => {
+        mastoArray.push(post)
+    })
+
+    // mastoArray = mastoArray.filter(post => !mutedWordsArray.some(mutedWord => post.content.toLowerCase().includes(mutedWord.toLowerCase())));
+
+    mastoArray.forEach((post, index) => {
+      if (mutedWordsArray.some(mutedWord => post.content.toLowerCase().includes(mutedWord.toLowerCase()))) {
+        console.log(`this post has a muted word: ${post.content.toLowerCase()}`);
+        mastoArray = mastoArray.splice(index, 1);
+      }
+    })
+
+    // mastoArray.push(daArray);
   })
 
 </script>
+
+<!-- <Content>
+  <Feed relays={[relay]} filter={{kinds: [1]}} />
+</Content> -->
+
+<div class="border-b border-solid border-gray-6" />
 
 <Content>
   {#await popularMastodon()}
@@ -96,8 +145,4 @@
       Unable to load feditrends
     </p>
   {/await}
-</Content>
-<div class="border-b border-solid border-gray-6" />
-<Content>
-  <Feed relays={[relay]} filter={{kinds: [1]}} />
 </Content>

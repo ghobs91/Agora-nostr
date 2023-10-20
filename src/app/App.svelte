@@ -197,12 +197,12 @@
           "cursor-pointer": $canPublish,
           "pointer-events-none opacity-75": !$canPublish,
         })}>
-        <a class="bottom-bar-button block px-4 py-2 transition-all hover:bg-accent hover:text-white" href="/messages">
+        <!-- <a class="bottom-bar-button block px-4 py-2 transition-all hover:bg-accent hover:text-white" href="/messages">
           <i class="fa fa-envelope mr-2" />
           {#if $newDirectMessages}
             <div class="absolute top-2 left-7 h-2 w-2 rounded bg-accent" />
           {/if}
-        </a>
+        </a> -->
       </li> 
         <li class="botton-bar-button-container relative cursor-pointer">
           <a class="bottom-bar-button block px-4 py-2 transition-all hover:bg-accent hover:text-white" href="/search">

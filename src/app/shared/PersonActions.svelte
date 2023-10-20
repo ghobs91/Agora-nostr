@@ -34,11 +34,11 @@
     actions.push({onClick: share, label: "Share", icon: "share-nodes"})
 
     if (user.getPubkey() !== person.pubkey && $canPublish) {
-      actions.push({
-        onClick: () => navigate(`/messages/${npub}`),
-        label: "Message",
-        icon: "envelope",
-      })
+      // actions.push({
+      //   onClick: () => navigate(`/messages/${npub}`),
+      //   label: "Message",
+      //   icon: "envelope",
+      // })
 
       if (muted) {
         actions.push({onClick: unmute, label: "Unmute", icon: "microphone"})

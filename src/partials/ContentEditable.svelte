@@ -26,7 +26,7 @@
       }
 
       // Remove gunk that gets copy/pasted, or bold/italic tags that can be added with hotkeys
-      if (node instanceof HTMLElement && !node.dataset.coracle) {
+      if (node instanceof HTMLElement && !node.dataset.agora) {
         const text = document.createTextNode(node.textContent)
 
         if (node.tagName === "DIV") {
@@ -64,8 +64,8 @@
         content += "\n"
       }
 
-      if (child.dataset?.coracle) {
-        const {prefix, value} = JSON.parse(child.dataset.coracle)
+      if (child.dataset?.agora) {
+        const {prefix, value} = JSON.parse(child.dataset.agora)
 
         content += value
         annotations = annotations.concat({prefix, value})

@@ -8,9 +8,9 @@ import {invoiceAmount} from "src/util/lightning"
 export const personKinds = [0, 2, 3, 10001, 10002]
 export const userKinds = personKinds.concat([10000, 30001, 30078])
 export const appDataKeys = [
-  "coracle/settings/v1",
-  "coracle/last_checked/v1",
-  "coracle/rooms_joined/v1",
+  "agora/settings/v1",
+  "agora/last_checked/v1",
+  "agora/rooms_joined/v1",
 ]
 
 export let profileNameFromNostrBand;

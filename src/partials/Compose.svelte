@@ -65,7 +65,7 @@
       const span = document.createElement("span")
 
       span.classList.add("underline")
-      span.dataset.coracle = JSON.stringify({prefix, value})
+      span.dataset.agora = JSON.stringify({prefix, value})
       span.innerText = text
 
       // Remove our partial mention text

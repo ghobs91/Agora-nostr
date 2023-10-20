@@ -254,7 +254,7 @@ addHandler(
 addHandler(
   30078,
   profileHandler("settings", async (e, p) => {
-    if (Tags.from(e).getMeta("d") === "coracle/settings/v1") {
+    if (Tags.from(e).getMeta("d") === "agora/settings/v1") {
       return {...p.settings, ...(await keys.decryptJson(e.content))}
     }
   })
@@ -263,7 +263,7 @@ addHandler(
 addHandler(
   30078,
   profileHandler("last_checked", async (e, p) => {
-    if (Tags.from(e).getMeta("d") === "coracle/last_checked/v1") {
+    if (Tags.from(e).getMeta("d") === "agora/last_checked/v1") {
       try {
         const payload = await keys.decryptJson(e.content)
         const updates = {}
@@ -289,7 +289,7 @@ addHandler(
 addHandler(
   30078,
   profileHandler("rooms_joined", async (e, p) => {
-    if (Tags.from(e).getMeta("d") === "coracle/rooms_joined/v1") {
+    if (Tags.from(e).getMeta("d") === "agora/rooms_joined/v1") {
       const roomsJoined = await keys.decryptJson(e.content)
 
       // Just a bug from when I was building the feature, remove someday

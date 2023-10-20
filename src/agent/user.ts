@@ -61,6 +61,8 @@ const canPublish = derived(
   ([$pubkey, $relays]) => keys.canSign() && find(prop("write"), $relays)
 )
 
+
+
 // Keep a copy so we can avoid calling `get` all the time
 
 let profileCopy = null
@@ -107,10 +109,9 @@ export default {
   // App data
 
   lastChecked,
-  roomsJoined,
   async setAppData(key, content) {
     if (keys.canSign()) {
-      const d = `coracle/${key}`
+      const d = `agora/${key}`
       const v = await keys.encryptJson(content)
 
       return cmd.setAppData(d, v).publish(profileCopy.relays)
