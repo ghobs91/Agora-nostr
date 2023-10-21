@@ -16,13 +16,14 @@
   let followersCount = tweened(0, {interpolate, duration: 1000})
 
   const nostrBandApi = 'https://api.nostr.band/v0/stats/profile/' + person.pubkey
+  const alternateNostrBandApi = 'https://api.nostr.band/nostr?method=search&count=1&q=' + person.pubkey
 
   const nostrbandFollowersCount = async (): Promise <any[]> => {
-      const res = await fetch(nostrBandApi, {
+      const res = await fetch(alternateNostrBandApi, {
                 method: "GET"
               })
-      const json = await res.json()
-      return json.stats[person.pubkey]
+      const json = await res.json();
+      return json.people[0] || json.stats[person.pubkey];
     }
 
   const showFollows = () => {
@@ -35,7 +36,7 @@
 
   onMount(async () => {
     nostrbandFollowersCount().then((response) => {
-      followersCountFromNostrBand = response["followers_pubkey_count"];
+      followersCountFromNostrBand = response["followed_count"] || response["followers_pubkey_count"];
       followersCountFromNostrBand = followersCountFromNostrBand.toLocaleString();
     })
     
