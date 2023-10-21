@@ -145,7 +145,7 @@
       on:click={quote}>
       <i
       class={cx("fa fa-quote-left cursor-pointer")} />
-      Repost
+      Quote
     </button>
   </div>
   <div class="flex items-center">

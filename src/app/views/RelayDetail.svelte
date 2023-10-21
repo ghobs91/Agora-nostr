@@ -7,6 +7,7 @@
   import {relays} from "src/agent/db"
 
   export let url
+  let includesReposts
 
   url = normalizeRelayUrl(url)
 
@@ -26,5 +27,5 @@
 </Content>
 <div class="border-b border-solid border-gray-6" />
 <Content>
-  <Feed relays={[relay]} filter={{kinds: [1]}} />
+  <Feed relays={[relay]} filter={{kinds: [1, 6]}} {includesReposts}/>
 </Content>

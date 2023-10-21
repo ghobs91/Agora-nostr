@@ -122,6 +122,7 @@ class Cursor {
   relays: Array<Relay>
   limit: number
   delta?: number
+  incluesReposts?: boolean
   until: Record<string, number>
   since: number
   seen: Set<string>
@@ -332,7 +333,7 @@ const streamContext = ({notes, onChunk, maxDepth = 2}) => {
 
 const applyContext = (notes, context) => {
   context = context.map(assoc("isContext", true))
-
+  const reposts = context.filter(propEq("kind", 6))
   const replies = context.filter(propEq("kind", 1))
   const reactions = context.filter(propEq("kind", 7))
   const zaps = context.filter(propEq("kind", 9735))
@@ -350,6 +351,7 @@ const applyContext = (notes, context) => {
       ...note,
       replies: sortBy(e => -e.created_at, uniqBy(prop("id"), combinedReplies).map(annotate)),
       reactions: uniqBy(prop("id"), combinedReactions),
+      reposts: uniqBy(prop("id"), reposts),
       zaps: uniqBy(prop("id"), combinedZaps),
     }
   }

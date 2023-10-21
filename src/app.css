@@ -378,3 +378,18 @@ body,
 .content-container-child {
   gap: .5rem !important;
 }
+.repost-indicator-container {
+  display: flex;
+  margin: 10px 0 10px 10px;
+  color: #8c8c8e;
+}
+.repost-indicator-text {
+  margin-right: 10px;
+  color: #8c8c8e;
+}
+.reposted-note {
+  border: 1px solid;
+  border-color: #8c8c8e;
+  border-radius: .75rem;
+  padding: 10px 10px 20px 10px;
+}

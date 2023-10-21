@@ -19,6 +19,7 @@
   import {watch} from "src/agent/db"
   import NoteContent from "src/app/shared/NoteContent.svelte"
   import {Tags} from "src/util/nostr"
+  import cx from "classnames"
 
   export let note
   export let feedRelay
@@ -29,6 +30,8 @@
   export let showContext = false
   export let invertColors = false
 
+  export let includesReposts
+
   let list;
   list = find(e => e.id !== list?.id && Tags.from(e).getMeta("d") === "agora_muted_words", user.getLists());
 
@@ -38,7 +41,7 @@
   let visibleNotes = []
   let collapsed = false
 
-  const {mutes} = user
+  const {mutes, petnamePubkeys} = user
   const timestamp = formatTimestamp(note.created_at)
   const borderColor = invertColors ? "gray-6" : "gray-7"
   const showEntire = anchorId === note.id
@@ -124,7 +127,12 @@
   })
 </script>
 
-<div class="note">
+<div class={cx("note", {"reposted-note": !$petnamePubkeys.includes($author.pubkey)})}>
+  {#if !$petnamePubkeys.includes($author.pubkey)}
+    <div class="repost-indicator-container">
+      <div class="repost-indicator-text">Repost</div><div><i class="fa fa-retweet" /></div>
+    </div>
+  {/if}
   <div bind:this={noteContainer} class="group relative">
     <Card class="relative flex gap-4" on:click={onClick} {interactive} {invertColors}>
       {#if !showParent}

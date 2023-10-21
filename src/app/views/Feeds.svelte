@@ -21,6 +21,7 @@
   const {lists, canPublish} = user
   let topicsListCreated = false;
   let list;
+  let includesReposts;
   topicsListCreated = find(e => e.id !== list?.id && Tags.from(e).getMeta("d") === "agora_followed_topics", user.getLists())
   console.log('value of topicsListCreated: ', topicsListCreated);
   const defaultTabs = topicsListCreated ? ["Topics", "Friends"] : ["Friends", "Topics"]
@@ -51,6 +52,7 @@
       const authors = shuffle(getUserFollows()).slice(0, 256)
 
       filter = {authors}
+      includesReposts = true
 
       if (authors.length < 1) {
         relays = [{url: 'wss://feeds.nostr.band/popular'}]
@@ -79,7 +81,7 @@
       }
     }
 
-    filter = [{...filter, kinds: [1]}]
+    filter = [{...filter, kinds: [1, 6]}]
   }
 
   const setActiveTab = tab => {
@@ -158,9 +160,9 @@
         <FediverseTopicsFeed></FediverseTopicsFeed>
         {:else}
         {#if getUserFollows().length < 5}
-          <Feed relays={[{url: 'wss://feeds.nostr.band/popular'}]} filter={{kinds: [1]}} />
+          <Feed relays={[{url: 'wss://feeds.nostr.band/popular'}]} filter={{kinds: [1]}} {includesReposts} />
           {:else}
-            <Feed {relays} {filter} />
+            <Feed {relays} {filter} {includesReposts}/>
         {/if}
       {/if}
       

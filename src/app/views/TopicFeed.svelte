@@ -10,8 +10,10 @@
   import {Tags} from "src/util/nostr"
   import Anchor from "src/partials/Anchor.svelte"
   import user from "src/agent/user"
-    import FediverseTopicFeed from "./FediverseTopicFeed.svelte"
+  import FediverseTopicFeed from "./FediverseTopicFeed.svelte"
   export let topic
+
+  let includesReposts
 
   const {profile, canPublish} = user
 
@@ -103,5 +105,5 @@
     </div> -->
     <!-- {/if} -->
   </div>
-  <Feed {relays} {filter} />
+  <Feed {relays} {filter} {includesReposts}/>
 </Content>

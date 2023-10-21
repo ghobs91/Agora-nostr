@@ -15,6 +15,7 @@
   import {mergeParents} from "src/app/state"
 
   export let filter
+  export let includesReposts
   export let relays = []
   export let delta = timedelta(6, "hours")
   export let shouldDisplay = always(true)
@@ -77,7 +78,7 @@
     // Stream in additional data and merge it in
     network.streamContext({
       maxDepth: 2,
-      notes: combined.filter(propEq("kind", 1)).slice(0, 10),
+      notes: combined.filter(propEq("kind", [1, 6])).slice(0, 10),
       onChunk: context => {
         context = user.applyMutes(context)
 
@@ -145,7 +146,7 @@
 
   <div class="flex flex-col gap-4">
     {#each notes as note (note.id)}
-      <Note depth={2} {note} {feedRelay} {setFeedRelay} {invertColors} />
+        <Note depth={2} {note} {feedRelay} {setFeedRelay} {invertColors} {includesReposts}/>
     {/each}
   </div>
 
