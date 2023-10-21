@@ -127,13 +127,13 @@
   })
 </script>
 
-<div class={cx("note", {"reposted-note": !$petnamePubkeys.includes($author.pubkey)})}>
-  {#if !$petnamePubkeys.includes($author.pubkey)}
-    <div class="repost-indicator-container">
-      <div class="repost-indicator-text">Repost</div><div><i class="fa fa-retweet" /></div>
-    </div>
-  {/if}
-  <div bind:this={noteContainer} class="group relative">
+<div class="note">
+  <div bind:this={noteContainer} class={cx("group relative", {"reposted-note": (!$petnamePubkeys.includes($author.pubkey) && showParent)})}>
+    {#if !$petnamePubkeys.includes($author.pubkey) && showParent}
+      <div class="repost-indicator-container">
+        <div class="repost-indicator-text">Repost</div><div><i class="fa fa-retweet" /></div>
+      </div>
+    {/if}
     <Card class="relative flex gap-4" on:click={onClick} {interactive} {invertColors}>
       {#if !showParent}
         <div
